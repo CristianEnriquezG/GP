@@ -10,5 +10,5 @@ package Controlador;
  * @author EGcri
  */
 public class Login {
-    
+    //aca va la logica
 }
