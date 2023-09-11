@@ -86,7 +86,7 @@ public class Login extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("esto con .net \nno me pasa");
-        jTextArea1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(240, 240, 240)));
+        jTextArea1.setBorder(new javax.swing.border.MatteBorder(null));
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

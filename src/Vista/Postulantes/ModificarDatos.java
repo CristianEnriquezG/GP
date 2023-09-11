@@ -27,19 +27,217 @@ public class ModificarDatos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelApellido = new javax.swing.JLabel();
+        jTextFieldDNI = new javax.swing.JTextField();
+        jButtonAdjuntar = new javax.swing.JButton();
+        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldApellido = new javax.swing.JTextField();
+        jLabelRutaPdf = new javax.swing.JLabel();
+        jLabelDomicilio = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jButtonGuardar = new javax.swing.JButton();
+        jLabelTelefono = new javax.swing.JLabel();
+        jTextFieldDomicilio = new javax.swing.JTextField();
+        jLabelEmail = new javax.swing.JLabel();
+        jTextFieldTelefono = new javax.swing.JTextField();
+        jTextFieldEmail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelDni = new javax.swing.JLabel();
+        jLabelCv = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(1280, 550));
+        setMinimumSize(new java.awt.Dimension(1280, 550));
+
+        jLabelApellido.setText("Apellido/s");
+        jLabelApellido.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelApellido.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelApellido.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jTextFieldDNI.setMaximumSize(new java.awt.Dimension(200, 22));
+        jTextFieldDNI.setMinimumSize(new java.awt.Dimension(200, 22));
+        jTextFieldDNI.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jButtonAdjuntar.setText("Adjuntar Archivo PDF");
+        jButtonAdjuntar.setMaximumSize(new java.awt.Dimension(200, 22));
+        jButtonAdjuntar.setMinimumSize(new java.awt.Dimension(200, 22));
+        jButtonAdjuntar.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabelNombre.setText("Nombre/s");
+        jLabelNombre.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelNombre.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelNombre.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jTextFieldApellido.setMaximumSize(new java.awt.Dimension(200, 22));
+        jTextFieldApellido.setMinimumSize(new java.awt.Dimension(200, 22));
+        jTextFieldApellido.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabelRutaPdf.setText("jLabel4");
+        jLabelRutaPdf.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelRutaPdf.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelRutaPdf.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelDomicilio.setText("Domicilio");
+        jLabelDomicilio.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelDomicilio.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelDomicilio.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jTextFieldNombre.setMaximumSize(new java.awt.Dimension(200, 22));
+        jTextFieldNombre.setMinimumSize(new java.awt.Dimension(200, 22));
+        jTextFieldNombre.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jButtonGuardar.setText("Guardar Cambios");
+        jButtonGuardar.setActionCommand("Guardar Cambios");
+        jButtonGuardar.setMaximumSize(new java.awt.Dimension(200, 22));
+        jButtonGuardar.setMinimumSize(new java.awt.Dimension(200, 22));
+        jButtonGuardar.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabelTelefono.setText("Teléfono");
+        jLabelTelefono.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelTelefono.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelTelefono.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jTextFieldDomicilio.setMaximumSize(new java.awt.Dimension(200, 22));
+        jTextFieldDomicilio.setMinimumSize(new java.awt.Dimension(200, 22));
+        jTextFieldDomicilio.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabelEmail.setText("E-mail");
+        jLabelEmail.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelEmail.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelEmail.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jTextFieldTelefono.setMaximumSize(new java.awt.Dimension(200, 22));
+        jTextFieldTelefono.setMinimumSize(new java.awt.Dimension(200, 22));
+        jTextFieldTelefono.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jTextFieldEmail.setMaximumSize(new java.awt.Dimension(200, 22));
+        jTextFieldEmail.setMinimumSize(new java.awt.Dimension(200, 22));
+        jTextFieldEmail.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Modificar Datos de Postulante");
+        jLabel1.setMaximumSize(new java.awt.Dimension(350, 29));
+        jLabel1.setMinimumSize(new java.awt.Dimension(350, 29));
+        jLabel1.setPreferredSize(new java.awt.Dimension(350, 29));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Ingrese los datos a modificar");
+        jLabel2.setMaximumSize(new java.awt.Dimension(350, 17));
+        jLabel2.setMinimumSize(new java.awt.Dimension(350, 17));
+        jLabel2.setPreferredSize(new java.awt.Dimension(350, 17));
+
+        jLabelDni.setText("DNI");
+        jLabelDni.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jLabelCv.setText("Currículum Vitae");
+        jLabelCv.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelCv.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelCv.setPreferredSize(new java.awt.Dimension(100, 16));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(491, 491, 491)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(253, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(528, 528, 528))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(454, 454, 454)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdjuntar;
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelCv;
+    private javax.swing.JLabel jLabelDni;
+    private javax.swing.JLabel jLabelDomicilio;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelRutaPdf;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JTextField jTextFieldApellido;
+    private javax.swing.JTextField jTextFieldDNI;
+    private javax.swing.JTextField jTextFieldDomicilio;
+    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,19 +27,174 @@ public class Cancelar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaDescrip = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelFechaInicio = new javax.swing.JLabel();
+        jLabelFechaCierre = new javax.swing.JLabel();
+        jLabelPruebas = new javax.swing.JLabel();
+        jLabelFechaInicioTexto = new javax.swing.JLabel();
+        jLabelFechaCierreTexto = new javax.swing.JLabel();
+        jLabelNumPruebasTexto = new javax.swing.JLabel();
+        jButtonSiguiente = new javax.swing.JButton();
+        jLabelNombreTexto = new javax.swing.JLabel();
+        jLabelPruebas1 = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(1280, 550));
+        setMinimumSize(new java.awt.Dimension(1280, 550));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Cancelar Puesto Vacante");
+        jLabel1.setMaximumSize(new java.awt.Dimension(300, 29));
+        jLabel1.setMinimumSize(new java.awt.Dimension(300, 29));
+        jLabel1.setPreferredSize(new java.awt.Dimension(300, 29));
+
+        jTextAreaDescrip.setEditable(false);
+        jTextAreaDescrip.setColumns(20);
+        jTextAreaDescrip.setLineWrap(true);
+        jTextAreaDescrip.setRows(5);
+        jTextAreaDescrip.setWrapStyleWord(true);
+        jTextAreaDescrip.setMaximumSize(new java.awt.Dimension(332, 60));
+        jTextAreaDescrip.setMinimumSize(new java.awt.Dimension(332, 60));
+        jTextAreaDescrip.setPreferredSize(new java.awt.Dimension(332, 60));
+        jScrollPane1.setViewportView(jTextAreaDescrip);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Descripción:");
+        jLabel3.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabel3.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabel3.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelFechaInicio.setText("Fecha de inicio:");
+        jLabelFechaInicio.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaInicio.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaInicio.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelFechaCierre.setText("Fecha de cierre:");
+        jLabelFechaCierre.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaCierre.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaCierre.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelPruebas.setText("Número de pruebas:");
+        jLabelPruebas.setToolTipText("");
+        jLabelPruebas.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelPruebas.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelPruebas.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelFechaInicioTexto.setText("[Fecha inicio]");
+        jLabelFechaInicioTexto.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaInicioTexto.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaInicioTexto.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelFechaCierreTexto.setText("[Fecha cierre]");
+        jLabelFechaCierreTexto.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaCierreTexto.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelFechaCierreTexto.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelNumPruebasTexto.setText("[Num pruebas]");
+        jLabelNumPruebasTexto.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelNumPruebasTexto.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelNumPruebasTexto.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jButtonSiguiente.setText("Cancelar Puesto");
+        jButtonSiguiente.setMaximumSize(new java.awt.Dimension(200, 22));
+        jButtonSiguiente.setMinimumSize(new java.awt.Dimension(200, 22));
+        jButtonSiguiente.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabelNombreTexto.setText("[Nombre [Código]]");
+        jLabelNombreTexto.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelNombreTexto.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelNombreTexto.setPreferredSize(new java.awt.Dimension(140, 16));
+
+        jLabelPruebas1.setText("Nombre:");
+        jLabelPruebas1.setMaximumSize(new java.awt.Dimension(140, 16));
+        jLabelPruebas1.setMinimumSize(new java.awt.Dimension(140, 16));
+        jLabelPruebas1.setPreferredSize(new java.awt.Dimension(140, 16));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(536, Short.MAX_VALUE)
+                .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(544, 544, 544))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(383, 383, 383)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelPruebas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNombreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabelFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabelFechaInicioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelPruebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabelNumPruebasTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabelFechaCierreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPruebas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFechaInicioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFechaCierreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPruebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNumPruebasTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84)
+                .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonSiguiente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelFechaCierre;
+    private javax.swing.JLabel jLabelFechaCierreTexto;
+    private javax.swing.JLabel jLabelFechaInicio;
+    private javax.swing.JLabel jLabelFechaInicioTexto;
+    private javax.swing.JLabel jLabelNombreTexto;
+    private javax.swing.JLabel jLabelNumPruebasTexto;
+    private javax.swing.JLabel jLabelPruebas;
+    private javax.swing.JLabel jLabelPruebas1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaDescrip;
     // End of variables declaration//GEN-END:variables
 }

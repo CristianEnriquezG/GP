@@ -27,19 +27,191 @@ public class EliminarDatos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelApellido = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelDomicilio = new javax.swing.JLabel();
+        jButtonEliminar = new javax.swing.JButton();
+        jLabelTelefono = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelDni = new javax.swing.JLabel();
+        jLabelDniTexto = new javax.swing.JLabel();
+        jLabelApellidoTexto = new javax.swing.JLabel();
+        jLabelNombreTexto = new javax.swing.JLabel();
+        jLabelDomicilioTexto = new javax.swing.JLabel();
+        jLabelEmailTexto = new javax.swing.JLabel();
+        jLabelTelefonoTexto = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(1280, 550));
+        setMinimumSize(new java.awt.Dimension(1280, 550));
+
+        jLabelApellido.setText("Apellido/s:");
+        jLabelApellido.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelApellido.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelApellido.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jLabelNombre.setText("Nombre/s:");
+        jLabelNombre.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelNombre.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelNombre.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jLabelDomicilio.setText("Domicilio:");
+        jLabelDomicilio.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelDomicilio.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelDomicilio.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jButtonEliminar.setText("Eliminar Datos");
+        jButtonEliminar.setMaximumSize(new java.awt.Dimension(200, 22));
+        jButtonEliminar.setMinimumSize(new java.awt.Dimension(200, 22));
+        jButtonEliminar.setPreferredSize(new java.awt.Dimension(200, 22));
+
+        jLabelTelefono.setText("Teléfono:");
+        jLabelTelefono.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelTelefono.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelTelefono.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jLabelEmail.setText("E-mail:");
+        jLabelEmail.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelEmail.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelEmail.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Eliminar Postulante");
+        jLabel1.setMaximumSize(new java.awt.Dimension(250, 29));
+        jLabel1.setMinimumSize(new java.awt.Dimension(250, 29));
+        jLabel1.setPreferredSize(new java.awt.Dimension(250, 29));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Datos del postulante");
+        jLabel2.setMaximumSize(new java.awt.Dimension(250, 17));
+        jLabel2.setMinimumSize(new java.awt.Dimension(250, 17));
+        jLabel2.setPreferredSize(new java.awt.Dimension(250, 17));
+
+        jLabelDni.setText("DNI:");
+        jLabelDni.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jLabelDniTexto.setText("jLabel3");
+        jLabelDniTexto.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelDniTexto.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelDniTexto.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelApellidoTexto.setText("jLabel3");
+        jLabelApellidoTexto.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelApellidoTexto.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelApellidoTexto.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelNombreTexto.setText("jLabel3");
+        jLabelNombreTexto.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelNombreTexto.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelNombreTexto.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelDomicilioTexto.setText("jLabel3");
+        jLabelDomicilioTexto.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelDomicilioTexto.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelDomicilioTexto.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelEmailTexto.setText("jLabel3");
+        jLabelEmailTexto.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelEmailTexto.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelEmailTexto.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelTelefonoTexto.setText("jLabel3");
+        jLabelTelefonoTexto.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelTelefonoTexto.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelTelefonoTexto.setPreferredSize(new java.awt.Dimension(200, 16));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(528, 528, 528)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(526, 526, 526)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEmailTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelApellidoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDniTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNombreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDomicilioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTelefonoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(436, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(530, 530, 530))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDniTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelApellidoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombreTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDomicilioTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTelefonoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmailTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelApellidoTexto;
+    private javax.swing.JLabel jLabelDni;
+    private javax.swing.JLabel jLabelDniTexto;
+    private javax.swing.JLabel jLabelDomicilio;
+    private javax.swing.JLabel jLabelDomicilioTexto;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelEmailTexto;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelNombreTexto;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelTelefonoTexto;
     // End of variables declaration//GEN-END:variables
 }

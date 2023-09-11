@@ -86,5 +86,5 @@ public class Postulante {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
+ 
 }

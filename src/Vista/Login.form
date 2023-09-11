@@ -188,9 +188,7 @@
             <Property name="text" type="java.lang.String" value="esto con .net &#xa;no me pasa"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                <MatteColorBorder>
-                  <Color PropertyName="color" blue="f0" green="f0" red="f0" type="rgb"/>
-                </MatteColorBorder>
+                <MatteColorBorder/>
               </Border>
             </Property>
           </Properties>

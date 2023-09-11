@@ -12,6 +12,8 @@ import Vista.Consulta.BuscarPostDNI;
 import Vista.Consulta.VerPostulantesPuesto;
 import Vista.Convocatoria.Crear;
 import Vista.Convocatoria.Modificar;
+import Vista.Convocatoria.Cancelar;
+import Vista.Etapa.NuevaEntrevista;
 import Vista.Etapa.NuevaPrueba;
 import Vista.Etapa.NuevoExamen;
 import Vista.Postulantes.EliminarDatos;
@@ -149,7 +151,7 @@ public class Main {
 			{
 				public void actionPerformed(ActionEvent e){
 					bottomPanel.removeAll();
-					bottomPanel.add(new Modificar());
+					bottomPanel.add(new Cancelar());
 					bottomPanel.revalidate();
 					bottomPanel.repaint();
 				}
@@ -173,7 +175,7 @@ public class Main {
 			nueva_entrevista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					bottomPanel.removeAll();
-					bottomPanel.add(new Modificar());
+					bottomPanel.add(new NuevaEntrevista());
 					bottomPanel.revalidate();
 					bottomPanel.repaint();
 				}
