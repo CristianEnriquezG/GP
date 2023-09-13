@@ -15,25 +15,25 @@ public class EntrevistaDaoJDBC implements EntrevistaDao {
     private static final String SQL_DELETE = "";
 
 
-  public List<Entrevista> select() throws SQLException{
+  public List<Entrevista> select(){
         List<Entrevista> convocatoria = new ArrayList<Entrevista>();
         return convocatoria;
     }
 
-    public int insert(Entrevista Entrevista) throws SQLException{
+    public int insert(Entrevista Entrevista){
         int rows = 0;
 
         return rows;
     }
 
-    public int update(Entrevista Entrevista) throws SQLException{
+    public int update(Entrevista Entrevista){
         int rows = 0;
 
         return rows;
 
     }
 
-    public int delete(Entrevista Entrevista) throws SQLException{
+    public int delete(Entrevista Entrevista){
         int rows = 0;
 
         return rows;

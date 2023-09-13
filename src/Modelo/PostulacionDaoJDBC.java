@@ -14,26 +14,26 @@ public class PostulacionDaoJDBC implements PostulacionDao {
     private static final String SQL_UPDATE = "";
     private static final String SQL_DELETE = "";
 
-
-    public List<Postulacion> select() throws SQLException{
+    
+    public List<Postulacion> select() {
         List<Postulacion> Postulacion = new ArrayList<Postulacion>();
         return Postulacion;
     }
-
-    public int insert(Postulacion Postulacion) throws SQLException{
+    
+    public int insert(Postulacion Postulacion){
         int rows = 0;
 
         return rows;
     }
 
-    public int update(Postulacion Postulacion) throws SQLException{
+    public int update(Postulacion Postulacion){
         int rows = 0;
 
         return rows;
 
     }
 
-    public int delete(Postulacion Postulacion) throws SQLException{
+    public int delete(Postulacion Postulacion){
         int rows = 0;
 
         return rows;

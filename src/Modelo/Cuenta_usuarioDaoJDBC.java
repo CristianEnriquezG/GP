@@ -14,25 +14,25 @@ public class Cuenta_usuarioDaoJDBC implements Cuenta_usuarioDao {
     private static final String SQL_UPDATE = "";
     private static final String SQL_DELETE = "";
 
-    public List<Cuenta_usuario> select() throws SQLException{
+    public List<Cuenta_usuario> select(){
         List<Cuenta_usuario> convocatoria = new ArrayList<Cuenta_usuario>();
         return convocatoria;
     }
 
-    public int insert(Cuenta_usuario Cuenta_usuario) throws SQLException{
+    public int insert(Cuenta_usuario Cuenta_usuario){
         int rows = 0;
 
         return rows;
     }
 
-    public int update(Cuenta_usuario Cuenta_usuario) throws SQLException{
+    public int update(Cuenta_usuario Cuenta_usuario){
         int rows = 0;
 
         return rows;
 
     }
 
-    public int delete(Cuenta_usuario Cuenta_usuario) throws SQLException{
+    public int delete(Cuenta_usuario Cuenta_usuario){
         int rows = 0;
 
         return rows;

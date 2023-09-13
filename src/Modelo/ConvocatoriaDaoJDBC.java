@@ -13,7 +13,8 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
     private static final String SQL_UPDATE = "UPDATE convocatoria SET titulo=?. descripcion=?, fecha_inicio=?, fecha_fin=?, estado=? Where cod_convocatoria = ?";
     private static final String SQL_DELETE = "DELETE FROM convocatoria WHERE cod_convocatoria=?";
 
-    public List<Convocatoria> select() throws SQLException{
+
+    public List<Convocatoria> select(){
         Connection Conexion = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -34,7 +35,11 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
                     convocatoria = new Convocatoria(cod_convocatoria,titulo,descripcion,fecha_inicio,fecha_fin,estado);
                     convocatorias.add(convocatoria);
                 }
-            } finally {
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            finally {
                 Conector_DB.close(rs);
                 Conector_DB.close(stmt);
                 if(this.ConexionDB == null)
@@ -45,7 +50,7 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
         return convocatorias;
     }
 
-    public int insert(Convocatoria convocatoria) throws SQLException{
+    public int insert(Convocatoria convocatoria){
         Connection Conexion = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -60,7 +65,11 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
             stmt.setString(5,convocatoria.getEstado());
             //mensaje
             rows = stmt.executeUpdate();
-        } finally {             
+        }
+        catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        finally {             
             Conector_DB.close(stmt);
             if(this.ConexionDB == null)
                 {
@@ -71,7 +80,7 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
         return rows;
     }
 
-    public int update(Convocatoria convocatoria) throws SQLException{
+    public int update(Convocatoria convocatoria){
         Connection Conexion = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -88,7 +97,11 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
             rows = stmt.executeUpdate();
             //mensaje
 
-        }finally{
+        }
+        catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        finally{
             Conector_DB.close(stmt);
             if(this.ConexionDB == null)
             {
@@ -100,7 +113,7 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
 
     }
 
-    public int delete(Convocatoria convocatoria) throws SQLException{
+    public int delete(Convocatoria convocatoria){
         Connection Conexion = null;
         PreparedStatement stmt = null;        
         int rows = 0;
@@ -113,7 +126,11 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
             //mensaje
 
             
-        } finally{
+        } 
+        catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        finally{
             Conector_DB.close(stmt);
             if(this.ConexionDB == null){
                 Conector_DB.close(Conexion);

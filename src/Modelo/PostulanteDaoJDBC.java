@@ -15,25 +15,25 @@ public class PostulanteDaoJDBC implements PostulanteDao {
     private static final String SQL_DELETE = "";
 
 
-    public List<Postulante> select() throws SQLException{
+    public List<Postulante> select(){
         List<Postulante> Postulante = new ArrayList<Postulante>();
         return Postulante;
     }
 
-    public int insert(Postulante Postulante) throws SQLException{
+    public int insert(Postulante Postulante){
         int rows = 0;
 
         return rows;
     }
 
-    public int update(Postulante Postulante) throws SQLException{
+    public int update(Postulante Postulante){
         int rows = 0;
 
         return rows;
 
     }
 
-    public int delete(Postulante Postulante) throws SQLException{
+    public int delete(Postulante Postulante){
         int rows = 0;
 
         return rows;

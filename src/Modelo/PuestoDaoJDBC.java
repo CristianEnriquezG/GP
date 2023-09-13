@@ -15,25 +15,25 @@ public class PuestoDaoJDBC implements PuestoDao {
     private static final String SQL_DELETE = "";
 
 
-    public List<Puesto> select() throws SQLException{
+    public List<Puesto> select(){
         List<Puesto> Puesto = new ArrayList<Puesto>();
         return Puesto;
     }
 
-    public int insert(Puesto Puesto) throws SQLException{
+    public int insert(Puesto Puesto){
         int rows = 0;
 
         return rows;
     }
 
-    public int update(Puesto Puesto) throws SQLException{
+    public int update(Puesto Puesto){
         int rows = 0;
 
         return rows;
 
     }
 
-    public int delete(Puesto Puesto) throws SQLException{
+    public int delete(Puesto Puesto){
         int rows = 0;
 
         return rows;

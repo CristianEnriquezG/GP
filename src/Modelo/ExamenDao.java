@@ -5,13 +5,13 @@ import java.util.List;
 
 public interface ExamenDao {
     
-    public List<Examen> select() throws SQLException;
+    public List<Examen> select();
 
-    public int insert(Examen Examen) throws SQLException;
+    public int insert(Examen Examen);
 
-    public int update(Examen Examen) throws SQLException;
+    public int update(Examen Examen);
 
-    public int delete(Examen Examen) throws SQLException;
+    public int delete(Examen Examen);
 
 
 }

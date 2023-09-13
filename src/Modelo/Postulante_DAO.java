@@ -36,15 +36,16 @@ public class Postulante_DAO {
             System.out.println(ex.getMessage());
         }
         finally {
-            //Conector_DB.close(ps);
-            //Conector_DB.close(c);
-            try {
-                if(ps != null) ps.close();
-                if(c != null) c.close();
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+            /*try {
+                if(ps != null) Conector_DB.close(ps);
+                if(c != null) Conector_DB.close(c);
             }
             catch(SQLException e) {
                 System.out.println(e.getMessage());
             }
+            */
         }
     }
 }

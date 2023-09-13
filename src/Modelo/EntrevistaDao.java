@@ -5,12 +5,12 @@ import java.util.List;
 
 public interface EntrevistaDao {
     
-    public List<Entrevista> select() throws SQLException;
+    public List<Entrevista> select();
 
-    public int insert(Entrevista Entrevista) throws SQLException;
+    public int insert(Entrevista Entrevista);
 
-    public int update(Entrevista Entrevista) throws SQLException;
+    public int update(Entrevista Entrevista);
 
-    public int delete(Entrevista Entrevista) throws SQLException;
+    public int delete(Entrevista Entrevista);
 
 }

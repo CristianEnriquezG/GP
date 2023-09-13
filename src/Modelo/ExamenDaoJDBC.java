@@ -15,25 +15,25 @@ public class ExamenDaoJDBC implements ExamenDao {
     private static final String SQL_DELETE = "";
 
 
-  public List<Examen> select() throws SQLException{
+  public List<Examen> select(){
         List<Examen> Examen = new ArrayList<Examen>();
         return Examen;
     }
 
-    public int insert(Examen Examen) throws SQLException{
+    public int insert(Examen Examen){
         int rows = 0;
 
         return rows;
     }
 
-    public int update(Examen Examen) throws SQLException{
+    public int update(Examen Examen){
         int rows = 0;
 
         return rows;
 
     }
 
-    public int delete(Examen Examen) throws SQLException{
+    public int delete(Examen Examen){
         int rows = 0;
 
         return rows;
