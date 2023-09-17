@@ -10,7 +10,7 @@ public class ConvocatoriaDaoJDBC implements ConvocatoriaDao {
 
     private static final String SQL_SELECT = "SELECT cod_convocatoria, titulo, descripcion, fecha_inicio, fecha_fin, estado FROM convocatoria";
     private static final String SQL_INSERT = "INSERT INTO convocatoria(cod_convocatoria, titulo, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE convocatoria SET titulo=?. descripcion=?, fecha_inicio=?, fecha_fin=?, estado=? Where cod_convocatoria = ?";
+    private static final String SQL_UPDATE = "UPDATE convocatoria SET titulo=?, descripcion=?, fecha_inicio=?, fecha_fin=?, estado=? Where cod_convocatoria = ?";
     private static final String SQL_DELETE = "DELETE FROM convocatoria WHERE cod_convocatoria=?";
 
 
