@@ -27,7 +27,7 @@ public class CrearUsuario extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        GuardarjButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
@@ -45,7 +45,12 @@ public class CrearUsuario extends javax.swing.JPanel {
 
         jLabel1.setText("Nombre de usuario");
 
-        jButton1.setText("Guardar");
+        GuardarjButton.setText("Guardar");
+        GuardarjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Contraseña");
 
@@ -55,11 +60,11 @@ public class CrearUsuario extends javax.swing.JPanel {
 
         jPasswordField2.setText("jPasswordField2");
 
-        jRadioButton1.setText("jRadioButton1");
+        jRadioButton1.setText("Administrador");
 
-        jRadioButton2.setText("jRadioButton2");
+        jRadioButton2.setText("Operador");
 
-        jRadioButton3.setText("jRadioButton3");
+        jRadioButton3.setText("Postulante");
 
         jLabel4.setText("Permisos");
 
@@ -101,8 +106,8 @@ public class CrearUsuario extends javax.swing.JPanel {
                         .addGap(131, 131, 131)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton2)
-                            .addComponent(jButton1))))
-                .addContainerGap(479, Short.MAX_VALUE))
+                            .addComponent(GuardarjButton))))
+                .addContainerGap(495, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,14 +136,19 @@ public class CrearUsuario extends javax.swing.JPanel {
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(GuardarjButton)
                 .addGap(81, 81, 81))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void GuardarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarjButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_GuardarjButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton GuardarjButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
