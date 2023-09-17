@@ -13,12 +13,13 @@
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/ConvocatoriaDaoJDBC.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/Cuenta_usuarioDao.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/PostulacionDao.java</file>
-            <file>file:/C:/Users/EGcri/Documents/GP/src/Vista/Etapa/NuevaEntrevista.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Controlador/CtrlRegistrarDatos.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/ExamenDao.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Vista/Etapa/NuevoExamen.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/Usuario.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Vista/Etapa/NuevaPrueba.java</file>
+            <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/Conector_DB.java</file>
+            <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/Cuenta_usuario.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/PostulanteDaoJDBC.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/ConvocatoriaDao.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Vista/GestionUsuarios/EliminarUsuario.java</file>
@@ -27,6 +28,7 @@
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/Cuenta_usuarioDaoJDBC.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/UsuarioDao.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/EntrevistaDao.java</file>
+            <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/Entrevista.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Vista/Consulta/VerPostulantesPuesto.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/PuestoDao.java</file>
             <file>file:/C:/Users/EGcri/Documents/GP/src/Modelo/PostulacionDaoJDBC.java</file>
