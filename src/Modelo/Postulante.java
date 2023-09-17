@@ -11,22 +11,42 @@ package Modelo;
  */
 public class Postulante {
   private  int cod_postulante;
-  private  long DNI;
+  private  int DNI;
+  private  String apellido;
+  private  String nombre;
   private  String domicilio;
-  private  long telefono;
+  private  String telefono;
   private  String email;
-  private  int cv;
-  private  int estado;
+  private  Boolean estado;
 
-    public Postulante(int cod_postulante, long DNI, String domicilio, long telefono, String email, int cv, int estado) {
+    public Postulante(int cod_postulante, int DNI, String apellido, String nombre, String domicilio, String telefono, String email, boolean estado) {
         this.cod_postulante = cod_postulante;
+        this.apellido = apellido;
+        this.nombre = nombre;
         this.DNI = DNI;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.email = email;
-        this.cv = cv;
         this.estado = estado;
     }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
 
     public Postulante() {
     }
@@ -39,11 +59,11 @@ public class Postulante {
         this.cod_postulante = cod_postulante;
     }
 
-    public long getDNI() {
+    public int getDNI() {
         return DNI;
     }
 
-    public void setDNI(long DNI) {
+    public void setDNI(int DNI) {
         this.DNI = DNI;
     }
 
@@ -55,11 +75,11 @@ public class Postulante {
         this.domicilio = domicilio;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -71,19 +91,13 @@ public class Postulante {
         this.email = email;
     }
 
-    public int getCv() {
-        return cv;
-    }
 
-    public void setCv(int cv) {
-        this.cv = cv;
-    }
 
-    public int getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
  
