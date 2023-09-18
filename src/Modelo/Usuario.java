@@ -14,13 +14,20 @@ public class Usuario {
     private String contraseñaUsuario;
     private int permisosUsuario;
 
-    public Usuario(int uidUsuario, String nombreUsuario, String contraseñaUsuario, int permisosUsuario) {
+    public Usuario(String nombreUsuario, String contraseñaUsuario, int permisosUsuario) {
+        this.nombreUsuario = nombreUsuario;
+        this.contraseñaUsuario = contraseñaUsuario;
+        this.permisosUsuario = permisosUsuario;
+    }
+    
+     public Usuario(int uidUsuario,String nombreUsuario, String contraseñaUsuario, int permisosUsuario) {
         this.uidUsuario = uidUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contraseñaUsuario = contraseñaUsuario;
         this.permisosUsuario = permisosUsuario;
     }
 
+    
     public Usuario() {
     }
 

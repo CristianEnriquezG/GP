@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista.GestionUsuarios;
+import Modelo.UsuarioDao;
+import Modelo.UsuarioDaoJDBC;
+import Modelo.Usuario;
+import Controlador.CtrlContraseñaaHash;
+import Controlador.CtrlUsuarios;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,16 +33,17 @@ public class CrearUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         GuardarjButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        NombreUsuariojTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        PermisoAdministradorjRadioButton = new javax.swing.JRadioButton();
+        PermisoOperadorjRadioButton = new javax.swing.JRadioButton();
+        PermisoPostulantejRadioButton = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -54,17 +62,16 @@ public class CrearUsuario extends javax.swing.JPanel {
 
         jLabel2.setText("Contraseña");
 
-        jPasswordField1.setText("jPasswordField1");
-
         jLabel3.setText("Repetir Contraseña");
 
-        jPasswordField2.setText("jPasswordField2");
+        buttonGroup1.add(PermisoAdministradorjRadioButton);
+        PermisoAdministradorjRadioButton.setText("Administrador");
 
-        jRadioButton1.setText("Administrador");
+        buttonGroup1.add(PermisoOperadorjRadioButton);
+        PermisoOperadorjRadioButton.setText("Operador");
 
-        jRadioButton2.setText("Operador");
-
-        jRadioButton3.setText("Postulante");
+        buttonGroup1.add(PermisoPostulantejRadioButton);
+        PermisoPostulantejRadioButton.setText("Postulante");
 
         jLabel4.setText("Permisos");
 
@@ -87,17 +94,17 @@ public class CrearUsuario extends javax.swing.JPanel {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1))
                             .addComponent(jLabel3)
-                            .addComponent(jRadioButton1))
+                            .addComponent(PermisoAdministradorjRadioButton))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1)
+                                .addComponent(NombreUsuariojTextField)
                                 .addComponent(jPasswordField1)
                                 .addComponent(jPasswordField2)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(109, 109, 109)
-                                    .addComponent(jRadioButton3)))))
+                                    .addComponent(PermisoPostulantejRadioButton)))))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
@@ -105,7 +112,7 @@ public class CrearUsuario extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
+                            .addComponent(PermisoOperadorjRadioButton)
                             .addComponent(GuardarjButton))))
                 .addContainerGap(495, Short.MAX_VALUE))
         );
@@ -119,7 +126,7 @@ public class CrearUsuario extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreUsuariojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -132,9 +139,9 @@ public class CrearUsuario extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(PermisoAdministradorjRadioButton)
+                    .addComponent(PermisoOperadorjRadioButton)
+                    .addComponent(PermisoPostulantejRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(GuardarjButton)
                 .addGap(81, 81, 81))
@@ -142,13 +149,43 @@ public class CrearUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarjButtonActionPerformed
-        // TODO add your handling code here:
+       Usuario usuario = new Usuario();        
+       char[] password1 = jPasswordField1.getPassword();
+       char[] password2 = jPasswordField2.getPassword();
+       
+       usuario.setNombreUsuario(NombreUsuariojTextField.getText());
+       if(NombreUsuariojTextField.getText().length() == 0)
+           mostrarVentanaDeError(CtrlUsuarios.errorUsuarioVacio);
+       if(Arrays.equals(password1, password2))
+        usuario.setContraseñaUsuario(CtrlContraseñaaHash.hasher(new String (password1)));
+       else
+           mostrarVentanaDeError(CtrlUsuarios.errorContraseñaVacia);
+       if(PermisoAdministradorjRadioButton.isEnabled())
+           usuario.setPermisosUsuario(1);
+       else if(PermisoOperadorjRadioButton.isEnabled())
+           usuario.setPermisosUsuario(2);
+       else if(PermisoPostulantejRadioButton.isEnabled())
+           usuario.setPermisosUsuario(3);
+       else
+           mostrarVentanaDeError(CtrlUsuarios.errorSinSeleccion);
+       
+       UsuarioDao UsuarioDao = new UsuarioDaoJDBC();
+       UsuarioDao.insert(usuario);
+       
         
     }//GEN-LAST:event_GuardarjButtonActionPerformed
-
+    
+    public static void mostrarVentanaDeError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarjButton;
+    private javax.swing.JTextField NombreUsuariojTextField;
+    private javax.swing.JRadioButton PermisoAdministradorjRadioButton;
+    private javax.swing.JRadioButton PermisoOperadorjRadioButton;
+    private javax.swing.JRadioButton PermisoPostulantejRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -157,9 +194,5 @@ public class CrearUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

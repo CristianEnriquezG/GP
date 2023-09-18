@@ -16,6 +16,9 @@ import Vista.Convocatoria.Cancelar;
 import Vista.Etapa.NuevaEntrevista;
 import Vista.Etapa.NuevaPrueba;
 import Vista.Etapa.NuevoExamen;
+import Vista.GestionUsuarios.CrearUsuario;
+import Vista.GestionUsuarios.EliminarUsuario;
+import Vista.GestionUsuarios.ModificarUsuario;
 import Vista.Postulantes.EliminarDatos;
 import Vista.Postulantes.ModificarDatos;
 import Vista.Postulantes.RegistrarDatos;
@@ -249,17 +252,65 @@ public class Main {
 	        Consulta.add(buscar_DNI);
 	        Consulta.add(buscar_Nombre);
 	        Consulta.add(ver_Puesto);
-
-	        Menu_Principal.add(Consulta);
-	        
-			JButton SalirBoton = new JButton("Salir");
-			SalirBoton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e){
-					System.exit(0);
-				}
-			});
                 
-            Menu_Principal.add(SalirBoton);
+	        Menu_Principal.add(Consulta);
+                
+                JMenu gestionUsuarios = new JMenu("Gestion de usuarios");
+            gestionUsuarios.setFont(font);
+            
+            JMenuItem agregarUsuario = new JMenuItem("Agregar Usuario");
+                agregarUsuario.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e){
+                        bottomPanel.removeAll();
+                        bottomPanel.add(new CrearUsuario());
+                        bottomPanel.revalidate();
+                        bottomPanel.repaint();
+                    }
+                });
+            
+            JMenuItem modificarUsuario = new JMenuItem("Modificar Usuario");
+                modificarUsuario.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e){
+                        bottomPanel.removeAll();
+                        bottomPanel.add(new ModificarUsuario());
+                        bottomPanel.revalidate();
+                        bottomPanel.repaint();
+                    }
+                });
+            
+            JMenuItem eliminarUsuario = new JMenuItem("Eliminar Usuario");
+                eliminarUsuario.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e){
+                        bottomPanel.removeAll();
+                        bottomPanel.add(new EliminarUsuario());
+                        bottomPanel.revalidate();
+                        bottomPanel.repaint();
+                    }
+                });
+	    
+                agregarUsuario.setFont(font);
+                modificarUsuario.setFont(font);
+                eliminarUsuario.setFont(font);
+                
+                gestionUsuarios.add(agregarUsuario);
+                gestionUsuarios.add(modificarUsuario);
+                gestionUsuarios.add(eliminarUsuario);
+                
+                Menu_Principal.add(gestionUsuarios);
+                
+                JButton SalirBoton = new JButton("Salir");
+                SalirBoton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e){
+                                System.exit(0);
+                        }
+                });
+            
+            
+                        
+                Menu_Principal.add(SalirBoton);
 	        centerPanel.add(Menu_Principal);	        	        
 
 	    	bottomPanel = new JPanel();

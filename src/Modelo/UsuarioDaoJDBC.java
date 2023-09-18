@@ -17,7 +17,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
     private Connection ConexionDB;
 
     private static final String SQL_SELECT = "SELECT uidUsuario, nombreUsuario, contraseñaUsuario, permisosUsuario FROM usuario";
-    private static final String SQL_INSERT = "INSERT INTO usuario(uidUsuario,nombreUsuario,contraseñaUsuario,permisosUsuario) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO usuario(nombreUsuario,contraseñaUsuario,permisosUsuario) VALUES (?,?,?)";
     private static final String SQL_UPDATE = "UPDATE usario SET nombreUsuario=?, contraseñaUsuario=?, permisosUsuario=?";
     private static final String SQL_DELETE = "DELETE FROM usuario Where uidUsuario =?";
 
@@ -64,10 +64,9 @@ public class UsuarioDaoJDBC implements UsuarioDao{
         try{
             Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
             stmt = Conexion.prepareStatement(SQL_INSERT);
-            stmt.setInt(1,Usuario.getUidUsuario());
-            stmt.setString(2,Usuario.getNombreUsuario());
-            stmt.setString(3,Usuario.getContraseñaUsuario());
-            stmt.setInt(4,Usuario.getPermisosUsuario());
+            stmt.setString(1,Usuario.getNombreUsuario());
+            stmt.setString(2,Usuario.getContraseñaUsuario());
+            stmt.setInt(3,Usuario.getPermisosUsuario());
             rows = stmt.executeUpdate();
         }catch ( Exception e){
             System.out.println(e.getMessage());
@@ -90,10 +89,9 @@ public class UsuarioDaoJDBC implements UsuarioDao{
         try{
             Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
             stmt = Conexion.prepareStatement(SQL_UPDATE);
-            stmt.setInt(1,Usuario.getUidUsuario());
-            stmt.setString(2,Usuario.getNombreUsuario());
-            stmt.setString(3,Usuario.getContraseñaUsuario());
-            stmt.setInt(4,Usuario.getPermisosUsuario());
+            stmt.setString(1,Usuario.getNombreUsuario());
+            stmt.setString(2,Usuario.getContraseñaUsuario());
+            stmt.setInt(3,Usuario.getPermisosUsuario());
         }catch(Exception e)
         {
             System.out.println(e.getMessage());
