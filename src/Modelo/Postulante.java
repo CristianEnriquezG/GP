@@ -30,6 +30,30 @@ public class Postulante {
         this.estado = estado;
     }
 
+<<<<<<< Updated upstream
+=======
+    public Postulante() {
+        
+    }
+
+
+    public int getCod_postulante() {
+        return cod_postulante;
+    }
+
+    public void setCod_postulante(int cod_postulante) {
+        this.cod_postulante = cod_postulante;
+    }
+
+    public int getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(int DNI) {
+        this.DNI = DNI;
+    }
+
+>>>>>>> Stashed changes
     public String getApellido() {
         return apellido;
     }
