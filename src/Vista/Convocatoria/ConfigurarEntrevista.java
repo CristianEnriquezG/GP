@@ -4,17 +4,28 @@
  */
 package Vista.Convocatoria;
 
+import Controlador.CtrlCrearConvocatoria;
+import Modelo.FormatoEntrevista;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MC1
  */
 public class ConfigurarEntrevista extends javax.swing.JPanel {
+    private Crear pantCrear;
+    private ArrayList<Object> objeto;
 
     /**
      * Creates new form ConfigurarEntrevista
+     * @param c
+     * @param obj
      */
-    public ConfigurarEntrevista() {
+    public ConfigurarEntrevista(Crear c, ArrayList<Object> obj) {
         initComponents();
+        pantCrear = c;
+        objeto = obj;
     }
 
     /**
@@ -26,7 +37,7 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelRutaPdf = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButtonSiguiente = new javax.swing.JButton();
         jCheckBox1Prese = new javax.swing.JCheckBox();
@@ -44,17 +55,19 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
         jCheckBox13Manej = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldFecha = new javax.swing.JTextField();
-        jTextFieldFecha1 = new javax.swing.JTextField();
-        jLabelRutaPdf1 = new javax.swing.JLabel();
+        jTextFieldHora = new javax.swing.JTextField();
+        jLabelHora = new javax.swing.JLabel();
+        jLabelFormatoHora = new javax.swing.JLabel();
+        jButtonCancelar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
 
-        jLabelRutaPdf.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelRutaPdf.setText("Fecha");
-        jLabelRutaPdf.setMaximumSize(new java.awt.Dimension(50, 16));
-        jLabelRutaPdf.setMinimumSize(new java.awt.Dimension(50, 16));
-        jLabelRutaPdf.setPreferredSize(new java.awt.Dimension(50, 16));
+        jLabelFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelFecha.setText("Fecha");
+        jLabelFecha.setMaximumSize(new java.awt.Dimension(50, 16));
+        jLabelFecha.setMinimumSize(new java.awt.Dimension(50, 16));
+        jLabelFecha.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -64,9 +77,14 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(250, 29));
 
         jButtonSiguiente.setText("Siguiente");
-        jButtonSiguiente.setMaximumSize(new java.awt.Dimension(200, 22));
-        jButtonSiguiente.setMinimumSize(new java.awt.Dimension(200, 22));
-        jButtonSiguiente.setPreferredSize(new java.awt.Dimension(200, 22));
+        jButtonSiguiente.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonSiguiente.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonSiguiente.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguienteActionPerformed(evt);
+            }
+        });
 
         jCheckBox1Prese.setText("Presentación");
         jCheckBox1Prese.setMaximumSize(new java.awt.Dimension(200, 20));
@@ -135,7 +153,7 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Competencias");
+        jLabel2.setText("Seleccione las competencias a evaluar");
         jLabel2.setMaximumSize(new java.awt.Dimension(250, 17));
         jLabel2.setMinimumSize(new java.awt.Dimension(250, 17));
         jLabel2.setPreferredSize(new java.awt.Dimension(250, 17));
@@ -144,49 +162,38 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
         jTextFieldFecha.setMinimumSize(new java.awt.Dimension(100, 22));
         jTextFieldFecha.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        jTextFieldFecha1.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha1.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha1.setPreferredSize(new java.awt.Dimension(100, 22));
+        jTextFieldHora.setMaximumSize(new java.awt.Dimension(100, 22));
+        jTextFieldHora.setMinimumSize(new java.awt.Dimension(100, 22));
+        jTextFieldHora.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        jLabelRutaPdf1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelRutaPdf1.setText("Hora");
-        jLabelRutaPdf1.setMaximumSize(new java.awt.Dimension(40, 16));
-        jLabelRutaPdf1.setMinimumSize(new java.awt.Dimension(40, 16));
-        jLabelRutaPdf1.setPreferredSize(new java.awt.Dimension(40, 16));
+        jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelHora.setText("Hora");
+        jLabelHora.setMaximumSize(new java.awt.Dimension(40, 16));
+        jLabelHora.setMinimumSize(new java.awt.Dimension(40, 16));
+        jLabelHora.setPreferredSize(new java.awt.Dimension(40, 16));
+
+        jLabelFormatoHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFormatoHora.setText("hh:mm");
+        jLabelFormatoHora.setEnabled(false);
+        jLabelFormatoHora.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jLabelFormatoHora.setMaximumSize(new java.awt.Dimension(60, 16));
+        jLabelFormatoHora.setMinimumSize(new java.awt.Dimension(60, 16));
+        jLabelFormatoHora.setPreferredSize(new java.awt.Dimension(60, 16));
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(528, 528, 528))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(477, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox2Actit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1Prese, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox8Aspec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox9Exper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jCheckBox7Trans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox3Conve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox4Dispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox5Decis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox6Dspnb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox11Relac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox10Conoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox12Lider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox13Manej, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(385, 385, 385))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -196,14 +203,48 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(466, 466, 466)
-                        .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelRutaPdf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(404, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox2Actit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox1Prese, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox8Aspec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox9Exper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jCheckBox7Trans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox3Conve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox4Dispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox6Dspnb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox5Decis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox11Relac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox10Conoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox12Lider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox13Manej, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(385, 385, 385))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(474, 474, 474))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,9 +269,7 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
                         .addComponent(jCheckBox3Conve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox4Dispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox5Decis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(56, 56, 56)
                         .addComponent(jCheckBox6Dspnb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox7Trans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,24 +278,63 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox11Relac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox12Lider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox12Lider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox5Decis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox13Manej, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelRutaPdf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
-                .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
+        FormatoEntrevista formatoEnt = new FormatoEntrevista();
+        
+        String fec = jTextFieldFecha.getText();
+        String hor = jTextFieldHora.getText();
+        formatoEnt.setPresentacion(jCheckBox1Prese.isSelected());
+        formatoEnt.setActitud(jCheckBox2Actit.isSelected());
+        formatoEnt.setConversacion(jCheckBox3Conve.isSelected());
+        formatoEnt.setDisposicion(jCheckBox4Dispo.isSelected());
+        formatoEnt.setDecision(jCheckBox5Decis.isSelected());
+        formatoEnt.setDisponibilidad(jCheckBox6Dspnb.isSelected());
+        formatoEnt.setTransporte(jCheckBox7Trans.isSelected());
+        formatoEnt.setAspectoFisico(jCheckBox8Aspec.isSelected());
+        formatoEnt.setExperiencia(jCheckBox9Exper.isSelected());
+        formatoEnt.setConocimientos(jCheckBox10Conoc.isSelected());
+        formatoEnt.setRelacion(jCheckBox11Relac.isSelected());
+        formatoEnt.setLiderazgo(jCheckBox12Lider.isSelected());
+        formatoEnt.setManejoHerramientas(jCheckBox13Manej.isSelected());
+        
+        if(CtrlCrearConvocatoria.esValido(formatoEnt, fec, hor)) {
+            // almacena objeto válido en array list
+            objeto.add(formatoEnt);
+            pantCrear.avanzarPantalla();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, CtrlCrearConvocatoria.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+        }  
+    }//GEN-LAST:event_jButtonSiguienteActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        pantCrear.resetearPantallas();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonSiguiente;
     private javax.swing.JCheckBox jCheckBox10Conoc;
     private javax.swing.JCheckBox jCheckBox11Relac;
@@ -273,9 +351,10 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBox9Exper;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelRutaPdf;
-    private javax.swing.JLabel jLabelRutaPdf1;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelFormatoHora;
+    private javax.swing.JLabel jLabelHora;
     private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldFecha1;
+    private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables
 }

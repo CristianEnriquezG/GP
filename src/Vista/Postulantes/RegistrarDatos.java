@@ -6,18 +6,24 @@
 package Vista.Postulantes;
 import Modelo.*;
 import Controlador.*;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
- * @author Mauricio Camino Oller
+ * @author MC1
  */
 public class RegistrarDatos extends javax.swing.JPanel {
+    private File archivoPDF = null;
 
     /**
      * Creates new form RegistrarDatos
      */
     public RegistrarDatos() {
         initComponents();
+        seleccionArchivo.addChoosableFileFilter(new FileNameExtensionFilter("Documentos PDF","pdf"));
+        seleccionArchivo.setAcceptAllFileFilterUsed(false);
     }
 
     /**
@@ -29,6 +35,7 @@ public class RegistrarDatos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        seleccionArchivo = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,6 +55,7 @@ public class RegistrarDatos extends javax.swing.JPanel {
         jButtonAdjuntar = new javax.swing.JButton();
         jLabelRutaPdf = new javax.swing.JLabel();
         jButtonGuardar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -132,23 +140,37 @@ public class RegistrarDatos extends javax.swing.JPanel {
         jTextFieldEmail.setMinimumSize(new java.awt.Dimension(200, 22));
         jTextFieldEmail.setPreferredSize(new java.awt.Dimension(200, 22));
 
-        jButtonAdjuntar.setText("Adjuntar Archivo PDF");
+        jButtonAdjuntar.setText("Adjuntar Archivo PDF...");
         jButtonAdjuntar.setMaximumSize(new java.awt.Dimension(200, 22));
         jButtonAdjuntar.setMinimumSize(new java.awt.Dimension(200, 22));
         jButtonAdjuntar.setPreferredSize(new java.awt.Dimension(200, 22));
+        jButtonAdjuntar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdjuntarActionPerformed(evt);
+            }
+        });
 
-        jLabelRutaPdf.setText("jLabel4");
         jLabelRutaPdf.setMaximumSize(new java.awt.Dimension(200, 16));
         jLabelRutaPdf.setMinimumSize(new java.awt.Dimension(200, 16));
         jLabelRutaPdf.setPreferredSize(new java.awt.Dimension(200, 16));
 
         jButtonGuardar.setText("Guardar Datos");
-        jButtonGuardar.setMaximumSize(new java.awt.Dimension(200, 22));
-        jButtonGuardar.setMinimumSize(new java.awt.Dimension(200, 22));
-        jButtonGuardar.setPreferredSize(new java.awt.Dimension(200, 22));
+        jButtonGuardar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.setPreferredSize(new java.awt.Dimension(140, 22));
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGuardarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -185,12 +207,14 @@ public class RegistrarDatos extends javax.swing.JPanel {
                             .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(232, 232, 232)))
                 .addContainerGap(253, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(528, 528, 528))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,15 +254,16 @@ public class RegistrarDatos extends javax.swing.JPanel {
                     .addComponent(jButtonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        // TODO add your handling code here:
-        PostulanteDTO post = new PostulanteDTO();
+        Postulante post = new Postulante();
         try {
             post.setDni(Integer.parseInt(jTextFieldDNI.getText()));
         } catch(NumberFormatException e) {
@@ -247,27 +272,50 @@ public class RegistrarDatos extends javax.swing.JPanel {
         post.setApellido(jTextFieldApellido.getText());
         post.setNombre(jTextFieldNombre.getText());
         post.setDomicilio(jTextFieldDomicilio.getText());
-        try {
-            post.setTelefono(Integer.parseInt(jTextFieldTelefono.getText()));
-        } catch(NumberFormatException e) {
-            post.setTelefono(0);
-        }
+        post.setTelefono(jTextFieldTelefono.getText());
         post.setEmail(jTextFieldEmail.getText());
         post.setEstado(true);
-        // Validación de los datos
+        // Si los datos son válidos se insertan en la BD
         if(CtrlRegistrarDatos.esValido(post)) {
-            Postulante_DAO posDAO = new Postulante_DAO();
-            posDAO.insertar(post);
+            // Inserta postulante
+            new PostulanteDaoJDBC().insert(post);
+            // Inserta CV
+            
+            // Confirmación del alta
             JOptionPane.showMessageDialog(this, "Postulante agregado");
+            limpiarFormulario();
         }
         else {
             JOptionPane.showMessageDialog(this, CtrlRegistrarDatos.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
+    private void jButtonAdjuntarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdjuntarActionPerformed
+        int valorRet = seleccionArchivo.showDialog(this, "Seleccionar");
+        if(valorRet == JFileChooser.APPROVE_OPTION) {
+            archivoPDF = seleccionArchivo.getSelectedFile();
+            jLabelRutaPdf.setText(archivoPDF.getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButtonAdjuntarActionPerformed
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        limpiarFormulario();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void limpiarFormulario() {
+        jTextFieldDNI.setText("");
+        jTextFieldApellido.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldDomicilio.setText("");
+        jTextFieldTelefono.setText("");
+        jTextFieldEmail.setText("");
+        jLabelRutaPdf.setText("");
+        archivoPDF = null;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdjuntar;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -286,5 +334,6 @@ public class RegistrarDatos extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefono;
+    private javax.swing.JFileChooser seleccionArchivo;
     // End of variables declaration//GEN-END:variables
 }

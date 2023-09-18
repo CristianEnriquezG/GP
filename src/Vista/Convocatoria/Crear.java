@@ -5,17 +5,55 @@
  */
 package Vista.Convocatoria;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
+
 /**
  *
  * @author EGcri
  */
 public class Crear extends javax.swing.JPanel {
+    CardLayout cl;
+    ArrayList<Object> obj;
 
     /**
      * Creates new form Crear
      */
     public Crear() {
         initComponents();
+        obj = new ArrayList<>();
+        NuevoPuesto np = new NuevoPuesto(this,obj);
+        this.add(np);
+        cl = (CardLayout)this.getLayout();
+        cl.addLayoutComponent(np, "NUEVO_PUESTO");
+        cl.first(this);
+    }
+    
+    public void agregarPantallas(int numPruebas) {
+        ConfigurarEntrevista ce = new ConfigurarEntrevista(this,obj);
+        this.add(ce);
+        cl.addLayoutComponent(ce,"ENTREVISTA");
+        for(int i = 1; i <= numPruebas; i++) {
+            String etiqBoton = (i != numPruebas) ? "Siguiente" : "Finalizar";
+            ConfigurarPrueba cp = new ConfigurarPrueba(this,i,etiqBoton,obj);
+            this.add(cp);
+            cl.addLayoutComponent(cp,"PRUEBA_" + i);
+        }
+    }
+    
+    public void avanzarPantalla() {
+        cl.next(this);
+    }
+    
+    public void resetearPantallas() {
+        this.removeAll();
+        initComponents();
+        obj = new ArrayList<>();
+        NuevoPuesto np = new NuevoPuesto(this,obj);
+        this.add(np);
+        cl = (CardLayout)this.getLayout();
+        cl.addLayoutComponent(np, "NUEVO_PUESTO");
+        cl.first(this);
     }
 
     /**
@@ -27,180 +65,13 @@ public class Crear extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextFieldFechaInicio = new javax.swing.JTextField();
-        jTextFieldFechaCierre = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabelFechaInicio = new javax.swing.JLabel();
-        jLabelFechaCierre = new javax.swing.JLabel();
-        jLabelPruebas = new javax.swing.JLabel();
-        jButtonSiguiente = new javax.swing.JButton();
-        jSpinnerPruebas = new javax.swing.JSpinner();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaDescrip = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
-        jLabelFechaInicio1 = new javax.swing.JLabel();
-
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
-
-        jTextFieldFechaInicio.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFechaInicio.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFechaInicio.setPreferredSize(new java.awt.Dimension(100, 22));
-
-        jTextFieldFechaCierre.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFechaCierre.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFechaCierre.setPreferredSize(new java.awt.Dimension(100, 22));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Nuevo Puesto");
-        jLabel1.setMaximumSize(new java.awt.Dimension(250, 29));
-        jLabel1.setMinimumSize(new java.awt.Dimension(250, 29));
-        jLabel1.setPreferredSize(new java.awt.Dimension(250, 29));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Ingrese los datos del puesto");
-        jLabel2.setMaximumSize(new java.awt.Dimension(250, 17));
-        jLabel2.setMinimumSize(new java.awt.Dimension(250, 17));
-        jLabel2.setPreferredSize(new java.awt.Dimension(250, 17));
-
-        jLabelFechaInicio.setText("Fecha de inicio");
-        jLabelFechaInicio.setMaximumSize(new java.awt.Dimension(140, 16));
-        jLabelFechaInicio.setMinimumSize(new java.awt.Dimension(140, 16));
-        jLabelFechaInicio.setPreferredSize(new java.awt.Dimension(140, 16));
-
-        jLabelFechaCierre.setText("Fecha de cierre");
-        jLabelFechaCierre.setMaximumSize(new java.awt.Dimension(140, 16));
-        jLabelFechaCierre.setMinimumSize(new java.awt.Dimension(140, 16));
-        jLabelFechaCierre.setPreferredSize(new java.awt.Dimension(140, 16));
-
-        jLabelPruebas.setText("Número de pruebas");
-        jLabelPruebas.setMaximumSize(new java.awt.Dimension(140, 16));
-        jLabelPruebas.setMinimumSize(new java.awt.Dimension(140, 16));
-        jLabelPruebas.setPreferredSize(new java.awt.Dimension(140, 16));
-
-        jButtonSiguiente.setText("Siguiente");
-        jButtonSiguiente.setMaximumSize(new java.awt.Dimension(200, 22));
-        jButtonSiguiente.setMinimumSize(new java.awt.Dimension(200, 22));
-        jButtonSiguiente.setPreferredSize(new java.awt.Dimension(200, 22));
-
-        jSpinnerPruebas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
-        jSpinnerPruebas.setMaximumSize(new java.awt.Dimension(64, 22));
-
-        jTextAreaDescrip.setColumns(20);
-        jTextAreaDescrip.setLineWrap(true);
-        jTextAreaDescrip.setRows(5);
-        jTextAreaDescrip.setWrapStyleWord(true);
-        jTextAreaDescrip.setMaximumSize(new java.awt.Dimension(332, 60));
-        jTextAreaDescrip.setMinimumSize(new java.awt.Dimension(332, 60));
-        jTextAreaDescrip.setPreferredSize(new java.awt.Dimension(332, 60));
-        jScrollPane1.setViewportView(jTextAreaDescrip);
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Descripción");
-        jLabel3.setMaximumSize(new java.awt.Dimension(230, 16));
-        jLabel3.setMinimumSize(new java.awt.Dimension(230, 16));
-        jLabel3.setPreferredSize(new java.awt.Dimension(230, 16));
-
-        jTextFieldNombre.setMaximumSize(new java.awt.Dimension(332, 22));
-        jTextFieldNombre.setMinimumSize(new java.awt.Dimension(332, 22));
-        jTextFieldNombre.setPreferredSize(new java.awt.Dimension(332, 22));
-
-        jLabelFechaInicio1.setText("Nombre");
-        jLabelFechaInicio1.setMaximumSize(new java.awt.Dimension(140, 16));
-        jLabelFechaInicio1.setMinimumSize(new java.awt.Dimension(140, 16));
-        jLabelFechaInicio1.setPreferredSize(new java.awt.Dimension(140, 16));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(496, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(528, 528, 528))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelPruebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSpinnerPruebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(494, 494, 494))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabelFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(452, 452, 452))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(497, 497, 497))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jLabelFechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPruebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerPruebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        setPreferredSize(new java.awt.Dimension(1280, 550));
+        setLayout(new java.awt.CardLayout());
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonSiguiente;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelFechaCierre;
-    private javax.swing.JLabel jLabelFechaInicio;
-    private javax.swing.JLabel jLabelFechaInicio1;
-    private javax.swing.JLabel jLabelPruebas;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinnerPruebas;
-    private javax.swing.JTextArea jTextAreaDescrip;
-    private javax.swing.JTextField jTextFieldFechaCierre;
-    private javax.swing.JTextField jTextFieldFechaInicio;
-    private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }

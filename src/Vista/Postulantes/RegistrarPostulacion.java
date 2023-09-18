@@ -5,17 +5,34 @@
  */
 package Vista.Postulantes;
 
+import Modelo.Postulacion;
+import Modelo.PostulacionDaoJDBC;
+import Modelo.Postulante;
+import Modelo.PostulanteDaoJDBC;
+import Modelo.Puesto;
+import Modelo.PuestoDaoJDBC;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author EGcri
  */
 public class RegistrarPostulacion extends javax.swing.JPanel {
-
+    ArrayList<String> listaPuestosActivos;
+    Postulante post;
     /**
      * Creates new form RegistrarPostulacion
      */
     public RegistrarPostulacion() {
         initComponents();
+        activarFormRegistrarPostulacion(false);
+        listaPuestosActivos = new ArrayList<>();
+        if(!hayPuestosVacantes()) {
+            activarFormBuscarPostulante(false);
+            mostrarMensajeError();
+        }
     }
 
     /**
@@ -28,11 +45,15 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelPostulante = new javax.swing.JLabel();
+        jLabelSeleccione = new javax.swing.JLabel();
+        jLabelDatosPostulante = new javax.swing.JLabel();
+        jComboBoxPuestos = new javax.swing.JComboBox<>();
+        jButtonBuscar = new javax.swing.JButton();
+        jTextFieldDNI = new javax.swing.JTextField();
+        jLabelDni = new javax.swing.JLabel();
         jButtonGuardar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jButtonCancelar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -44,36 +65,70 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
         jLabel1.setMinimumSize(new java.awt.Dimension(250, 29));
         jLabel1.setPreferredSize(new java.awt.Dimension(250, 29));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Postulante: ");
-        jLabel2.setMaximumSize(new java.awt.Dimension(250, 17));
-        jLabel2.setMinimumSize(new java.awt.Dimension(250, 17));
-        jLabel2.setPreferredSize(new java.awt.Dimension(250, 17));
+        jLabelPostulante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelPostulante.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelPostulante.setText("Postulante: ");
+        jLabelPostulante.setMaximumSize(new java.awt.Dimension(250, 17));
+        jLabelPostulante.setMinimumSize(new java.awt.Dimension(250, 17));
+        jLabelPostulante.setPreferredSize(new java.awt.Dimension(250, 17));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Seleccione el puesto vacante");
-        jLabel3.setMaximumSize(new java.awt.Dimension(250, 16));
-        jLabel3.setMinimumSize(new java.awt.Dimension(250, 16));
-        jLabel3.setPreferredSize(new java.awt.Dimension(250, 16));
+        jLabelSeleccione.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelSeleccione.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSeleccione.setText("Seleccione el puesto vacante");
+        jLabelSeleccione.setMaximumSize(new java.awt.Dimension(250, 16));
+        jLabelSeleccione.setMinimumSize(new java.awt.Dimension(250, 16));
+        jLabelSeleccione.setPreferredSize(new java.awt.Dimension(250, 16));
+
+        jLabelDatosPostulante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelDatosPostulante.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelDatosPostulante.setText("Ape, Nom [COD]");
+        jLabelDatosPostulante.setMaximumSize(new java.awt.Dimension(300, 17));
+        jLabelDatosPostulante.setMinimumSize(new java.awt.Dimension(300, 17));
+        jLabelDatosPostulante.setPreferredSize(new java.awt.Dimension(300, 17));
+
+        jComboBoxPuestos.setMaximumSize(new java.awt.Dimension(250, 22));
+        jComboBoxPuestos.setMinimumSize(new java.awt.Dimension(250, 22));
+        jComboBoxPuestos.setPreferredSize(new java.awt.Dimension(250, 22));
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.setMaximumSize(new java.awt.Dimension(125, 22));
+        jButtonBuscar.setMinimumSize(new java.awt.Dimension(125, 22));
+        jButtonBuscar.setPreferredSize(new java.awt.Dimension(125, 22));
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
+        jTextFieldDNI.setMaximumSize(new java.awt.Dimension(125, 22));
+        jTextFieldDNI.setMinimumSize(new java.awt.Dimension(125, 22));
+        jTextFieldDNI.setPreferredSize(new java.awt.Dimension(125, 22));
+
+        jLabelDni.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelDni.setText("Ingrese DNI:");
+        jLabelDni.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setPreferredSize(new java.awt.Dimension(100, 16));
 
         jButtonGuardar.setText("Guardar Datos");
-        jButtonGuardar.setMaximumSize(new java.awt.Dimension(200, 22));
-        jButtonGuardar.setMinimumSize(new java.awt.Dimension(200, 22));
-        jButtonGuardar.setPreferredSize(new java.awt.Dimension(200, 22));
+        jButtonGuardar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Ape, Nom [COD]");
-        jLabel4.setMaximumSize(new java.awt.Dimension(250, 17));
-        jLabel4.setMinimumSize(new java.awt.Dimension(250, 17));
-        jLabel4.setPreferredSize(new java.awt.Dimension(250, 17));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setMaximumSize(new java.awt.Dimension(250, 22));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(250, 22));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(250, 22));
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,48 +141,161 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(363, 363, 363)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(405, Short.MAX_VALUE))
+                        .addComponent(jLabelDatosPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(419, 419, 419)
+                        .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(355, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(528, 528, 528))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(501, 501, 501)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jComboBoxPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelSeleccione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(501, 501, 501)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(477, 477, 477))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(93, 93, 93)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDatosPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelSeleccione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173)
-                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean hayPuestosVacantes() {
+        ArrayList<Puesto> listaPuestos = (ArrayList<Puesto>) new PuestoDaoJDBC().select();
+        for(int i = 0; i < listaPuestos.size(); i++) {
+            Puesto p = listaPuestos.get(i);
+            if(p.getEstadoConvocatoria().equals("abierta")) {
+                listaPuestosActivos.add(String.format("%05d",p.getCodPuesto()) + " - " + p.getNombre());
+            }
+        }
+        return !listaPuestosActivos.isEmpty();
+    }
+    
+    private void mostrarMensajeError() {
+        JOptionPane.showMessageDialog(this,"ERROR: No hay puestos vacantes");
+    }
+    
+    public final void activarFormBuscarPostulante(boolean band) {
+        jLabelDni.setEnabled(band);
+        jTextFieldDNI.setEnabled(band);
+        jButtonBuscar.setEnabled(band);
+    }
+    
+    public final void activarFormRegistrarPostulacion(boolean band) {
+        jLabelPostulante.setEnabled(band);
+        jLabelDatosPostulante.setEnabled(band);
+        jLabelSeleccione.setEnabled(band);
+        jComboBoxPuestos.setEnabled(band);
+        jButtonGuardar.setEnabled(band);
+        jButtonCancelar.setEnabled(band);
+    }
+    
+    public void limpiarFormulario() {
+        jTextFieldDNI.setText("");
+        jLabelDatosPostulante.setText("");
+        jComboBoxPuestos.removeAllItems();
+    }
+    
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        int dniPost = 0;
+        try {
+            dniPost = Integer.parseInt(jTextFieldDNI.getText());
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,"ERROR: Número de DNI no válido");
+            return;
+        }
+        post = new PostulanteDaoJDBC().select(dniPost);
+        if(post != null) {
+            if(post.isEstado()) {
+                jLabelDatosPostulante.setText(post.getApellido() + ", " + post.getNombre() + " [Código: " + String.format("%05d",post.getCodPostulante()) + "]");
+                jComboBoxPuestos.setModel(new DefaultComboBoxModel(listaPuestosActivos.toArray()));
+                
+                /***************************************************/
+                /***************************************************/
+                /********* ATENCIÓN: FALTA HACER QUE UN POSTULANTE 
+                 * NO SE PUEDA POSTULAR DOS VECES AL MISMO PUESTO
+                 * 
+                 * ADEMÁS SI SE INTENTA ESO, TIRA UNA SQLEXCEPTION
+                 * PORQUE LOS CAMPOS COD_POSTULANTE Y COD_PUESTO ESTÁN
+                 * DEFINIDOS COMO CLAVE PRIMARIA
+                 **************************************************/ 
+                
+                activarFormRegistrarPostulacion(true);
+                activarFormBuscarPostulante(false);
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"ERROR: Postulante inactivo");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"ERROR: Postulante inexistente");
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        Postulacion postula = new Postulacion();
+        
+        postula.setCodPostulante(post.getCodPostulante());
+        int codPuesto = Integer.parseInt(String.valueOf(jComboBoxPuestos.getSelectedItem()).substring(0,5));
+        postula.setCodPuesto(codPuesto);
+        postula.setEtapaActual("Entrevista");
+        postula.setNumPruebaActual(0);
+        new PostulacionDaoJDBC().insert(postula);
+        
+        JOptionPane.showMessageDialog(this, "Se ha registrado la postulación");
+        limpiarFormulario();
+        activarFormRegistrarPostulacion(false);
+        activarFormBuscarPostulante(true);
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        limpiarFormulario();
+        activarFormRegistrarPostulacion(false);
+        activarFormBuscarPostulante(true);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxPuestos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelDatosPostulante;
+    private javax.swing.JLabel jLabelDni;
+    private javax.swing.JLabel jLabelPostulante;
+    private javax.swing.JLabel jLabelSeleccione;
+    private javax.swing.JTextField jTextFieldDNI;
     // End of variables declaration//GEN-END:variables
 }

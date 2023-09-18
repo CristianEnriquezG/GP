@@ -10,51 +10,42 @@ package Modelo;
  * @author EGcri
  */
 public class Postulacion {
-    private int cod_postulante;
-    private int cod_puesto;
-    private String etapa;
-    private int pruebas_completadas;
+    private int codPostulante;
+    private int codPuesto;
+    private String etapaActual;
+    private int numPruebaActual;
 
-    public Postulacion() {
+    public Postulacion() {}
+
+    public int getCodPostulante() {
+        return codPostulante;
     }
 
-    public Postulacion(int cod_postulante, int cod_puesto, String etapa, int pruebas_completadas) {
-        this.cod_postulante = cod_postulante;
-        this.cod_puesto = cod_puesto;
-        this.etapa = etapa;
-        this.pruebas_completadas = pruebas_completadas;
+    public void setCodPostulante(int codPostulante) {
+        this.codPostulante = codPostulante;
     }
 
-    public int getCod_postulante() {
-        return cod_postulante;
+    public int getCodPuesto() {
+        return codPuesto;
     }
 
-    public void setCod_postulante(int cod_postulante) {
-        this.cod_postulante = cod_postulante;
+    public void setCodPuesto(int codPuesto) {
+        this.codPuesto = codPuesto;
     }
 
-    public int getCod_puesto() {
-        return cod_puesto;
+    public String getEtapaActual() {
+        return etapaActual;
     }
 
-    public void setCod_puesto(int cod_puesto) {
-        this.cod_puesto = cod_puesto;
+    public void setEtapaActual(String etapaActual) {
+        this.etapaActual = etapaActual;
     }
 
-    public String getEtapa() {
-        return etapa;
+    public int getNumPruebaActual() {
+        return numPruebaActual;
     }
 
-    public void setEtapa(String etapa) {
-        this.etapa = etapa;
+    public void setNumPruebaActual(int numPruebaActual) {
+        this.numPruebaActual = numPruebaActual;
     }
-
-    public int getPruebas_completadas() {
-        return pruebas_completadas;
-    }
-
-    public void setPruebas_completadas(int pruebas_completadas) {
-        this.pruebas_completadas = pruebas_completadas;
-    }
-    
 }

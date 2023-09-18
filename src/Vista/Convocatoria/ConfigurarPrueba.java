@@ -4,17 +4,39 @@
  */
 package Vista.Convocatoria;
 
+import Controlador.CtrlCrearConvocatoria;
+import Modelo.FormatoEntrevista;
+import Modelo.FormatoEntrevistaDaoJDBC;
+import Modelo.FormatoPrueba;
+import Modelo.FormatoPruebaDaoJDBC;
+import Modelo.Puesto;
+import Modelo.PuestoDaoJDBC;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MC1
  */
 public class ConfigurarPrueba extends javax.swing.JPanel {
+    private Crear pantCrear;
+    private ArrayList<Object> objeto;
+    private int numeroPrueba;
 
     /**
      * Creates new form ConfigurarPrueba
+     * @param c
+     * @param numPrueba
+     * @param etiqBoton
+     * @param obj
      */
-    public ConfigurarPrueba() {
+    public ConfigurarPrueba(Crear c, int numPrueba, String etiqBoton, ArrayList<Object> obj) {
         initComponents();
+        pantCrear = c;
+        numeroPrueba = numPrueba;
+        objeto = obj;
+        jLabel1.setText("Configurar Prueba " + numeroPrueba);
+        jButtonSigFin.setText(etiqBoton);
     }
 
     /**
@@ -29,12 +51,13 @@ public class ConfigurarPrueba extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButtonSigFin = new javax.swing.JButton();
         jTextFieldFecha = new javax.swing.JTextField();
-        jTextFieldFecha1 = new javax.swing.JTextField();
+        jTextFieldHora = new javax.swing.JTextField();
         jLabelRutaPdf1 = new javax.swing.JLabel();
         jLabelRutaPdf2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescrip = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
+        jButtonCancelar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -47,17 +70,22 @@ public class ConfigurarPrueba extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(250, 29));
 
         jButtonSigFin.setText("[Siguiente | Finalizar]");
-        jButtonSigFin.setMaximumSize(new java.awt.Dimension(200, 22));
-        jButtonSigFin.setMinimumSize(new java.awt.Dimension(200, 22));
-        jButtonSigFin.setPreferredSize(new java.awt.Dimension(200, 22));
+        jButtonSigFin.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonSigFin.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonSigFin.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonSigFin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSigFinActionPerformed(evt);
+            }
+        });
 
         jTextFieldFecha.setMaximumSize(new java.awt.Dimension(100, 22));
         jTextFieldFecha.setMinimumSize(new java.awt.Dimension(100, 22));
         jTextFieldFecha.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        jTextFieldFecha1.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha1.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha1.setPreferredSize(new java.awt.Dimension(100, 22));
+        jTextFieldHora.setMaximumSize(new java.awt.Dimension(100, 22));
+        jTextFieldHora.setMinimumSize(new java.awt.Dimension(100, 22));
+        jTextFieldHora.setPreferredSize(new java.awt.Dimension(100, 22));
 
         jLabelRutaPdf1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelRutaPdf1.setText("Hora");
@@ -86,14 +114,20 @@ public class ConfigurarPrueba extends javax.swing.JPanel {
         jLabel3.setMinimumSize(new java.awt.Dimension(250, 16));
         jLabel3.setPreferredSize(new java.awt.Dimension(250, 16));
 
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonSigFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(528, 528, 528))
             .addGroup(layout.createSequentialGroup()
                 .addGap(528, 528, 528)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,8 +147,13 @@ public class ConfigurarPrueba extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelRutaPdf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(461, 461, 461))))
+                        .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(461, 461, 461))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSigFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(471, 471, 471))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,15 +169,59 @@ public class ConfigurarPrueba extends javax.swing.JPanel {
                     .addComponent(jLabelRutaPdf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelRutaPdf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95)
-                .addComponent(jButtonSigFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSigFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSigFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSigFinActionPerformed
+        FormatoPrueba formatoPru = new FormatoPrueba();
+        formatoPru.setDescripcion(jTextAreaDescrip.getText());
+        formatoPru.setNumPrueba(numeroPrueba);
+        String fec = jTextFieldFecha.getText();
+        String hor = jTextFieldHora.getText();
+        if(CtrlCrearConvocatoria.esValido(formatoPru, fec, hor)) {
+            // almacena objeto válido en array list
+            objeto.add(formatoPru);
+            if(jButtonSigFin.getText().equals("Siguiente")) {
+                pantCrear.avanzarPantalla();
+            }
+            else {
+                int codPuesto = 0;
+                // Inserta puesto nuevo en la BD
+                Object ob = objeto.get(0);
+                codPuesto = new PuestoDaoJDBC().insert((Puesto) ob);
+                // Inserta entrevistas o pruebas según sea el caso
+                for(int i = 1; i < objeto.size(); i++) {
+                    ob = objeto.get(i);
+                    if(ob instanceof FormatoEntrevista) {
+                        ((FormatoEntrevista) ob).setCodPuesto(codPuesto);
+                        new FormatoEntrevistaDaoJDBC().insert((FormatoEntrevista) ob);
+                    }
+                    else {
+                        ((FormatoPrueba) ob).setCodPuesto(codPuesto);
+                        new FormatoPruebaDaoJDBC().insert((FormatoPrueba) ob);
+                    }  
+                }
+                JOptionPane.showMessageDialog(this, "Puesto creado");
+                pantCrear.resetearPantallas();
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, CtrlCrearConvocatoria.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonSigFinActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        pantCrear.resetearPantallas();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonSigFin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -147,6 +230,6 @@ public class ConfigurarPrueba extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDescrip;
     private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldFecha1;
+    private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables
 }

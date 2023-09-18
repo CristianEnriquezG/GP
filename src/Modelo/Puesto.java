@@ -5,56 +5,68 @@
  */
 package Modelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author EGcri
  */
 public class Puesto {
-    private int cod_puesto;
-    private String denomicnacion;
-    private int cantidad_pruebas;
-    private int cod_convocatoria;
+    private int codPuesto;
+    private String nombre;
+    private String descripcion;
+    private Date fechaInicio;
+    private Date fechaCierre;
+    private String estadoConvocatoria; // ENUM('abierta','cerrada','cancelada')
 
     public Puesto() {
     }
 
-    public Puesto(int cod_puesto, String denomicnacion, int cantidad_pruebas, int cod_convocatoria) {
-        this.cod_puesto = cod_puesto;
-        this.denomicnacion = denomicnacion;
-        this.cantidad_pruebas = cantidad_pruebas;
-        this.cod_convocatoria = cod_convocatoria;
+    public int getCodPuesto() {
+        return codPuesto;
     }
 
-    public int getCod_puesto() {
-        return cod_puesto;
+    public void setCodPuesto(int codPuesto) {
+        this.codPuesto = codPuesto;
     }
 
-    public void setCod_puesto(int cod_puesto) {
-        this.cod_puesto = cod_puesto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getDenomicnacion() {
-        return denomicnacion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setDenomicnacion(String denomicnacion) {
-        this.denomicnacion = denomicnacion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public int getCantidad_pruebas() {
-        return cantidad_pruebas;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public void setCantidad_pruebas(int cantidad_pruebas) {
-        this.cantidad_pruebas = cantidad_pruebas;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public int getCod_convocatoria() {
-        return cod_convocatoria;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public void setCod_convocatoria(int cod_convocatoria) {
-        this.cod_convocatoria = cod_convocatoria;
+    public Date getFechaCierre() {
+        return fechaCierre;
     }
-    
+
+    public void setFechaCierre(Date fechaCierre) {
+        this.fechaCierre = fechaCierre;
+    }
+
+    public String getEstadoConvocatoria() {
+        return estadoConvocatoria;
+    }
+
+    public void setEstadoConvocatoria(String estadoConvocatoria) {
+        this.estadoConvocatoria = estadoConvocatoria;
+    }
 }

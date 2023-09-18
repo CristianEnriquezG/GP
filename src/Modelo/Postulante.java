@@ -10,48 +10,43 @@ package Modelo;
  * @author EGcri
  */
 public class Postulante {
-  private  int cod_postulante;
-  private  int DNI;
-  private  String apellido;
-  private  String nombre;
-  private  String domicilio;
-  private  String telefono;
-  private  String email;
-  private  Boolean estado;
+    private int codPostulante;
+    private int dni;
+    private String apellido;
+    private String nombre;
+    private String domicilio;
+    private String telefono;
+    private String email;
+    private boolean estado;
 
-    public Postulante(int cod_postulante, int DNI, String apellido, String nombre, String domicilio, String telefono, String email, boolean estado) {
-        this.cod_postulante = cod_postulante;
+    public Postulante() {}
+
+    public Postulante(int codPostulante, int dni, String apellido, String nombre, String domicilio, String telefono, String email, boolean estado) {
+        this.codPostulante = codPostulante;
+        this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
-        this.DNI = DNI;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.email = email;
         this.estado = estado;
     }
-
-
-    public Postulante() {
-        
+    
+    public int getCodPostulante() {
+        return codPostulante;
     }
 
-
-    public int getCod_postulante() {
-        return cod_postulante;
+    public void setCodPostulante(int codPostulante) {
+        this.codPostulante = codPostulante;
     }
 
-    public void setCod_postulante(int cod_postulante) {
-        this.cod_postulante = cod_postulante;
+    public int getDni() {
+        return dni;
     }
 
-    public int getDNI() {
-        return DNI;
+    public void setDni(int dni) {
+        this.dni = dni;
     }
-
-    public void setDNI(int DNI) {
-        this.DNI = DNI;
-    }
-
 
     public String getApellido() {
         return apellido;
@@ -68,10 +63,6 @@ public class Postulante {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    
-
-
 
     public String getDomicilio() {
         return domicilio;
@@ -97,14 +88,11 @@ public class Postulante {
         this.email = email;
     }
 
-
-
-    public Boolean getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
- 
 }
