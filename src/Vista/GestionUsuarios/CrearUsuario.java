@@ -170,11 +170,25 @@ public class CrearUsuario extends javax.swing.JPanel {
            mostrarVentanaDeError(CtrlUsuarios.errorSinSeleccion);
        
        UsuarioDao UsuarioDao = new UsuarioDaoJDBC();
-       UsuarioDao.insert(usuario);
+       if(CtrlUsuarios.chequeoFinal(usuario))
+       {
+            UsuarioDao.insert(usuario);
+            JOptionPane.showMessageDialog(this,"Usuario Creado");
+       }
+       else{
+           JOptionPane.showMessageDialog(this, CtrlUsuarios.errorContraseñaVacia, "Error", JOptionPane.ERROR_MESSAGE);
+       }
        
         
     }//GEN-LAST:event_GuardarjButtonActionPerformed
-    
+    public void limpiarFormulario(){
+        NombreUsuariojTextField.setText("");
+        PermisoAdministradorjRadioButton.setSelected(false);
+        PermisoOperadorjRadioButton.setSelected(false);
+        PermisoPostulantejRadioButton.setSelected(false);
+        jPasswordField1.setText("");
+        jPasswordField2.setText("");
+    }
     public static void mostrarVentanaDeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }

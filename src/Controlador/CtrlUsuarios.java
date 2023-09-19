@@ -4,6 +4,8 @@
  */
 package Controlador;
 
+import Modelo.Usuario;
+
 /**
  *
  * @author EGcri
@@ -14,6 +16,18 @@ public class CtrlUsuarios {
     public static final String errorContraseñaVacia = "la contraseña no puede estar vacia";
     
     public static final String errorSinSeleccion= "Debe seleccionar al menos un permiso";
+    
+    public static final String errorEnCreacion = "Error usuario no creado";
             
-        
+    public static boolean chequeoFinal(Usuario usuario){
+        boolean resultado = false;
+        if(usuario.getNombreUsuario().length() != 0)
+            resultado = true;
+        if(usuario.getPermisosUsuario() != 0)
+            resultado = true;
+        if(usuario.getContraseñaUsuario().length() != 0)
+            resultado = true;
+            
+        return resultado;
+    }
 }
