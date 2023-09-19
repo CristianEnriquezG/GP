@@ -13,22 +13,34 @@ public class Usuario {
     private String nombreUsuario;
     private String contraseñaUsuario;
     private int permisosUsuario;
+    private boolean activo;
 
     public Usuario(String nombreUsuario, String contraseñaUsuario, int permisosUsuario) {
         this.nombreUsuario = nombreUsuario;
         this.contraseñaUsuario = contraseñaUsuario;
         this.permisosUsuario = permisosUsuario;
+        this.activo = true;
     }
     
-     public Usuario(int uidUsuario,String nombreUsuario, String contraseñaUsuario, int permisosUsuario) {
+     public Usuario(int uidUsuario,String nombreUsuario, String contraseñaUsuario, int permisosUsuario, boolean activo) {
         this.uidUsuario = uidUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contraseñaUsuario = contraseñaUsuario;
         this.permisosUsuario = permisosUsuario;
+        this.activo = activo;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     
     public Usuario() {
+        this.activo = true;
     }
 
     public int getUidUsuario() {

@@ -172,8 +172,12 @@ public class CrearUsuario extends javax.swing.JPanel {
        UsuarioDao UsuarioDao = new UsuarioDaoJDBC();
        if(CtrlUsuarios.chequeoFinal(usuario))
        {
-            UsuarioDao.insert(usuario);
-            JOptionPane.showMessageDialog(this,"Usuario Creado");
+            if(UsuarioDao.insert(usuario) != 0){
+                JOptionPane.showMessageDialog(this,"Usuario Creado");
+                limpiarFormulario();
+            }
+                
+               
        }
        else{
            JOptionPane.showMessageDialog(this, CtrlUsuarios.errorContraseñaVacia, "Error", JOptionPane.ERROR_MESSAGE);

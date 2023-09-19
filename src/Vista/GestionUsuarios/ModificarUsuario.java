@@ -26,6 +26,7 @@ public class ModificarUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         NombreUsuariojTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -59,6 +60,7 @@ public class ModificarUsuario extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setText("Datos del usuario");
+        jLabel2.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setText("Buscar Usuario");
@@ -68,35 +70,35 @@ public class ModificarUsuario extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setText("Cambiar Contraseña");
+        jLabel5.setEnabled(false);
 
         jLabel6.setText("Contraseña Actual");
+        jLabel6.setEnabled(false);
 
-        ContraseñaActualjPasswordField.setText("jPasswordField1");
+        ContraseñaActualjPasswordField.setEnabled(false);
         ContraseñaActualjPasswordField.setMaximumSize(new java.awt.Dimension(100, 20));
         ContraseñaActualjPasswordField.setMinimumSize(new java.awt.Dimension(100, 20));
         ContraseñaActualjPasswordField.setPreferredSize(new java.awt.Dimension(100, 20));
 
         jLabel7.setText("Contraseña Nueva");
+        jLabel7.setEnabled(false);
 
         jLabel8.setText("Confirmar contraseña");
+        jLabel8.setEnabled(false);
 
-        ContraseñaNuevajPasswordField.setText("jPasswordField1");
+        ContraseñaNuevajPasswordField.setEnabled(false);
         ContraseñaNuevajPasswordField.setMaximumSize(new java.awt.Dimension(100, 20));
         ContraseñaNuevajPasswordField.setMinimumSize(new java.awt.Dimension(100, 20));
         ContraseñaNuevajPasswordField.setName(""); // NOI18N
         ContraseñaNuevajPasswordField.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setEnabled(false);
         jPasswordField1.setMaximumSize(new java.awt.Dimension(100, 20));
         jPasswordField1.setMinimumSize(new java.awt.Dimension(100, 20));
         jPasswordField1.setPreferredSize(new java.awt.Dimension(100, 20));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
 
         GuardarjButton.setText("Guardar");
+        GuardarjButton.setEnabled(false);
         GuardarjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarjButtonActionPerformed(evt);
@@ -105,12 +107,19 @@ public class ModificarUsuario extends javax.swing.JPanel {
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setText("Permisos");
+        jLabel9.setEnabled(false);
 
-        jRadioButton1.setText("Permiso 1");
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Administrador");
+        jRadioButton1.setEnabled(false);
 
-        jRadioButton2.setText("Administrador");
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Operador");
+        jRadioButton2.setEnabled(false);
 
-        jRadioButton3.setText("Operador");
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setText("Postulante");
+        jRadioButton3.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -196,10 +205,6 @@ public class ModificarUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
     private void GuardarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarjButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GuardarjButtonActionPerformed
@@ -214,6 +219,7 @@ public class ModificarUsuario extends javax.swing.JPanel {
     private javax.swing.JPasswordField ContraseñaNuevajPasswordField;
     private javax.swing.JButton GuardarjButton;
     private javax.swing.JTextField NombreUsuariojTextField1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

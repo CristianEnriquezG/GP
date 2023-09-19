@@ -4,12 +4,21 @@
  */
 package Vista.GestionUsuarios;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import Controlador.CtrlUsuarios;
+import Modelo.Usuario;
+import Modelo.UsuarioDao;
+import Modelo.UsuarioDaoJDBC;
+
 /**
  *
  * @author EGcri
  */
 public class EliminarUsuario extends javax.swing.JPanel {
-
+    
+    private Usuario usuario = null;
+    UsuarioDao inter = new UsuarioDaoJDBC();
     /**
      * Creates new form eliminarUsuario
      */
@@ -30,9 +39,9 @@ public class EliminarUsuario extends javax.swing.JPanel {
         NombreUsuariojTextField = new javax.swing.JTextField();
         BuscarjButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        LabelPermiso = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        LabelUID = new javax.swing.JLabel();
         EliminarUsuariojButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -51,16 +60,27 @@ public class EliminarUsuario extends javax.swing.JPanel {
         });
 
         BuscarjButton.setText("Buscar");
+        BuscarjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Permisos ");
 
-        jLabel3.setText("LabelPermiso");
+        LabelPermiso.setText("LabelPermiso");
 
         jLabel4.setText("UID");
 
-        jLabel5.setText("LabelUID");
+        LabelUID.setText("LabelUID");
 
         EliminarUsuariojButton.setText("Eliminar");
+        EliminarUsuariojButton.setEnabled(false);
+        EliminarUsuariojButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarUsuariojButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel6.setText("Eliminar Usuario");
@@ -93,12 +113,12 @@ public class EliminarUsuario extends javax.swing.JPanel {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(LabelUID)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(NombreUsuariojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
                                 .addComponent(BuscarjButton))
-                            .addComponent(jLabel3)
+                            .addComponent(LabelPermiso)
                             .addComponent(jLabel6)))
                     .addComponent(jLabel9))
                 .addContainerGap(379, Short.MAX_VALUE))
@@ -120,11 +140,11 @@ public class EliminarUsuario extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(LabelPermiso))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(LabelUID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(93, 93, 93)
@@ -134,19 +154,62 @@ public class EliminarUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NombreUsuariojTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NombreUsuariojTextFieldKeyPressed
-        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            BuscarjButtonActionPerformed(null);
     }//GEN-LAST:event_NombreUsuariojTextFieldKeyPressed
+
+    private void BuscarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarjButtonActionPerformed
+        String nombreUsuario = NombreUsuariojTextField.getText();
+        if(nombreUsuario.length() == 0 || " ".equals(nombreUsuario) ) JOptionPane.showMessageDialog(this, CtrlUsuarios.errorUsuarioVacio, TOOL_TIP_TEXT_KEY, HEIGHT);
+        else
+        {
+           
+
+            this.usuario = inter.search(nombreUsuario);
+            String permisos = "";
+            if(usuario != null)
+            { 
+                switch (this.usuario.getPermisosUsuario()) {
+                    case 0:
+                        permisos = "Administrador";
+                        break;
+                    case 1:
+                        permisos = "Operador";
+                        break;
+                    case 2:
+                        permisos = "Postulante";
+                        break;
+                    default:
+                        break;
+                }
+                LabelPermiso.setText(permisos);
+                LabelUID.setText(String.valueOf(this.usuario.getUidUsuario()));
+                EliminarUsuariojButton.setEnabled(true);                
+            }
+            
+            
+        }
+    }//GEN-LAST:event_BuscarjButtonActionPerformed
+
+    private void EliminarUsuariojButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarUsuariojButtonActionPerformed
+
+      if(inter.delete(this.usuario) == 1)
+      {
+          JOptionPane.showMessageDialog(this, "Eliminación correcta");
+      }
+      
+    }//GEN-LAST:event_EliminarUsuariojButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarjButton;
     private javax.swing.JButton EliminarUsuariojButton;
+    private javax.swing.JLabel LabelPermiso;
+    private javax.swing.JLabel LabelUID;
     private javax.swing.JTextField NombreUsuariojTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

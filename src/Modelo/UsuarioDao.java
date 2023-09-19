@@ -22,5 +22,7 @@ public interface UsuarioDao {
         
 
     public int delete(Usuario Usuario);
+    
+    public Usuario search(String nombreUsuario);
         
 }
