@@ -162,9 +162,7 @@ public class EliminarUsuario extends javax.swing.JPanel {
         String nombreUsuario = NombreUsuariojTextField.getText();
         if(nombreUsuario.length() == 0 || " ".equals(nombreUsuario) ) JOptionPane.showMessageDialog(this, CtrlUsuarios.errorUsuarioVacio, TOOL_TIP_TEXT_KEY, HEIGHT);
         else
-        {
-           
-
+        {           
             this.usuario = inter.search(nombreUsuario);
             String permisos = "";
             if(usuario != null)
