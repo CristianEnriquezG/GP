@@ -22,7 +22,6 @@ public class UsuarioDaoJDBC implements UsuarioDao{
     private static final String SQL_UPDATE = "UPDATE usuario SET nombreUsuario=?, contraseñaUsuario=?, permisosUsuario=?";
     private static final String SQL_DELETE = "UPDATE usuario SET activo=? WHERE uidUsuario =?";
     private static final String SQL_SEARCH = "SELECT uidUsuario, nombreUsuario, contraseñaUsuario, permisosUsuario, activo FROM usuario WHERE nombreUsuario =?";
-    private static final String SQL_MATCH = "SELECT contraseñaUsuario FROM usuario where nombreUsuario=?";
 
 
     public List<Usuario> select(){
@@ -166,32 +165,5 @@ public class UsuarioDaoJDBC implements UsuarioDao{
             if(this.ConexionDB == null) Conector_DB.close(Conexion);
         }
         return usuario;
-    }
-    
-    public boolean match(Usuario usuario){
-        Connection Conexion = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        boolean result = false;
-         try{
-            Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
-            stmt = Conexion.prepareStatement(SQL_MATCH);
-            stmt.setString(1,usuario.getNombreUsuario());
-            rs = stmt.executeQuery();
-            while(rs.next()){                
-                String contraseñaUsuario = rs.getString("contraseñaUsuario"); 
-                if(contraseñaUsuario == null ? usuario.getContraseñaUsuario() == null : contraseñaUsuario.equals(usuario.getContraseñaUsuario()))
-                    result = true;
-            }
-            
-        }catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        finally{
-            Conector_DB.close(stmt);
-            if(this.ConexionDB == null) Conector_DB.close(Conexion);
-        }
-        return result;
     }
 }

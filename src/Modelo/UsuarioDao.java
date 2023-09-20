@@ -20,10 +20,9 @@ public interface UsuarioDao {
 
     public int update(Usuario Usuario);
         
+
     public int delete(Usuario Usuario);
     
     public Usuario search(String nombreUsuario);
-    
-    public boolean match(Usuario usuario);
         
 }
