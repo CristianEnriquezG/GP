@@ -14,15 +14,14 @@ import java.util.List;
 public interface UsuarioDao {
     public List<Usuario> select();
     
-
     public int insert(Usuario Usuario);
         
-
     public int update(Usuario Usuario);
         
-
     public int delete(Usuario Usuario);
     
     public Usuario search(String nombreUsuario);
+    
+    public boolean match(Usuario usuario);
         
 }
