@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,15 +92,17 @@ public class PostulanteDaoJDBC implements PostulanteDao {
         return post;
     }
 
+    // Esta implementacion devuelve la clave del postulante insertado
     @Override
     public int insert(Postulante Postulante){
-        int rows = 0;
+        int clave = 0;
         String sql = SQL_INSERT;
         Connection c = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             c = Conector_DB.getConnection();
-            ps = c.prepareStatement(sql);
+            ps = c.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,Postulante.getDni());
             ps.setString(2,Postulante.getApellido());
             ps.setString(3, Postulante.getNombre());
@@ -108,6 +111,10 @@ public class PostulanteDaoJDBC implements PostulanteDao {
             ps.setString(6,Postulante.getEmail());
             ps.setBoolean(7,Postulante.isEstado());
             ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+                if(rs.next()) {
+                    clave = rs.getInt(1);
+                }
         }
         catch(SQLException ex) {
             System.out.println(ex.getMessage());
@@ -116,7 +123,7 @@ public class PostulanteDaoJDBC implements PostulanteDao {
             Conector_DB.close(ps);
             Conector_DB.close(c);
         }
-        return rows;
+        return clave;
     }
     
     @Override
@@ -154,13 +161,10 @@ public class PostulanteDaoJDBC implements PostulanteDao {
         int rows = 0;
         try{
             Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
-
             stmt = Conexion.prepareStatement(SQL_DELETE);
             stmt.setInt(1, Postulante.getCodPostulante());
             rows = stmt.executeUpdate();
             //mensaje
-
-            
         } 
         catch(Exception e){
                 System.out.println(e.getMessage());
