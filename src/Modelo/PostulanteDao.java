@@ -11,4 +11,8 @@ public interface PostulanteDao {
     public int update(Postulante Postulante);
 
     public int delete(Postulante Postulante);
+    
+    public Postulante fetch(String apellido, String nombre);
+    
+    public Postulante fetch(int DNI);
 }

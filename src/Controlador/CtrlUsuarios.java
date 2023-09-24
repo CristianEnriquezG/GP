@@ -18,6 +18,14 @@ public class CtrlUsuarios {
     public static final String errorSinSeleccion= "Debe seleccionar al menos un permiso";
     
     public static final String errorEnCreacion = "Error usuario no creado";
+     
+    public static final String errorUsuarioDadoDeBaja = "Error: el usuario no esta activo";
+
+    public static final String errorUsuarioInexistente = "Error: El usuario no existe";
+
+    public static final String errorContraseñaIncorrecta = "Error: Contraseña incorrecta";
+
+    public static final String errorContraseñasDistintas = "Error: las contraseñas no son iguales";
             
     public static boolean chequeoFinal(Usuario usuario){
         boolean resultado = false;
