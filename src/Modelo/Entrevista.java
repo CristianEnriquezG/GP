@@ -5,60 +5,58 @@
  */
 package Modelo;
 
+import java.sql.Date;
+import java.sql.Time;
+
 /**
  *
  * @author EGcri
  */
 public class Entrevista {
-    private int cod_entrevista;
+    private int codEntrevista;
+    private Date fecha;
+    private Time hora;
     private int presentacion;
     private int actitud;
     private int conversacion;
     private int disposicion;
     private int decision;
+    private int disponibilidad;
     private int transporte;
-    private int aspecto_fisico;
+    private int aspectoFisico;
     private int experiencia;
     private int conocimientos;
     private int relacion;
     private int liderazgo;
-    private int manejo_herramientas;
-    private String vive_con;
+    private int manejoHerramientas;
+    private String viveCon;
     private String estudios;
-    private String recomendado_por;
-    private int cod_postulante;
-    private int cod_puesto;
+    private String recomendadoPor;
+    private int codPostulante;
+    private int codPuesto;
 
-    public Entrevista() {
+    public int getCodEntrevista() {
+        return codEntrevista;
     }
 
-    public Entrevista(int cod_entrevista, int presentacion, int actitud, int conversacion, int disposicion, int decision, int transporte, int aspecto_fisico, int experiencia, int conocimientos, int relacion, int liderazgo, int manejo_herramientas, String vive_con, String estudios, String recomendado_por, int cod_postulante, int cod_puesto) {
-        this.cod_entrevista = cod_entrevista;
-        this.presentacion = presentacion;
-        this.actitud = actitud;
-        this.conversacion = conversacion;
-        this.disposicion = disposicion;
-        this.decision = decision;
-        this.transporte = transporte;
-        this.aspecto_fisico = aspecto_fisico;
-        this.experiencia = experiencia;
-        this.conocimientos = conocimientos;
-        this.relacion = relacion;
-        this.liderazgo = liderazgo;
-        this.manejo_herramientas = manejo_herramientas;
-        this.vive_con = vive_con;
-        this.estudios = estudios;
-        this.recomendado_por = recomendado_por;
-        this.cod_postulante = cod_postulante;
-        this.cod_puesto = cod_puesto;
+    public void setCodEntrevista(int codEntrevista) {
+        this.codEntrevista = codEntrevista;
     }
 
-    public int getCod_entrevista() {
-        return cod_entrevista;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setCod_entrevista(int cod_entrevista) {
-        this.cod_entrevista = cod_entrevista;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
     public int getPresentacion() {
@@ -101,6 +99,14 @@ public class Entrevista {
         this.decision = decision;
     }
 
+    public int getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(int disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
     public int getTransporte() {
         return transporte;
     }
@@ -109,12 +115,12 @@ public class Entrevista {
         this.transporte = transporte;
     }
 
-    public int getAspecto_fisico() {
-        return aspecto_fisico;
+    public int getAspectoFisico() {
+        return aspectoFisico;
     }
 
-    public void setAspecto_fisico(int aspecto_fisico) {
-        this.aspecto_fisico = aspecto_fisico;
+    public void setAspectoFisico(int aspectoFisico) {
+        this.aspectoFisico = aspectoFisico;
     }
 
     public int getExperiencia() {
@@ -149,20 +155,20 @@ public class Entrevista {
         this.liderazgo = liderazgo;
     }
 
-    public int getManejo_herramientas() {
-        return manejo_herramientas;
+    public int getManejoHerramientas() {
+        return manejoHerramientas;
     }
 
-    public void setManejo_herramientas(int manejo_herramientas) {
-        this.manejo_herramientas = manejo_herramientas;
+    public void setManejoHerramientas(int manejoHerramientas) {
+        this.manejoHerramientas = manejoHerramientas;
     }
 
-    public String getVive_con() {
-        return vive_con;
+    public String getViveCon() {
+        return viveCon;
     }
 
-    public void setVive_con(String vive_con) {
-        this.vive_con = vive_con;
+    public void setViveCon(String viveCon) {
+        this.viveCon = viveCon;
     }
 
     public String getEstudios() {
@@ -173,28 +179,27 @@ public class Entrevista {
         this.estudios = estudios;
     }
 
-    public String getRecomendado_por() {
-        return recomendado_por;
+    public String getRecomendadoPor() {
+        return recomendadoPor;
     }
 
-    public void setRecomendado_por(String recomendado_por) {
-        this.recomendado_por = recomendado_por;
+    public void setRecomendadoPor(String recomendadoPor) {
+        this.recomendadoPor = recomendadoPor;
     }
 
-    public int getCod_postulante() {
-        return cod_postulante;
+    public int getCodPostulante() {
+        return codPostulante;
     }
 
-    public void setCod_postulante(int cod_postulante) {
-        this.cod_postulante = cod_postulante;
+    public void setCodPostulante(int codPostulante) {
+        this.codPostulante = codPostulante;
     }
 
-    public int getCod_puesto() {
-        return cod_puesto;
+    public int getCodPuesto() {
+        return codPuesto;
     }
 
-    public void setCod_puesto(int cod_puesto) {
-        this.cod_puesto = cod_puesto;
+    public void setCodPuesto(int codPuesto) {
+        this.codPuesto = codPuesto;
     }
-    
 }

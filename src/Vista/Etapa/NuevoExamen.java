@@ -5,17 +5,35 @@
  */
 package Vista.Etapa;
 
+import Controlador.CtrlNuevoExamen;
+import Modelo.Examen;
+import Modelo.ExamenDaoJDBC;
+import Modelo.Postulacion;
+import Modelo.PostulacionDaoJDBC;
+import Modelo.Postulante;
+import Modelo.PostulanteDaoJDBC;
+import Modelo.Puesto;
+import Modelo.PuestoDaoJDBC;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author EGcri
  */
 public class NuevoExamen extends javax.swing.JPanel {
+    private Postulacion pstl;
+    private ArrayList<Postulacion> listaPostulacionExamen;
+    private ArrayList<String> listaPuestosExamen;
 
     /**
      * Creates new form NuevoExamen
      */
     public NuevoExamen() {
         initComponents();
+        activarFormSeleccionarPuesto(false);
+        activarFormRegistrarExamen(false);
     }
 
     /**
@@ -28,28 +46,31 @@ public class NuevoExamen extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jButtonGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelIdPostulante = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
+        jLabelObservaciones = new javax.swing.JLabel();
         jTextFieldFecha = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelHora = new javax.swing.JLabel();
         jTextFieldHora = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelApto = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jTextAreaObservaciones = new javax.swing.JTextArea();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jTextFieldDNI = new javax.swing.JTextField();
+        jLabelDni = new javax.swing.JLabel();
+        jButtonBuscar = new javax.swing.JButton();
+        jLabelPuesto = new javax.swing.JLabel();
+        jComboBoxPuesto = new javax.swing.JComboBox<>();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
+        jLabelFormatoFecha = new javax.swing.JLabel();
+        jLabelFormatoHora = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
         setPreferredSize(new java.awt.Dimension(1280, 550));
-
-        jButtonGuardar.setText("Guardar Datos");
-        jButtonGuardar.setMaximumSize(new java.awt.Dimension(200, 22));
-        jButtonGuardar.setMinimumSize(new java.awt.Dimension(200, 22));
-        jButtonGuardar.setPreferredSize(new java.awt.Dimension(200, 22));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -58,48 +79,47 @@ public class NuevoExamen extends javax.swing.JPanel {
         jLabel1.setMinimumSize(new java.awt.Dimension(400, 29));
         jLabel1.setPreferredSize(new java.awt.Dimension(400, 29));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Postulante: Pérez, Juan [DNI: ]");
-        jLabel2.setMaximumSize(new java.awt.Dimension(350, 17));
-        jLabel2.setMinimumSize(new java.awt.Dimension(350, 17));
-        jLabel2.setPreferredSize(new java.awt.Dimension(350, 17));
+        jLabelIdPostulante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelIdPostulante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIdPostulante.setText("Postulante:");
+        jLabelIdPostulante.setMaximumSize(new java.awt.Dimension(350, 17));
+        jLabelIdPostulante.setMinimumSize(new java.awt.Dimension(350, 17));
+        jLabelIdPostulante.setPreferredSize(new java.awt.Dimension(350, 17));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Fecha de entrega");
-        jLabel3.setMaximumSize(new java.awt.Dimension(110, 16));
-        jLabel3.setMinimumSize(new java.awt.Dimension(110, 16));
-        jLabel3.setPreferredSize(new java.awt.Dimension(110, 16));
+        jLabelFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFecha.setText("Fecha de entrega");
+        jLabelFecha.setMaximumSize(new java.awt.Dimension(105, 16));
+        jLabelFecha.setMinimumSize(new java.awt.Dimension(105, 16));
+        jLabelFecha.setPreferredSize(new java.awt.Dimension(105, 16));
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Observaciones");
-        jLabel8.setMaximumSize(new java.awt.Dimension(100, 16));
-        jLabel8.setMinimumSize(new java.awt.Dimension(100, 16));
-        jLabel8.setPreferredSize(new java.awt.Dimension(100, 16));
+        jLabelObservaciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelObservaciones.setText("Observaciones");
+        jLabelObservaciones.setMaximumSize(new java.awt.Dimension(552, 16));
+        jLabelObservaciones.setMinimumSize(new java.awt.Dimension(552, 16));
+        jLabelObservaciones.setPreferredSize(new java.awt.Dimension(552, 16));
 
-        jTextFieldFecha.setText("jTextField1");
         jTextFieldFecha.setMaximumSize(new java.awt.Dimension(100, 22));
         jTextFieldFecha.setMinimumSize(new java.awt.Dimension(100, 22));
         jTextFieldFecha.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("Hora de entrega");
-        jLabel6.setMaximumSize(new java.awt.Dimension(110, 16));
-        jLabel6.setMinimumSize(new java.awt.Dimension(110, 16));
-        jLabel6.setPreferredSize(new java.awt.Dimension(110, 16));
+        jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelHora.setText("Hora de entrega");
+        jLabelHora.setMaximumSize(new java.awt.Dimension(105, 16));
+        jLabelHora.setMinimumSize(new java.awt.Dimension(105, 16));
+        jLabelHora.setPreferredSize(new java.awt.Dimension(105, 16));
 
-        jTextFieldHora.setText("jTextField1");
         jTextFieldHora.setMaximumSize(new java.awt.Dimension(100, 22));
         jTextFieldHora.setMinimumSize(new java.awt.Dimension(100, 22));
         jTextFieldHora.setPreferredSize(new java.awt.Dimension(100, 22));
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("¿Es apto?");
-        jLabel7.setMaximumSize(new java.awt.Dimension(100, 16));
-        jLabel7.setMinimumSize(new java.awt.Dimension(100, 16));
-        jLabel7.setPreferredSize(new java.awt.Dimension(100, 16));
+        jLabelApto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelApto.setText("¿Es apto?");
+        jLabelApto.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelApto.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelApto.setPreferredSize(new java.awt.Dimension(100, 16));
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Sí");
         jRadioButton1.setIconTextGap(10);
         jRadioButton1.setMaximumSize(new java.awt.Dimension(80, 20));
@@ -109,19 +129,88 @@ public class NuevoExamen extends javax.swing.JPanel {
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(4);
-        jTextArea2.setMaximumSize(new java.awt.Dimension(552, 68));
-        jTextArea2.setMinimumSize(new java.awt.Dimension(552, 68));
-        jTextArea2.setPreferredSize(new java.awt.Dimension(552, 68));
-        jScrollPane2.setViewportView(jTextArea2);
+        jTextAreaObservaciones.setColumns(20);
+        jTextAreaObservaciones.setRows(4);
+        jTextAreaObservaciones.setMaximumSize(new java.awt.Dimension(552, 68));
+        jTextAreaObservaciones.setMinimumSize(new java.awt.Dimension(552, 68));
+        jTextAreaObservaciones.setPreferredSize(new java.awt.Dimension(552, 68));
+        jScrollPane2.setViewportView(jTextAreaObservaciones);
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("No");
-        jRadioButton3.setIconTextGap(10);
-        jRadioButton3.setMaximumSize(new java.awt.Dimension(80, 20));
-        jRadioButton3.setMinimumSize(new java.awt.Dimension(80, 20));
-        jRadioButton3.setPreferredSize(new java.awt.Dimension(80, 20));
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("No");
+        jRadioButton2.setIconTextGap(10);
+        jRadioButton2.setMaximumSize(new java.awt.Dimension(80, 20));
+        jRadioButton2.setMinimumSize(new java.awt.Dimension(80, 20));
+        jRadioButton2.setPreferredSize(new java.awt.Dimension(80, 20));
+
+        jTextFieldDNI.setMaximumSize(new java.awt.Dimension(125, 22));
+        jTextFieldDNI.setMinimumSize(new java.awt.Dimension(125, 22));
+        jTextFieldDNI.setPreferredSize(new java.awt.Dimension(125, 22));
+
+        jLabelDni.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelDni.setText("Ingrese DNI:");
+        jLabelDni.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelDni.setPreferredSize(new java.awt.Dimension(100, 16));
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.setMaximumSize(new java.awt.Dimension(125, 22));
+        jButtonBuscar.setMinimumSize(new java.awt.Dimension(125, 22));
+        jButtonBuscar.setPreferredSize(new java.awt.Dimension(125, 22));
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabelPuesto.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelPuesto.setText("Seleccione puesto:");
+        jLabelPuesto.setMaximumSize(new java.awt.Dimension(120, 16));
+        jLabelPuesto.setMinimumSize(new java.awt.Dimension(100, 120));
+        jLabelPuesto.setPreferredSize(new java.awt.Dimension(120, 16));
+
+        jComboBoxPuesto.setMaximumSize(new java.awt.Dimension(250, 22));
+        jComboBoxPuesto.setMinimumSize(new java.awt.Dimension(250, 22));
+        jComboBoxPuesto.setPreferredSize(new java.awt.Dimension(250, 22));
+        jComboBoxPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPuestoActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setMaximumSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.setMinimumSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.setPreferredSize(new java.awt.Dimension(140, 22));
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
+
+        jLabelFormatoFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFormatoFecha.setText("dd/mm/aaaa");
+        jLabelFormatoFecha.setEnabled(false);
+        jLabelFormatoFecha.setMaximumSize(new java.awt.Dimension(80, 16));
+        jLabelFormatoFecha.setMinimumSize(new java.awt.Dimension(80, 16));
+        jLabelFormatoFecha.setPreferredSize(new java.awt.Dimension(80, 16));
+
+        jLabelFormatoHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFormatoHora.setText("hh:mm");
+        jLabelFormatoHora.setEnabled(false);
+        jLabelFormatoHora.setMaximumSize(new java.awt.Dimension(60, 16));
+        jLabelFormatoHora.setMinimumSize(new java.awt.Dimension(60, 16));
+        jLabelFormatoHora.setPreferredSize(new java.awt.Dimension(60, 16));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -130,81 +219,255 @@ public class NuevoExamen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(478, 478, 478)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(453, 453, 453)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(552, 552, 552)
-                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(427, 427, 427))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(363, 363, 363)))
+                        .addGap(396, 396, 396)
+                        .addComponent(jLabelApto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(396, 396, 396)
+                        .addComponent(jLabelObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(396, 396, 396)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(509, 509, 509)
+                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(396, 396, 396)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelIdPostulante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelFormatoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabelPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(254, 254, 254))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(51, 51, 51)
+                .addComponent(jLabelIdPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabelFormatoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabelApto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(jLabelObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        int dniPost = 0;
+        try {
+            dniPost = Integer.parseInt(jTextFieldDNI.getText());
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,"ERROR: Número de DNI no válido");
+            return;
+        }
+        Postulante post = new PostulanteDaoJDBC().select(dniPost);
+        if(post != null) {
+            if(CtrlNuevoExamen.esActivo(post)) {
+                // Obtiene todas las postulaciones y descarta las que no tienen examen pendiente o que estén canceladas
+                ArrayList<Postulacion> listaPostulacion = (ArrayList<Postulacion>) new PostulacionDaoJDBC().select(post.getCodPostulante());
+                listaPostulacionExamen = new ArrayList<>();
+                listaPuestosExamen = new ArrayList();
+                for(int i = 0; i < listaPostulacion.size(); i++) {
+                    Postulacion postul = listaPostulacion.get(i);
+                    Puesto pst = new PuestoDaoJDBC().select(postul.getCodPuesto());
+                    if(postul.getEtapaActual().equals("Examen preocupacional") && !pst.getEstadoConvocatoria().equals("cancelada")) {
+                        listaPostulacionExamen.add(postul);
+                        listaPuestosExamen.add(String.format("%05d",pst.getCodPuesto()) + " - " + pst.getNombre());
+                    }
+                }
+                if(!listaPostulacionExamen.isEmpty()) {
+                    jLabelIdPostulante.setText("Postulante: " + post.getApellido() + ", " + post.getNombre() + " [Código: " + String.format("%05d",post.getCodPostulante()) + "]");
+                    jComboBoxPuesto.setModel(new DefaultComboBoxModel(listaPuestosExamen.toArray()));
+                    // Activa otros componentes gráficos
+                    activarFormSeleccionarPuesto(true);
+                    activarFormBuscarPostulante(false);
+                    jLabelIdPostulante.setEnabled(true);
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "ERROR: El postulante no tiene exámenes preocupacionales pendientes", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(this,CtrlNuevoExamen.mensajeError);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"ERROR: Postulante inexistente");
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jComboBoxPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPuestoActionPerformed
+        // TODO add your handling code here:
+        for(int i = 0; i < listaPostulacionExamen.size(); i++) {
+            pstl = listaPostulacionExamen.get(i);
+            if(pstl.getCodPuesto() == Integer.parseInt(String.valueOf(jComboBoxPuesto.getSelectedItem()).substring(0,5))) {
+                activarFormSeleccionarPuesto(false);
+                activarFormRegistrarExamen(true);
+                return;
+            }
+        }
+    }//GEN-LAST:event_jComboBoxPuestoActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        limpiarFormulario();
+        activarFormRegistrarExamen(false);
+        jLabelIdPostulante.setText("Postulante:");
+        jLabelIdPostulante.setEnabled(false);
+        activarFormBuscarPostulante(true);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        Examen exa = new Examen();
+        
+        exa.setEsApto(obtenerAptitud());
+        exa.setObservaciones(jTextAreaObservaciones.getText());
+        exa.setCodPostulante(pstl.getCodPostulante());
+        exa.setCodPuesto(pstl.getCodPuesto());
+        String fec = jTextFieldFecha.getText();
+        String hor = jTextFieldHora.getText();
+        
+        if(CtrlNuevoExamen.esValido(exa,fec,hor)) {
+            new ExamenDaoJDBC().insert(exa);
+            pstl.setEtapaActual("Finalizado");
+            new PostulacionDaoJDBC().update(pstl);
+            JOptionPane.showMessageDialog(this, "Se ha registrado el examen preocupacional");
+            limpiarFormulario();
+            activarFormRegistrarExamen(false);
+            jLabelIdPostulante.setText("Postulante:");
+            jLabelIdPostulante.setEnabled(false);
+            activarFormBuscarPostulante(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, CtrlNuevoExamen.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    public boolean obtenerAptitud() {
+        return jRadioButton1.isSelected();
+    }
+    
+    public final void activarFormBuscarPostulante(boolean band) {
+        jLabelDni.setEnabled(band);
+        jTextFieldDNI.setEnabled(band);
+        jButtonBuscar.setEnabled(band);
+    }
+    
+    public final void activarFormSeleccionarPuesto(boolean band) {
+        jLabelPuesto.setEnabled(band);
+        jComboBoxPuesto.setEnabled(band);
+    }
+    
+    public final void activarFormRegistrarExamen(boolean band) {
+        jLabelFecha.setEnabled(band);
+        jTextFieldFecha.setEnabled(band);
+        jLabelHora.setEnabled(band);
+        jTextFieldHora.setEnabled(band);
+        jLabelApto.setEnabled(band);
+        jRadioButton1.setEnabled(band);
+        jRadioButton2.setEnabled(band);
+        jLabelObservaciones.setEnabled(band);
+        jTextAreaObservaciones.setEnabled(band);
+        jButtonGuardar.setEnabled(band);
+        jButtonCancelar.setEnabled(band);
+    }
+    
+    public void limpiarFormulario() {
+        jTextFieldDNI.setText("");
+        jTextFieldFecha.setText("");
+        jTextFieldHora.setText("");
+        jRadioButton1.setSelected(true);
+        jTextAreaObservaciones.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JComboBox<String> jComboBoxPuesto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelApto;
+    private javax.swing.JLabel jLabelDni;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelFormatoFecha;
+    private javax.swing.JLabel jLabelFormatoHora;
+    private javax.swing.JLabel jLabelHora;
+    private javax.swing.JLabel jLabelIdPostulante;
+    private javax.swing.JLabel jLabelObservaciones;
+    private javax.swing.JLabel jLabelPuesto;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextAreaObservaciones;
+    private javax.swing.JTextField jTextFieldDNI;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables

@@ -17,7 +17,7 @@ public class CtrlCrearConvocatoria {
     public static String mensajeError;
     
     private static boolean formatoFechaValido(String f) {
-        return f.matches("[0-9]{2}-[0-9]{2}-[0-9]{4}");
+        return f.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}");
     }
     
     private static boolean formatoHoraValido(String h) {

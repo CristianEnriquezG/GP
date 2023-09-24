@@ -6,6 +6,7 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,40 @@ public class FormatoPruebaDaoJDBC implements FormatoPruebaDao {
     public List<FormatoPrueba> select() {
         List<FormatoPrueba> FormatoPrueba = new ArrayList<>();
         return FormatoPrueba;
+    }
+    
+    // Devuelve un registro formato_prueba de acuerdo al código de puesto y número de prueba recibidos
+    public FormatoPrueba select(int codPuesto, int numPrueba) {
+        String sql = "SELECT * FROM formato_prueba WHERE cod_puesto = ? AND num_prueba = ?;";
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        FormatoPrueba forPru = null;
+        try {
+            c = Conector_DB.getConnection();
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, codPuesto);
+            ps.setInt(2,numPrueba);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                forPru = new FormatoPrueba();
+                forPru.setCodFormatoPrueba(rs.getInt(1));
+                forPru.setNumPrueba(rs.getInt(2));
+                forPru.setDescripcion(rs.getString(3));
+                forPru.setFecha(rs.getDate(4));
+                forPru.setHora(rs.getTime(5));
+                forPru.setCodPuesto(rs.getInt(6));
+            }
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            Conector_DB.close(rs);
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+        }
+        return forPru;
     }
 
     @Override
@@ -65,5 +100,32 @@ public class FormatoPruebaDaoJDBC implements FormatoPruebaDao {
     public int delete(FormatoPrueba FormatoPrueba) {
         int rows = 0;
         return rows;
+    }
+    
+    // Devuelve el número de pruebas definidas para un puesto específico
+    public int getNumeroPruebas(int codPuesto) {
+        int numPruebas = 0;
+        String sql = "SELECT MAX(num_prueba) FROM formato_prueba WHERE cod_puesto = ?;";
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            c = Conector_DB.getConnection();
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, codPuesto);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                numPruebas = rs.getInt(1);
+            }
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            Conector_DB.close(rs);
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+        }
+        return numPruebas;
     }
 }

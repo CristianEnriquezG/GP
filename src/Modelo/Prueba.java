@@ -5,72 +5,52 @@
  */
 package Modelo;
 
+import java.sql.Date;
+import java.sql.Time;
+
 /**
  *
  * @author EGcri
  */
 public class Prueba {
-    private int cod_prueba;
-    private int numero;
-    private String descripcion;
-    private int tiempo_ejecucion ;
-    private String fecha_hora;
+    private int codPrueba;
+    private Date fecha;
+    private Time hora;
+    private int resultado;
     private String observaciones;
-    private int cod_postulante;
-    private int cod_puesto;
-
-    public Prueba() {
+    private int codPostulante;
+    private int codPuesto;
+    
+    public int getCodPrueba() {
+        return codPrueba;
     }
 
-    public Prueba(int cod_prueba, int numero, String descripcion, int tiempo_ejecucion, String fecha_hora, String observaciones, int cod_postulante, int cod_puesto) {
-        this.cod_prueba = cod_prueba;
-        this.numero = numero;
-        this.descripcion = descripcion;
-        this.tiempo_ejecucion = tiempo_ejecucion;
-        this.fecha_hora = fecha_hora;
-        this.observaciones = observaciones;
-        this.cod_postulante = cod_postulante;
-        this.cod_puesto = cod_puesto;
+    public void setCodPrueba(int codPrueba) {
+        this.codPrueba = codPrueba;
     }
 
-    public int getCod_prueba() {
-        return cod_prueba;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setCod_prueba(int cod_prueba) {
-        this.cod_prueba = cod_prueba;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public int getNumero() {
-        return numero;
+    public Time getHora() {
+        return hora;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getResultado() {
+        return resultado;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getTiempo_ejecucion() {
-        return tiempo_ejecucion;
-    }
-
-    public void setTiempo_ejecucion(int tiempo_ejecucion) {
-        this.tiempo_ejecucion = tiempo_ejecucion;
-    }
-
-    public String getFecha_hora() {
-        return fecha_hora;
-    }
-
-    public void setFecha_hora(String fecha_hora) {
-        this.fecha_hora = fecha_hora;
+    public void setResultado(int resultado) {
+        this.resultado = resultado;
     }
 
     public String getObservaciones() {
@@ -81,20 +61,19 @@ public class Prueba {
         this.observaciones = observaciones;
     }
 
-    public int getCod_postulante() {
-        return cod_postulante;
+    public int getCodPostulante() {
+        return codPostulante;
     }
 
-    public void setCod_postulante(int cod_postulante) {
-        this.cod_postulante = cod_postulante;
+    public void setCodPostulante(int codPostulante) {
+        this.codPostulante = codPostulante;
     }
 
-    public int getCod_puesto() {
-        return cod_puesto;
+    public int getCodPuesto() {
+        return codPuesto;
     }
 
-    public void setCod_puesto(int cod_puesto) {
-        this.cod_puesto = cod_puesto;
+    public void setCodPuesto(int codPuesto) {
+        this.codPuesto = codPuesto;
     }
-    
 }

@@ -6,6 +6,7 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,50 @@ public class FormatoEntrevistaDaoJDBC implements FormatoEntrevistaDao {
     public List<FormatoEntrevista> select() {
         List<FormatoEntrevista> FormatoEntrevista = new ArrayList<>();
         return FormatoEntrevista;
+    }
+    
+    // Devuelve un registro de acuerdo al codPuesto recibido como parámetro
+    public FormatoEntrevista select(int codPuesto) {
+        String sql = "SELECT * FROM formato_entrevista WHERE cod_puesto = ?;";
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        FormatoEntrevista forEnt = null;
+        try {
+            c = Conector_DB.getConnection();
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, codPuesto);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                forEnt = new FormatoEntrevista();
+                forEnt.setCodFormatoEntrevista(rs.getInt(1));
+                forEnt.setFecha(rs.getDate(2));
+                forEnt.setHora(rs.getTime(3));
+                forEnt.setPresentacion(rs.getBoolean(4));
+                forEnt.setActitud(rs.getBoolean(5));
+                forEnt.setConversacion(rs.getBoolean(6));
+                forEnt.setDisposicion(rs.getBoolean(7));
+                forEnt.setDecision(rs.getBoolean(8));
+                forEnt.setDisponibilidad(rs.getBoolean(9));
+                forEnt.setTransporte(rs.getBoolean(10));
+                forEnt.setAspectoFisico(rs.getBoolean(11));
+                forEnt.setExperiencia(rs.getBoolean(12));
+                forEnt.setConocimientos(rs.getBoolean(13));
+                forEnt.setRelacion(rs.getBoolean(14));
+                forEnt.setLiderazgo(rs.getBoolean(15));
+                forEnt.setManejoHerramientas(rs.getBoolean(16));
+                forEnt.setCodPuesto(rs.getInt(17));
+            }
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            Conector_DB.close(rs);
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+        }
+        return forEnt;
     }
 
     @Override

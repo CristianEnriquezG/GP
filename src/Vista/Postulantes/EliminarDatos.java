@@ -6,8 +6,17 @@
 package Vista.Postulantes;
 
 import Controlador.CtrlEliminarDatos;
+import Modelo.CvPostulante;
+import Modelo.CvPostulanteDaoJDBC;
 import Modelo.Postulante;
 import Modelo.PostulanteDaoJDBC;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,12 +25,15 @@ import javax.swing.JOptionPane;
  */
 public class EliminarDatos extends javax.swing.JPanel {
     Postulante post;
+    CvPostulante cvPost;
+    File cvPostPdf;
 
     /**
      * Creates new form EliminarDatos
      */
     public EliminarDatos() {
         initComponents();
+        cvPostPdf = null;
         activarFormEliminarPostulante(false);
     }
 
@@ -279,6 +291,7 @@ public class EliminarDatos extends javax.swing.JPanel {
         }
         post = new PostulanteDaoJDBC().select(dniPost);
         if(post != null) {
+            cvPost = new CvPostulanteDaoJDBC().select(post.getCodPostulante());
             if(CtrlEliminarDatos.esEliminable(post)) {
                 jLabelCodigoTexto.setText(String.format("%05d",post.getCodPostulante()));
                 jLabelApellidoTexto.setText(post.getApellido());
@@ -299,12 +312,32 @@ public class EliminarDatos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonVerCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerCVActionPerformed
-        // IMPLEMENTACIÓN PENDIENTE
+        if(cvPostPdf == null) {
+            try {
+                cvPostPdf = File.createTempFile("cv_" + post.getApellido(),".pdf");
+                FileOutputStream fos = new FileOutputStream(cvPostPdf);
+                int bytes;
+                InputStream is = cvPost.getCv();
+                while((bytes = is.read()) != -1) {
+                    fos.write(bytes);
+                }
+                fos.close();
+                cvPostPdf.deleteOnExit();
+            } catch (IOException ex) {
+                Logger.getLogger(EliminarDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Desktop.getDesktop().open(cvPostPdf);
+        } catch (IOException ex) {
+            Logger.getLogger(EliminarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonVerCVActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         post.setEstado(false);
         new PostulanteDaoJDBC().update(post);
+        cvPostPdf = null;
         JOptionPane.showMessageDialog(this, "Postulante eliminado");
         limpiarFormulario();
         activarFormEliminarPostulante(false);
@@ -312,6 +345,7 @@ public class EliminarDatos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        cvPostPdf = null;
         limpiarFormulario();
         activarFormEliminarPostulante(false);
         activarFormBuscarPostulante(true);

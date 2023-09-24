@@ -279,10 +279,15 @@ public class ModificarDatos extends javax.swing.JPanel {
     
     public final void activarFormModificarPostulante(boolean band) {
         jLabel2.setEnabled(band);
+        jLabelApellido.setEnabled(band);
         jTextFieldApellido.setEnabled(band);
+        jLabelNombre.setEnabled(band);
         jTextFieldNombre.setEnabled(band);
+        jLabelDomicilio.setEnabled(band);
         jTextFieldDomicilio.setEnabled(band);
+        jLabelTelefono.setEnabled(band);
         jTextFieldTelefono.setEnabled(band);
+        jLabelEmail.setEnabled(band);
         jTextFieldEmail.setEnabled(band);
         jButtonGuardar.setEnabled(band);
         jButtonCancelar.setEnabled(band);

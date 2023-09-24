@@ -4,16 +4,38 @@
  */
 package Modelo;
 
+import java.io.InputStream;
+
 /**
  *
  * @author MC1
  */
 public class CvPostulante {
-    /*
-    	cod_cv INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	cv MEDIUMBLOB NOT NULL,
-    cod_postulante INT UNSIGNED NOT NULL,
-    */
     private int codCv;
- 
+    private InputStream cv;
+    private int codPostulante;
+
+    public int getCodCv() {
+        return codCv;
+    }
+
+    public void setCodCv(int codCv) {
+        this.codCv = codCv;
+    }
+
+    public InputStream getCv() {
+        return cv;
+    }
+
+    public void setCv(InputStream cv) {
+        this.cv = cv;
+    }
+
+    public int getCodPostulante() {
+        return codPostulante;
+    }
+
+    public void setCodPostulante(int codPostulante) {
+        this.codPostulante = codPostulante;
+    }
 }

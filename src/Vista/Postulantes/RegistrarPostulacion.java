@@ -81,7 +81,6 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
 
         jLabelDatosPostulante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelDatosPostulante.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelDatosPostulante.setText("Ape, Nom [COD]");
         jLabelDatosPostulante.setMaximumSize(new java.awt.Dimension(300, 17));
         jLabelDatosPostulante.setMinimumSize(new java.awt.Dimension(300, 17));
         jLabelDatosPostulante.setPreferredSize(new java.awt.Dimension(300, 17));
@@ -155,11 +154,11 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jComboBoxPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelSeleccione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(501, 501, 501)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSeleccione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(501, 501, 501))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -204,7 +203,7 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
     }
     
     private void mostrarMensajeError() {
-        JOptionPane.showMessageDialog(this,"ERROR: No hay puestos vacantes");
+        JOptionPane.showMessageDialog(this, "ERROR: No hay puestos vacantes", "Error", JOptionPane.ERROR_MESSAGE);
     }
     
     public final void activarFormBuscarPostulante(boolean band) {
@@ -241,17 +240,6 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
             if(post.isEstado()) {
                 jLabelDatosPostulante.setText(post.getApellido() + ", " + post.getNombre() + " [Código: " + String.format("%05d",post.getCodPostulante()) + "]");
                 jComboBoxPuestos.setModel(new DefaultComboBoxModel(listaPuestosActivos.toArray()));
-                
-                /***************************************************/
-                /***************************************************/
-                /********* ATENCIÓN: FALTA HACER QUE UN POSTULANTE 
-                 * NO SE PUEDA POSTULAR DOS VECES AL MISMO PUESTO
-                 * 
-                 * ADEMÁS SI SE INTENTA ESO, TIRA UNA SQLEXCEPTION
-                 * PORQUE LOS CAMPOS COD_POSTULANTE Y COD_PUESTO ESTÁN
-                 * DEFINIDOS COMO CLAVE PRIMARIA
-                 **************************************************/ 
-                
                 activarFormRegistrarPostulacion(true);
                 activarFormBuscarPostulante(false);
             }
@@ -265,19 +253,23 @@ public class RegistrarPostulacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        Postulacion postula = new Postulacion();
-        
-        postula.setCodPostulante(post.getCodPostulante());
         int codPuesto = Integer.parseInt(String.valueOf(jComboBoxPuestos.getSelectedItem()).substring(0,5));
-        postula.setCodPuesto(codPuesto);
-        postula.setEtapaActual("Entrevista");
-        postula.setNumPruebaActual(0);
-        new PostulacionDaoJDBC().insert(postula);
-        
-        JOptionPane.showMessageDialog(this, "Se ha registrado la postulación");
-        limpiarFormulario();
-        activarFormRegistrarPostulacion(false);
-        activarFormBuscarPostulante(true);
+        // Actualiza la BD sólo si el postulante no está postulado a ese puesto
+        if(new PostulacionDaoJDBC().select(post.getCodPostulante(),codPuesto) == null) {
+            Postulacion postula = new Postulacion();
+            postula.setCodPostulante(post.getCodPostulante());
+            postula.setCodPuesto(codPuesto);
+            postula.setEtapaActual("Entrevista");
+            postula.setNumPruebaActual(0);
+            new PostulacionDaoJDBC().insert(postula);
+            JOptionPane.showMessageDialog(this, "Se ha registrado la postulación");
+            limpiarFormulario();
+            activarFormRegistrarPostulacion(false);
+            activarFormBuscarPostulante(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "ERROR: El postulante ya se encuentra postulado a este puesto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

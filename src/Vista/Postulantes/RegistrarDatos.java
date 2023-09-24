@@ -7,6 +7,10 @@ package Vista.Postulantes;
 import Modelo.*;
 import Controlador.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -277,13 +281,26 @@ public class RegistrarDatos extends javax.swing.JPanel {
         post.setEstado(true);
         // Si los datos son válidos se insertan en la BD
         if(CtrlRegistrarDatos.esValido(post)) {
-            // Inserta postulante
-            new PostulanteDaoJDBC().insert(post);
-            // Inserta CV
-            
-            // Confirmación del alta
-            JOptionPane.showMessageDialog(this, "Postulante agregado");
-            limpiarFormulario();
+            // Controla si ingresó CV
+            if(archivoPDF != null) {
+                // Inserta postulante
+                int cod_post = new PostulanteDaoJDBC().insert(post);
+                // Inserta CV
+                CvPostulante cvPost = new CvPostulante();
+                try {
+                    cvPost.setCv(new FileInputStream(archivoPDF));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(RegistrarDatos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cvPost.setCodPostulante(cod_post);
+                new CvPostulanteDaoJDBC().insert(cvPost);
+                // Confirmación del alta
+                JOptionPane.showMessageDialog(this, "Postulante agregado");
+                limpiarFormulario();
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "ERROR: NO se adjuntó Currículum Vitae", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else {
             JOptionPane.showMessageDialog(this, CtrlRegistrarDatos.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);

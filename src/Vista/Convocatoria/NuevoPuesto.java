@@ -131,7 +131,7 @@ public class NuevoPuesto extends javax.swing.JPanel {
         jLabelFechaInicio1.setMinimumSize(new java.awt.Dimension(140, 16));
         jLabelFechaInicio1.setPreferredSize(new java.awt.Dimension(140, 16));
 
-        jLabelFormatoFecha.setText("dd-mm-aaaa");
+        jLabelFormatoFecha.setText("dd/mm/aaaa");
         jLabelFormatoFecha.setEnabled(false);
         jLabelFormatoFecha.setMaximumSize(new java.awt.Dimension(140, 16));
         jLabelFormatoFecha.setMinimumSize(new java.awt.Dimension(140, 16));
