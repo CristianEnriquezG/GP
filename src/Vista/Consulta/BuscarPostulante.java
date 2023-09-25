@@ -474,38 +474,70 @@ public class BuscarPostulante extends javax.swing.JPanel {
 
     private void CurriculumVitaejButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurriculumVitaejButton1ActionPerformed
         cv = intercv.select(post.getCodPostulante());
+        try {
+
+        InputStream cvInputStream = cv.getCv();
+
+
+        File tempFile = File.createTempFile("archivo", ".pdf", new File(System.getProperty("user.dir")));
+
+
+        OutputStream outputStream = new FileOutputStream(tempFile);
+
+
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = cvInputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, length);
+        }
+
+
+        cvInputStream.close();
+        outputStream.close();
+
+        if (Desktop.isDesktopSupported()) 
+            {
+                Desktop.getDesktop().open(tempFile);
+            }
+            tempFile.deleteOnExit();
+        } catch (IOException e) 
+            {
+        System.out.println("Error al guardar o abrir el archivo: " + e.getMessage());
+            }
     }//GEN-LAST:event_CurriculumVitaejButton1ActionPerformed
 
     private void CurriculumVitaejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurriculumVitaejButtonActionPerformed
         cv = intercv.select(post.getCodPostulante());
         try {
 
-    InputStream cvInputStream = cv.getCv();
+        InputStream cvInputStream = cv.getCv();
 
 
-    File tempFile = File.createTempFile("archivo", ".pdf", new File(System.getProperty("user.dir")));
+        File tempFile = File.createTempFile("archivo", ".pdf", new File(System.getProperty("user.dir")));
 
 
-    OutputStream outputStream = new FileOutputStream(tempFile);
+        OutputStream outputStream = new FileOutputStream(tempFile);
 
 
-    byte[] buffer = new byte[1024];
-    int length;
-    while ((length = cvInputStream.read(buffer)) != -1) {
-        outputStream.write(buffer, 0, length);
-    }
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = cvInputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, length);
+        }
 
 
-    cvInputStream.close();
-    outputStream.close();
+        cvInputStream.close();
+        outputStream.close();
 
-    if (Desktop.isDesktopSupported()) {
-        Desktop.getDesktop().open(tempFile);
-    }
-    tempFile.deleteOnExit();
-} catch (IOException e) {
-    System.out.println("Error al guardar o abrir el archivo: " + e.getMessage());
-}
+        if (Desktop.isDesktopSupported()) 
+            {
+                Desktop.getDesktop().open(tempFile);
+            }
+            tempFile.deleteOnExit();
+        } catch (IOException e) 
+            {
+        System.out.println("Error al guardar o abrir el archivo: " + e.getMessage());
+            }
     }//GEN-LAST:event_CurriculumVitaejButtonActionPerformed
 
 
