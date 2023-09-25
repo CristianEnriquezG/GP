@@ -7,8 +7,7 @@ package Vista;
 
 import javax.swing.*;
 
-import Vista.Consulta.BuscarPostApeNom;
-import Vista.Consulta.BuscarPostDNI;
+import Vista.Consulta.BuscarPostulante;
 import Vista.Consulta.VerPostulantesPuesto;
 import Vista.Convocatoria.Crear;
 import Vista.Convocatoria.Modificar;
@@ -39,11 +38,12 @@ public class Main {
 
      public static void main(String[] args) {
 	        
-	        JFrame frame = new JFrame("Mi Aplicación");
+	        JFrame frame = new JFrame("Gestion de Postulantes");
 	        
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        frame.setSize(1280, 720);	        	        	      	        
 	        frame.setLayout(new BorderLayout());
+                frame.setResizable(false);
 	        
 	        topPanel = new JPanel();
 	        topPanel.setPreferredSize(new Dimension(frame.getWidth(), 80));
@@ -215,25 +215,15 @@ public class Main {
 	        JMenu Consulta = new JMenu("Consulta");
 	        Consulta.setFont(font);
 	        
-	        JMenuItem buscar_DNI = new JMenuItem("Buscar postulante por DNI");
+	        JMenuItem buscar_DNI = new JMenuItem("Buscar postulante");
 			buscar_DNI.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					bottomPanel.removeAll();
-					bottomPanel.add(new BuscarPostDNI());
+					bottomPanel.add(new BuscarPostulante());
 					bottomPanel.revalidate();
 					bottomPanel.repaint();
 				}
-			});
-	        JMenuItem buscar_Nombre = new JMenuItem("Buscar postulante por nombre y apellido");
-			buscar_Nombre.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e){
-					bottomPanel.removeAll();
-					bottomPanel.add(new BuscarPostApeNom());
-					bottomPanel.revalidate();
-					bottomPanel.repaint();
-				}
-			});	
+			});	       
 	        JMenuItem ver_Puesto = new JMenuItem("Ver Postulantes por puesto");
 			ver_Puesto.addActionListener(new ActionListener()
 			{
@@ -246,11 +236,9 @@ public class Main {
 			});
 	        
 	        buscar_DNI.setFont(font);
-	        buscar_Nombre.setFont(font);
 	        ver_Puesto.setFont(font);
 	        
 	        Consulta.add(buscar_DNI);
-	        Consulta.add(buscar_Nombre);
 	        Consulta.add(ver_Puesto);
                 
 	        Menu_Principal.add(Consulta);

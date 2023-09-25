@@ -9,6 +9,8 @@ import java.util.List;
 public interface CvPostulanteDao {
     
     public List<CvPostulante> select();
+    
+    public CvPostulante select(int codPostulante);
 
     public int insert(CvPostulante cv);
 

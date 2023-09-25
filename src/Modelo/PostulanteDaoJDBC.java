@@ -17,8 +17,9 @@ public class PostulanteDaoJDBC implements PostulanteDao {
     private static final String SQL_INSERT = "INSERT INTO postulante(dni,apellido,nombre,domicilio,telefono,email,estado) VALUES(?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE postulante SET apellido = ?, nombre = ?, domicilio = ?, telefono = ?, email = ?, estado = ? WHERE cod_postulante = ?";
     private static final String SQL_DELETE = "UPDATE postulante SET estado=? WHERE cod_postulante=?";
-    private static final String SQL_FETCH = "SELECT * FROM postulante WHERE apellido=? AND nombre=?";
     private static final String SQL_FETCH_DNI = "SELECT * FROM postulante WHERE apellido=? AND nombre=?";
+    private static final String SQL_SELECT_cod_postulante = "SELECT * from postulante WHERE cod_Postulante = ?";
+    
     @Override
     public List<Postulante> select(){
         Connection Conexion = null;
@@ -32,6 +33,46 @@ public class PostulanteDaoJDBC implements PostulanteDao {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int cod_postulante=rs.getInt("cod_postulante");
+                int dni = rs.getInt("dni");
+                String apellido = rs.getString("apellido");
+                String nombre = rs.getString("nombre");
+                String domicilio = rs.getString("domicilio");
+                String telefono = rs.getString("telefono");
+                String email = rs.getString("email");
+                boolean estado = rs.getBoolean("estado");
+                
+                Postulante = new Postulante (cod_postulante,dni,apellido,nombre,domicilio,telefono,email,estado);
+                Postulantes.add(Postulante);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        finally{
+            Conector_DB.close(rs);
+            Conector_DB.close(stmt);
+            if(this.ConexionDB == null)
+            {
+                Conector_DB.close(Conexion);
+            }
+        }
+        return Postulantes;
+    }
+    
+  @Override
+    public List<Postulante> select_cod(int cod_postulante){
+        Connection Conexion = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Postulante Postulante= null;        
+        List<Postulante> Postulantes = new ArrayList<Postulante>();
+        try{
+            Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
+            stmt = Conexion.prepareStatement(SQL_SELECT_cod_postulante);
+            stmt.setInt(1, cod_postulante);
+            rs = stmt.executeQuery();
+            while (rs.next()) {                
                 int dni = rs.getInt("dni");
                 String apellido = rs.getString("apellido");
                 String nombre = rs.getString("nombre");
@@ -217,42 +258,5 @@ public class PostulanteDaoJDBC implements PostulanteDao {
         }
         return postulante;
     }
-   
-    @Override
-    public Postulante fetch(int DNI){
-        Postulante postulante = null;
-        Connection Conexion = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try{
-            Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
-            stmt = Conexion.prepareStatement(SQL_FETCH);
-            stmt.setInt(1, DNI);
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                int cod_postulante=rs.getInt("cod_postulante");
-                String apellido = rs.getString("apellido");
-                String nombre = rs.getString("nombre");
-                String domicilio = rs.getString("domicilio");
-                String telefono = rs.getString("telefono");
-                String email = rs.getString("email");
-                boolean estado = rs.getBoolean("estado");                
-                postulante = new Postulante (cod_postulante,DNI,apellido,nombre,domicilio,telefono,email,estado);
-                
-            }
-        }
-        catch(SQLException e)
-        {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        finally{
-            Conector_DB.close(rs);
-            Conector_DB.close(stmt);
-            if(this.ConexionDB == null)
-            {
-                Conector_DB.close(Conexion);
-            }
-        }
-        return postulante;
-    }
+       
 }
