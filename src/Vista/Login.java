@@ -4,20 +4,30 @@
  * and open the template in the editor.
  */
 package Vista;
+import Controlador.CtrlUsuarios;
+import Modelo.Usuario;
+import Modelo.UsuarioDao;
+import Modelo.UsuarioDaoJDBC;
+import Controlador.CtrlContraseñaaHash;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+
 /**
  *jelout mouter
  * @author EGcri
  */
 public class Login extends javax.swing.JPanel {
-
+    private Main main;
+    private Usuario usuario = null;
+    private UsuarioDao inter = new UsuarioDaoJDBC();
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login(Main main) {
+        this.main = main;
         initComponents();
+        
     }
 
     /**
@@ -41,7 +51,7 @@ public class Login extends javax.swing.JPanel {
         LoginInvitadoButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jTextField1 = new javax.swing.JTextField();
+        UsuarioInvitadojTextField = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -103,7 +113,7 @@ public class Login extends javax.swing.JPanel {
                     .addComponent(jPasswordField)
                     .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(UsuarioInvitadojTextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,7 +138,7 @@ public class Login extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UsuarioInvitadojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(LoginInvitadoButton)
                 .addGap(18, 18, 18)
@@ -139,13 +149,59 @@ public class Login extends javax.swing.JPanel {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         String nombreUsuario = UsuarioJTextField.getText();
-        String contraseña = jPasswordField.getPassword().toString();
-        
+        String contraseña = CtrlContraseñaaHash.hasher(new String(jPasswordField.getPassword()));
+        try{
+            if(nombreUsuario.length() != 0)
+            {
+                if(contraseña.length() != 0)
+                {
+                    usuario = new Usuario(nombreUsuario,contraseña);
+                    if(inter.match(usuario)){
+                        switch(usuario.getPermisosUsuario())
+                        {
+                            case 1:
+                                main.Administrador();
+                                break;
+                            case 2:
+                                main.Operador();
+                                break;
+                            case 3:
+                                main.Postulante();
+                                break;
+                        }
+                    }
+                    else{
+                        mostrarVentanaDeError(CtrlUsuarios.errorContraseñaIncorrecta);
+                    }
+                }
+                else
+                {
+                 mostrarVentanaDeError(CtrlUsuarios.errorContraseñaVacia);
+                }
+            }
+            else{
+                mostrarVentanaDeError(CtrlUsuarios.errorUsuarioVacio);
+            }
+           
+        }catch(Exception e)
+        {
+            mostrarVentanaDeError(e.getMessage());
+        }
         
     }//GEN-LAST:event_LoginButtonActionPerformed
-
+    public static void mostrarVentanaDeError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
     private void LoginInvitadoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginInvitadoButtonActionPerformed
-        // TODO add your handling code here:
+        String UsuarioInvitado = UsuarioInvitadojTextField.getText();
+        if(UsuarioInvitado.length() != 0)
+        {
+            main.Postulante();
+        }
+        else{
+            mostrarVentanaDeError(CtrlUsuarios.errorUsuarioVacio);
+        }
+        
     }//GEN-LAST:event_LoginInvitadoButtonActionPerformed
 
     
@@ -153,6 +209,7 @@ public class Login extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
     private javax.swing.JButton LoginInvitadoButton;
+    private javax.swing.JTextField UsuarioInvitadojTextField;
     private javax.swing.JTextField UsuarioJTextField;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
@@ -162,7 +219,6 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }

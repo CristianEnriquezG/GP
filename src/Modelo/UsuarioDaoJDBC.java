@@ -22,7 +22,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
     private static final String SQL_UPDATE = "UPDATE usuario SET nombreUsuario=?, contraseñaUsuario=?, permisosUsuario=?";
     private static final String SQL_DELETE = "UPDATE usuario SET activo=? WHERE uidUsuario =?";
     private static final String SQL_SEARCH = "SELECT uidUsuario, nombreUsuario, contraseñaUsuario, permisosUsuario, activo FROM usuario WHERE nombreUsuario =?";
-    private static final String SQL_MATCH = "SELECT contraseñaUsuario FROM usuario where nombreUsuario=?";
+    private static final String SQL_MATCH = "SELECT * FROM usuario where nombreUsuario=?";
 
 
     public List<Usuario> select(){
@@ -181,6 +181,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
             while(rs.next()){                
                 String contraseñaUsuario = rs.getString("contraseñaUsuario"); 
                 if(contraseñaUsuario == null ? usuario.getContraseñaUsuario() == null : contraseñaUsuario.equals(usuario.getContraseñaUsuario()))
+                    usuario.setPermisosUsuario(rs.getInt("permisosUsuario"));
                     result = true;
             }
 

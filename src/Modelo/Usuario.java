@@ -30,6 +30,11 @@ public class Usuario {
         this.activo = activo;
     }
 
+     public Usuario(String nombreUsuario, String contraseñaUsuario){
+         this.nombreUsuario = nombreUsuario;
+         this.contraseñaUsuario = contraseñaUsuario;
+     }
+     
     public boolean isActivo() {
         return activo;
     }

@@ -22,7 +22,7 @@ import Vista.Postulantes.EliminarDatos;
 import Vista.Postulantes.ModificarDatos;
 import Vista.Postulantes.RegistrarDatos;
 import Vista.Postulantes.RegistrarPostulacion;
-
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,9 +35,21 @@ public class Main {
 	private static JPanel topPanel;
 	private static JPanel centerPanel;
 	private static JPanel bottomPanel;
-
-     public static void main(String[] args) {
-	        
+        private static JMenuBar Menu_Principal;
+        private JMenu Postulante;
+        private JMenu Etapa;
+        private JMenu Consulta;
+        private JMenu Convocatoria;
+        private JMenu gestionUsuarios;
+        private JMenuItem Eliminar_Datos;
+        
+    public Main(){
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch(Exception ex) {
+            System.err.println("Libreria ausente");
+            ex.printStackTrace();
+        }
 	        JFrame frame = new JFrame("Gestion de Postulantes");
 	        
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,18 +58,14 @@ public class Main {
                 frame.setResizable(false);
 	        
 	        topPanel = new JPanel();
-	        topPanel.setPreferredSize(new Dimension(frame.getWidth(), 80));
-	        topPanel.setBackground(Color.RED);
+	        topPanel.setPreferredSize(new Dimension(1280, 80));
 
 	        centerPanel = new JPanel();
-	        centerPanel.setPreferredSize(new Dimension(frame.getWidth(), 40));
-	        centerPanel.setBackground(Color.GREEN);
-	        
-	        
-	        
-	        JMenuBar Menu_Principal = new JMenuBar();
+	        centerPanel.setPreferredSize(new Dimension(1280, 40));	        
+	               
+	        Main.Menu_Principal = new JMenuBar();
 	        	        
-	        Menu_Principal.setPreferredSize(new Dimension(frame.getWidth(), 40));
+	        Menu_Principal.setPreferredSize(new Dimension(1280, 40));
 	        Font font = new Font(Menu_Principal.getFont().getName(), Font.BOLD, 16);
 	        Menu_Principal.setFont(font);
 	        Menu_Principal.setOpaque(false);
@@ -72,7 +80,7 @@ public class Main {
 	        
 	        Menu_Principal.add(Inicio);
 	        
-	        JMenu Postulante = new JMenu("Postulante");
+	        this.Postulante = new JMenu("Postulante");
 	        Postulante.setFont(font);
 	        
 	        JMenuItem Registrar_datos = new JMenuItem("Registrar Datos");
@@ -95,7 +103,7 @@ public class Main {
 				}
 			}
 			);
-	        JMenuItem Eliminar_Datos = new JMenuItem("Eliminar Datos");
+	        this.Eliminar_Datos = new JMenuItem("Eliminar Datos");
 			Eliminar_Datos.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e){
@@ -126,7 +134,7 @@ public class Main {
 
 	        Menu_Principal.add(Postulante);
 	        
-	        JMenu Convocatoria = new JMenu("Convocatoria");
+	        this.Convocatoria = new JMenu("Convocatoria");
 	        Convocatoria.setFont(font);
 	        
 	        JMenuItem crear = new JMenuItem("Crear");
@@ -171,7 +179,7 @@ public class Main {
 	        
 	        Menu_Principal.add(Convocatoria);
 	        	        	        	        
-	        JMenu Etapa = new JMenu("Etapa");
+	        this.Etapa = new JMenu("Etapa");
 	        Etapa.setFont(font);
 	        
 	        JMenuItem nueva_entrevista = new JMenuItem("Nueva Entrevista");
@@ -212,18 +220,9 @@ public class Main {
 	        
 	        Menu_Principal.add(Etapa);
 	        
-	        JMenu Consulta = new JMenu("Consulta");
+	        this.Consulta = new JMenu("Consulta");
 	        Consulta.setFont(font);
-	        
-	        JMenuItem buscar_DNI = new JMenuItem("Buscar postulante");
-			buscar_DNI.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e){
-					bottomPanel.removeAll();
-					bottomPanel.add(new BuscarPostulante());
-					bottomPanel.revalidate();
-					bottomPanel.repaint();
-				}
-			});	       
+	            
 	        JMenuItem ver_Puesto = new JMenuItem("Ver Postulantes por puesto");
 			ver_Puesto.addActionListener(new ActionListener()
 			{
@@ -234,16 +233,13 @@ public class Main {
 					bottomPanel.repaint();
 				}
 			});
-	        
-	        buscar_DNI.setFont(font);
+
 	        ver_Puesto.setFont(font);
-	        
-	        Consulta.add(buscar_DNI);
 	        Consulta.add(ver_Puesto);
                 
 	        Menu_Principal.add(Consulta);
                 
-                JMenu gestionUsuarios = new JMenu("Gestion de usuarios");
+                this.gestionUsuarios = new JMenu("Gestion de usuarios");
             gestionUsuarios.setFont(font);
             
             JMenuItem agregarUsuario = new JMenuItem("Agregar Usuario");
@@ -295,24 +291,54 @@ public class Main {
                                 System.exit(0);
                         }
                 });
+                SalirBoton.setOpaque(false);
+	        SalirBoton.setBorderPainted(false);
+	        SalirBoton.setFont(font);
             
             
                         
                 Menu_Principal.add(SalirBoton);
-	        centerPanel.add(Menu_Principal);	        	        
-
+	        centerPanel.add(Menu_Principal);	        	                       
 	    	bottomPanel = new JPanel();
 	        bottomPanel.setPreferredSize(new Dimension(frame.getWidth(), 550));
-	        bottomPanel.setBackground(Color.BLUE);
-	        bottomPanel.add(new Login());
-
+	        bottomPanel.add(new Login(this));
+                topPanel.add(new PanelSuperior());
+                Etapa.setVisible(false);
+                Convocatoria.setVisible(false);
+                Consulta.setVisible(false);
+                gestionUsuarios.setVisible(false);
+                Postulante.setVisible(false);
 	        frame.add(topPanel, BorderLayout.NORTH);
 	        frame.add(centerPanel, BorderLayout.CENTER);
 	        frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	        frame.setVisible(true);
-
 			
+    }
+     public static void main(String[] args) {
+	      Main principal = new Main();
+              
 	    }
+    public void Administrador(){
+        Etapa.setVisible(true);
+        gestionUsuarios.setVisible(true);
+        Consulta.setVisible(true);
+        Convocatoria.setVisible(true);
+        Eliminar_Datos.setVisible(true);
+        
+    } 
+    public void Operador(){
+        Etapa.setVisible(true);
+        Convocatoria.setVisible(true);
+        Eliminar_Datos.setVisible(true);
+    }
+    public void Postulante(){
+        Postulante.setVisible(true);
+        Eliminar_Datos.setVisible(false);
+        bottomPanel.removeAll();
+        bottomPanel.add(new RegistrarDatos());
+        bottomPanel.revalidate();
+        bottomPanel.repaint();
+    }
 
 }
