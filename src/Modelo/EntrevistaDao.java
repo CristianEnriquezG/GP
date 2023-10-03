@@ -12,5 +12,7 @@ public interface EntrevistaDao {
     public int update(Entrevista Entrevista);
 
     public int delete(Entrevista Entrevista);
+    
+    public int promedio (int cod_postulante);
 
 }

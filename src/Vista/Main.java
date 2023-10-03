@@ -325,6 +325,7 @@ public class Main {
         Consulta.setVisible(true);
         Convocatoria.setVisible(true);
         Eliminar_Datos.setVisible(true);
+
         
     } 
     public void Operador(){

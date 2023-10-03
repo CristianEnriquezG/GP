@@ -6,6 +6,8 @@
 package Vista.Consulta;
 
 import Controlador.CtrlConsulta;
+import Modelo.EntrevistaDao;
+import Modelo.EntrevistaDaoJDBC;
 import Modelo.Postulacion;
 import Modelo.PostulacionDao;
 import Modelo.PostulacionDaoJDBC;
@@ -34,6 +36,7 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
     PostulanteDao postulanteInter = new PostulanteDaoJDBC();
     PostulacionDao postulacionInter = new PostulacionDaoJDBC();
     PuestoDao puestoInter = new PuestoDaoJDBC();
+    EntrevistaDao entrevistaInter = new EntrevistaDaoJDBC();
     /**
      * Creates new form VerPostulantes
      */
@@ -116,14 +119,14 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "DNI", "Apellido y Nombre", "Etapa"
+                "DNI", "Apellido y Nombre", "Puntaje Promedio", "Etapa"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -135,12 +138,14 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
             }
         });
         PostulantesjTable.setColumnSelectionAllowed(true);
+        PostulantesjTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(PostulantesjTable);
         PostulantesjTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (PostulantesjTable.getColumnModel().getColumnCount() > 0) {
             PostulantesjTable.getColumnModel().getColumn(0).setResizable(false);
             PostulantesjTable.getColumnModel().getColumn(1).setResizable(false);
             PostulantesjTable.getColumnModel().getColumn(2).setResizable(false);
+            PostulantesjTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         ImprimirjButton.setText("Imprimir");
@@ -225,10 +230,11 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
             for (Postulante postulante: postulantes)
             {
                 if (postulacion.getCodPostulante() == postulante.getCodPostulante()){
-                Object[] row = new Object[3];
+                Object[] row = new Object[4];
                 row[0] = postulante.getDni();
                 row[1] = postulante.getApellido() + " " + postulante.getNombre();
-                row[2] = etapa(postulacion.getNumPruebaActual());
+                row[2] = entrevistaInter.promedio(postulante.getCodPostulante());
+                row[3] = etapa(postulacion.getNumPruebaActual());
                 model.addRow(row);
             }
             }            

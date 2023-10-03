@@ -3,30 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlUsuarios.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/PostulacionDaoJDBC.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/.gitignore</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Postulantes/RegistrarPostulacion.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Consulta/BuscarPostulante.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/Postulante.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Convocatoria/Cancelar.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/Conector_DB.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/Postulacion.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/PostulanteDaoJDBC.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/Puesto.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Consulta/VerPostulantesPuesto.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Main.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/CvPostulante.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Login.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/CvPostulanteDaoJDBC.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Postulantes/RegistrarDatos.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/CvPostulanteDao.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/PostulanteDao.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Consulta/BuscarPostApeNom.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlConsulta.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/UsuarioDaoJDBC.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/PostulacionDao.java</file>
-            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/GestionUsuarios/CrearUsuario.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/PanelSuperior.java</file>
         </group>
     </open-files>
 </project-private>

@@ -2,15 +2,17 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class EntrevistaDaoJDBC implements EntrevistaDao {
     
     private Connection ConexionDB;
 
-    private static final String SQL_SELECT = "";
+    private static final String SQL_SELECT = "SELECT * FROM entrevista WHERE cod_postulante = ?;";
     private static final String SQL_INSERT = "INSERT INTO entrevista(fecha,hora,presentacion,actitud,conversacion,disposicion,decision,disponibilidad,transporte,aspecto_fisico,experiencia,conocimientos,relacion,liderazgo,manejo_herramientas,vive_con,estudios,recomendado_por,cod_postulante,cod_puesto) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
     private static final String SQL_UPDATE = "";
     private static final String SQL_DELETE = "";
@@ -53,8 +55,8 @@ public class EntrevistaDaoJDBC implements EntrevistaDao {
             ps.setInt(20,Entrevista.getCodPuesto());
             ps.executeUpdate();
         }
-        catch(SQLException ex) {
-            System.out.println(ex.getMessage());
+        catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         finally {
             Conector_DB.close(ps);
@@ -76,5 +78,42 @@ public class EntrevistaDaoJDBC implements EntrevistaDao {
         int rows = 0;
 
         return rows;
+    }
+    @Override
+    public int promedio (int cod_postulante){
+        Connection Conexion = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int promedio = 0;
+        int[] resultados = new int[13];
+        try{
+            Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
+            stmt = Conexion.prepareStatement(SQL_SELECT);
+            stmt.setInt(1, cod_postulante);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                int i = 4;
+                int j = 0;
+                while(i<11 & j < resultados.length){
+                    resultados[j] = rs.getInt(i);
+                    i++;
+                    j++;
+                }
+            }
+            
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null,"Error en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        int cantidad = 0;
+        for(int i = 0; i < resultados.length ; i++){
+            if(resultados[i] != 0){
+                promedio += resultados[i];
+                cantidad++;
+            }
+        }
+        if(cantidad != 0)
+            promedio = promedio/cantidad;
+        return promedio;
     }
 }
