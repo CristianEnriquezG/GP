@@ -8,6 +8,7 @@ package Vista;
 import javax.swing.*;
 
 import Vista.Consulta.BuscarPostulante;
+import Vista.Consulta.Calendario;
 import Vista.Consulta.VerPostulantesPuesto;
 import Vista.Convocatoria.Crear;
 import Vista.Convocatoria.Modificar;
@@ -237,7 +238,21 @@ public class Main {
 	        ver_Puesto.setFont(font);
 	        Consulta.add(ver_Puesto);
                 
-	        Menu_Principal.add(Consulta);
+                JMenuItem calendario = new JMenuItem("Ver Calendario");
+			calendario.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e){
+					bottomPanel.removeAll();
+					bottomPanel.add(new Calendario());
+					bottomPanel.revalidate();
+					bottomPanel.repaint();
+				}
+			});
+
+	        calendario.setFont(font);
+	        Consulta.add(calendario);
+                
+                Menu_Principal.add(Consulta);
                 
                 this.gestionUsuarios = new JMenu("Gestion de usuarios");
             gestionUsuarios.setFont(font);
@@ -313,7 +328,6 @@ public class Main {
 	        frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	        frame.setVisible(true);
-			
     }
      public static void main(String[] args) {
 	      Main principal = new Main();
