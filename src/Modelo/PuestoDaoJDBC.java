@@ -81,6 +81,39 @@ public class PuestoDaoJDBC implements PuestoDao {
         return p;
     }
     
+    // Este método se utiliza para obtener el puesto de acuerdo a mes y año, para usar en Calendario
+    public ArrayList<Puesto> select(int mes, int año) {
+        ArrayList<Puesto> ListaPst = new ArrayList<>();
+        String sql = "SELECT nombre,fecha_cierre FROM puesto WHERE YEAR(fecha_cierre) = ? AND MONTH(fecha_cierre) = ? AND estado_convocatoria = 'abierta';";
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            c = Conector_DB.getConnection();
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, año);
+            ps.setInt(2, mes);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Puesto p = new Puesto();
+                
+                p.setNombre(rs.getString(1));
+                p.setFechaCierre(rs.getDate(2));
+                
+                ListaPst.add(p);
+            }
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            Conector_DB.close(rs);
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+        }
+        return ListaPst;
+    }
+    
     // Este método devuelve además la clave insertada
     @Override
     public int insert(Puesto Puesto){
