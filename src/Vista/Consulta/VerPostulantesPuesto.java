@@ -17,12 +17,29 @@ import Modelo.PostulanteDaoJDBC;
 import Modelo.Puesto;
 import Modelo.PuestoDao;
 import Modelo.PuestoDaoJDBC;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+
+
 
 /**
  *
@@ -43,6 +60,7 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
     public VerPostulantesPuesto() {
         initComponents();
         llenarTablaPuesto();
+
     }
 
     /**
@@ -119,14 +137,14 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "DNI", "Apellido y Nombre", "Puntaje Promedio", "Etapa"
+                "DNI", "Apellido y Nombre", "Puntaje Promedio", "Etapa", "CV"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -137,7 +155,8 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        PostulantesjTable.setColumnSelectionAllowed(true);
+        PostulantesjTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
+        PostulantesjTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(PostulantesjTable));
         PostulantesjTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(PostulantesjTable);
         PostulantesjTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -193,7 +212,103 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ImprimirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirjButtonActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccionada = PuestosjTable.getSelectedRow();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm");
+        Date date = new Date();
+        String fechaHora = dateFormat.format(date);
+
+        if (filaSeleccionada != -1) { // Asegúrate de que se haya seleccionado una fila
+            Object[] datosFila = new Object[PostulantesjTable.getColumnCount() - 1]; // Excluye la última columna
+
+            // Obtén los datos de la fila seleccionada, excluyendo la última columna
+            for (int i = 0; i < PostulantesjTable.getColumnCount() - 1; i++) {
+                datosFila[i] = PostulantesjTable.getValueAt(filaSeleccionada, i);
+            }
+
+            // Crea un documento PDF
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+            try {
+            // Agrega los datos de la fila al PDF
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            PDFont font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+            contentStream.setFont(font, 12);
+            float margin = 50;
+            float yStart = page.getMediaBox().getHeight() - margin;
+            float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
+            float yPosition = yStart;
+            int rows = PostulantesjTable.getRowCount();
+            int cols = PostulantesjTable.getColumnCount() - 1; // Excluye la última columna
+
+            // Configura las dimensiones de las celdas
+            float rowHeight = 20f;
+            float tableHeight = rowHeight * rows;
+            float tableYPosition = yStart - tableHeight;
+
+            // Agrega la línea con el encabezado del informe
+            String encabezado = "Informe Postulantes por Puesto - del la fecha " + fechaHora;
+            contentStream.beginText();
+            contentStream.newLineAtOffset(margin, yPosition);
+            contentStream.showText(encabezado);
+            contentStream.endText();
+            yPosition -= rowHeight;
+
+            // Agrega la línea con el puesto seleccionado
+            String puesto = PuestosjTable.getValueAt(filaSeleccionada, 1).toString();
+            contentStream.beginText();
+            contentStream.newLineAtOffset(margin, yPosition);
+            contentStream.showText("Puesto: " + puesto);
+            contentStream.endText();
+            yPosition -= rowHeight;
+
+            // Agrega los encabezados de la tabla
+            String[] headers = {"DNI", "Apellido Nombre", "Puntaje Promedio", "Etapa"};
+            float xHeader = margin;
+            for (String header : headers) {
+                contentStream.beginText();
+                contentStream.newLineAtOffset(xHeader, yPosition);
+                contentStream.showText(header);
+                contentStream.endText();
+                xHeader += tableWidth / (float) cols;
+
+            }
+
+             // Ajusta la posición vertical después de agregar los encabezados
+             yPosition -= rowHeight;
+
+             // Dibuja las celdas con los datos
+             for (int i = 0; i < rows; i++) {
+                 datosFila = new Object[cols];
+                 for (int j = 0; j < cols; j++) {
+                     datosFila[j] = PostulantesjTable.getValueAt(i, j);
+                 }
+                 float x = margin;
+                 for (int j = 0; j < cols; j++) {
+                     String cellValue = datosFila[j].toString();
+                     contentStream.beginText();
+                     contentStream.newLineAtOffset(x, yPosition);
+                     contentStream.showText(cellValue);
+                     contentStream.endText();
+                     x += tableWidth / (float) cols;
+                 }
+                 yPosition -= rowHeight;
+             }
+
+             contentStream.close();
+             document.save("informe_" + fechaHora + ".pdf");
+             document.close();
+
+             // Abre el PDF con la aplicación predeterminada
+             if (Desktop.isDesktopSupported()) {
+                 File file = new File("informe_" + fechaHora + ".pdf");
+                 Desktop.getDesktop().open(file);
+             }
+        } catch (IOException ex) {
+             ex.printStackTrace();
+        }
+        }
     }//GEN-LAST:event_ImprimirjButtonActionPerformed
     private void llenarTablaPuesto(){
         List<Puesto> Puestos = new java.util.ArrayList<>();
@@ -204,17 +319,21 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
         model.setRowCount(0);
             for(Puesto puesto : Puestos)
             {
-                Object[] row = new Object[2];
+                Object[] row = new Object[5];
                 row[0] = puesto.getCodPuesto();
                 row[1] = puesto.getNombre();
+                row[4] = "boton";
                 model.addRow(row);
-            }    
+                
+            }  
+            
         }
         else
         {
            mostrarVentanaDeError(CtrlConsulta.errorNoHayPuestos);
-        }
-        
+        }     
+
+
     }
 
     private void cargarPostulante(int  codPuesto ){

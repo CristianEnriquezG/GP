@@ -18,5 +18,6 @@ public interface PostulanteDao {
     
     public Postulante fetch(String apellido, String nombre);
     
+    public int fetch_cod(int dni);
 
 }

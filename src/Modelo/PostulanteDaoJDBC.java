@@ -19,6 +19,7 @@ public class PostulanteDaoJDBC implements PostulanteDao {
     private static final String SQL_DELETE = "UPDATE postulante SET estado=? WHERE cod_postulante=?";
     private static final String SQL_FETCH_DNI = "SELECT * FROM postulante WHERE apellido=? AND nombre=?";
     private static final String SQL_SELECT_cod_postulante = "SELECT * from postulante WHERE cod_Postulante = ?";
+    private static final String SQL_FETCH_Cod = "SELECT cod_postulante FROM postulante where dni = ?";
     
     @Override
     public List<Postulante> select(){
@@ -258,5 +259,25 @@ public class PostulanteDaoJDBC implements PostulanteDao {
         }
         return postulante;
     }
-       
+    @Override
+    public int fetch_cod(int dni){
+        int cod_postulante = 0;
+        Connection Conexion = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try{
+            Conexion = this.ConexionDB != null ? this.ConexionDB : Conector_DB.getConnection();
+             stmt = Conexion.prepareStatement(SQL_FETCH_Cod);
+             stmt.setInt(1, dni);
+             rs = stmt.executeQuery();
+             if(rs.next()){
+                 cod_postulante=rs.getInt("cod_postulante");
+             }
+             
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return cod_postulante;
+    }
 }
