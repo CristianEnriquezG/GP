@@ -33,7 +33,7 @@ import java.awt.event.ActionListener;
  */
 public class Main {
 
-	private static JPanel topPanel;
+	private static PanelSuperior topPanel;
 	private static JPanel centerPanel;
 	private static JPanel bottomPanel;
         private static JMenuBar Menu_Principal;
@@ -43,6 +43,7 @@ public class Main {
         private JMenu Convocatoria;
         private JMenu gestionUsuarios;
         private JMenuItem Eliminar_Datos;
+        private  JButton Cerrar_Sesion;
         
     public Main(){
         try {
@@ -58,7 +59,7 @@ public class Main {
 	        frame.setLayout(new BorderLayout());
                 frame.setResizable(false);
 	        
-	        topPanel = new JPanel();
+	        topPanel = new PanelSuperior();
 	        topPanel.setPreferredSize(new Dimension(1280, 80));
 
 	        centerPanel = new JPanel();
@@ -71,15 +72,25 @@ public class Main {
 	        Menu_Principal.setFont(font);
 	        Menu_Principal.setOpaque(false);
 	        
-	        JButton Inicio = new JButton("Inicio");
+	        Cerrar_Sesion = new JButton("Cerrar Sesion");
+                Cerrar_Sesion.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                            bottomPanel.removeAll();
+                            bottomPanel.add(new Login(Main.this,Main.topPanel));
+                            bottomPanel.revalidate();
+                            bottomPanel.repaint();
+                        }
+                    });
 	        
-	        Inicio.setPreferredSize(new Dimension(200, 40));
-	        Inicio.setOpaque(false);
-	        Inicio.setContentAreaFilled(false);
-	        Inicio.setBorderPainted(false);
-	        Inicio.setFont(font);
+                
+                
+	        Cerrar_Sesion.setPreferredSize(new Dimension(200, 40));
+	        Cerrar_Sesion.setOpaque(false);
+	        Cerrar_Sesion.setBorderPainted(false);
+	        Cerrar_Sesion.setFont(font);
+                Cerrar_Sesion.setVisible(false);
 	        
-	        Menu_Principal.add(Inicio);
+	        Menu_Principal.add(Cerrar_Sesion);
 	        
 	        this.Postulante = new JMenu("Postulante");
 	        Postulante.setFont(font);
@@ -316,7 +327,7 @@ public class Main {
 	        centerPanel.add(Menu_Principal);	        	                       
 	    	bottomPanel = new JPanel();
 	        bottomPanel.setPreferredSize(new Dimension(frame.getWidth(), 550));
-	        bottomPanel.add(new Login(this));
+	        bottomPanel.add(new Login(this,Main.topPanel));
                 topPanel.add(new PanelSuperior());
                 Etapa.setVisible(false);
                 Convocatoria.setVisible(false);
@@ -333,13 +344,18 @@ public class Main {
 	      Main principal = new Main();
               
 	    }
+     public void setBottomPanel(){
+        bottomPanel.removeAll();
+        bottomPanel.revalidate();
+        bottomPanel.repaint();
+     }
     public void Administrador(){
         Etapa.setVisible(true);
         gestionUsuarios.setVisible(true);
         Consulta.setVisible(true);
         Convocatoria.setVisible(true);
         Eliminar_Datos.setVisible(true);
-
+        Cerrar_Sesion.setVisible(true);
         
     } 
     public void Operador(){

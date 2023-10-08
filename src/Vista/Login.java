@@ -10,22 +10,24 @@ import Modelo.UsuarioDao;
 import Modelo.UsuarioDaoJDBC;
 import Controlador.CtrlContraseñaaHash;
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+
 
 /**
  *jelout mouter
  * @author EGcri
  */
 public class Login extends javax.swing.JPanel {
+    private PanelSuperior topPanel;
     private Main main;
     private Usuario usuario = null;
     private UsuarioDao inter = new UsuarioDaoJDBC();
     /**
      * Creates new form Login
      */
-    public Login(Main main) {
+    public Login(Main main, PanelSuperior topPanel) {
         this.main = main;
+        this.topPanel = topPanel;
+        topPanel.setLabel2("");
         initComponents();
         
     }
@@ -160,13 +162,25 @@ public class Login extends javax.swing.JPanel {
                         switch(usuario.getPermisosUsuario())
                         {
                             case 1:
+                                {
                                 main.Administrador();
+                                main.setBottomPanel();
+                                topPanel.setLabel2("Administrador");
+                                }                                
                                 break;
                             case 2:
+                                {
                                 main.Operador();
+                                main.setBottomPanel();
+                                topPanel.setLabel2("Operador");
+                                }                                
                                 break;
                             case 3:
+                                {
                                 main.Postulante();
+                                main.setBottomPanel();
+                                topPanel.setLabel2("Postulante");
+                                }                                
                                 break;
                         }
                     }
