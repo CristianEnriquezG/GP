@@ -22,9 +22,11 @@ public class CtrlConsulta {
     
     public static final String errorDNINoExistente = "El DNI no existe";
     
-    public static final String errorNoHayPuestos = "no hay puestos creados";
+    public static final String errorNoHayPuestos = "No hay puestos creados";
     
     public static final String errorVacio = "No hay seleccion";
+    
+    public static final String errorSinPostulantes = "No hay Postulantes para ese puesto";
     
     public static boolean verificarSeleccion(int i){
         if(i <= 0){
@@ -34,6 +36,23 @@ public class CtrlConsulta {
         else  return true;
         
     }
+    
+    public static boolean verificarPuestos(int i){
+        if(i <= 0){
+            mostrarVentanaDeError(errorNoHayPuestos);
+            return false;
+        }
+        else  return true;
+    }
+    
+    public static boolean verificarPostulantes(int i){
+        if(i <= 0){
+            mostrarVentanaDeError(errorSinPostulantes);
+            return false;
+        }
+        else  return true;
+    }
+    
      public static void mostrarVentanaDeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }

@@ -317,7 +317,7 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
     private void llenarTablaPuesto(){
         List<Puesto> Puestos = new java.util.ArrayList<>();
         Puestos = puestoInter.select();
-        if(Puestos.size() > 0)
+        if(CtrlConsulta.verificarPuestos(Puestos.size()))
         {
         DefaultTableModel model = (DefaultTableModel) PuestosjTable.getModel();
         model.setRowCount(0);
@@ -329,15 +329,8 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
                 row[4] = "boton";
                 model.addRow(row);
                 
-            }  
-            
-        }
-        else
-        {
-           mostrarVentanaDeError(CtrlConsulta.errorNoHayPuestos);
-        }     
-
-
+            }              
+        }  
     }
 
     private void cargarPostulante(int  codPuesto ){
@@ -349,7 +342,10 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) PostulantesjTable.getModel();
         model.setNumRows(0);
-        for (Postulacion postulacion : postulaciones) {
+        if(CtrlConsulta.verificarPostulantes(postulantes.size()))
+        {
+         for (Postulacion postulacion : postulaciones) 
+        {
             for (Postulante postulante: postulantes)
             {
                 if (postulacion.getCodPostulante() == postulante.getCodPostulante()){
@@ -361,8 +357,9 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
                 model.addRow(row);
             }
             }            
+        }      
         }
-            
+                 
     }
     
     private String etapa(int numero){
@@ -385,9 +382,6 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
                 
     }
     
-     public static void mostrarVentanaDeError(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
     
      
      
