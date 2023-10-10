@@ -29,7 +29,7 @@ public class CtrlConsulta {
     public static final String errorSinPostulantes = "No hay Postulantes para ese puesto";
     
     public static boolean verificarSeleccion(int i){
-        if(i <= 0){
+        if(i <= -1){
             mostrarVentanaDeError(errorVacio);
             return false;
         }

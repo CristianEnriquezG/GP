@@ -212,7 +212,8 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ImprimirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirjButtonActionPerformed
-        int filaSeleccionada = PuestosjTable.getSelectedRow();
+        int filaSeleccionada = -1;
+        filaSeleccionada = PuestosjTable.getSelectedRow();
         if(CtrlConsulta.verificarSeleccion(filaSeleccionada))
         {
           SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm");
