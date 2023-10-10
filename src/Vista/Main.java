@@ -72,25 +72,6 @@ public class Main {
 	        Menu_Principal.setFont(font);
 	        Menu_Principal.setOpaque(false);
 	        
-	        Cerrar_Sesion = new JButton("Cerrar Sesion");
-                Cerrar_Sesion.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent e){
-                            bottomPanel.removeAll();
-                            bottomPanel.add(new Login(Main.this,Main.topPanel));
-                            bottomPanel.revalidate();
-                            bottomPanel.repaint();
-                        }
-                    });
-	        
-                
-                
-	        Cerrar_Sesion.setPreferredSize(new Dimension(200, 40));
-	        Cerrar_Sesion.setOpaque(false);
-	        Cerrar_Sesion.setBorderPainted(false);
-	        Cerrar_Sesion.setFont(font);
-                Cerrar_Sesion.setVisible(false);
-	        
-	        Menu_Principal.add(Cerrar_Sesion);
 	        
 	        this.Postulante = new JMenu("Postulante");
 	        Postulante.setFont(font);
@@ -311,6 +292,33 @@ public class Main {
                 
                 Menu_Principal.add(gestionUsuarios);
                 
+                Cerrar_Sesion = new JButton("Cerrar Sesion");
+                Cerrar_Sesion.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                            bottomPanel.removeAll();
+                            bottomPanel.add(new Login(Main.this,Main.topPanel));
+                            bottomPanel.revalidate();
+                            bottomPanel.repaint();
+                            Etapa.setVisible(false);
+                            Convocatoria.setVisible(false);
+                            Consulta.setVisible(false);
+                            gestionUsuarios.setVisible(false);
+                            Postulante.setVisible(false);
+                            Cerrar_Sesion.setVisible(false);
+                        }
+                    });
+	        
+                
+                
+	        Cerrar_Sesion.setPreferredSize(new Dimension(200, 40));
+	        Cerrar_Sesion.setOpaque(false);
+	        Cerrar_Sesion.setBorderPainted(false);
+	        Cerrar_Sesion.setFont(font);
+                Cerrar_Sesion.setVisible(false);
+	        
+	        Menu_Principal.add(Cerrar_Sesion);
+	        
+                
                 JButton SalirBoton = new JButton("Salir");
                 SalirBoton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e){
@@ -350,6 +358,7 @@ public class Main {
         bottomPanel.repaint();
      }
     public void Administrador(){
+        Postulante.setVisible(true);
         Etapa.setVisible(true);
         gestionUsuarios.setVisible(true);
         Consulta.setVisible(true);

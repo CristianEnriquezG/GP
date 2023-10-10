@@ -213,7 +213,9 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
 
     private void ImprimirjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirjButtonActionPerformed
         int filaSeleccionada = PuestosjTable.getSelectedRow();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm");
+        if(CtrlConsulta.verificarSeleccion(filaSeleccionada))
+        {
+          SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH-mm");
         Date date = new Date();
         String fechaHora = dateFormat.format(date);
 
@@ -308,7 +310,9 @@ public class VerPostulantesPuesto extends javax.swing.JPanel {
         } catch (IOException ex) {
              ex.printStackTrace();
         }
+        }  
         }
+        
     }//GEN-LAST:event_ImprimirjButtonActionPerformed
     private void llenarTablaPuesto(){
         List<Puesto> Puestos = new java.util.ArrayList<>();

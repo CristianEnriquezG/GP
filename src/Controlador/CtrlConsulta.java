@@ -4,6 +4,8 @@
  */
 package Controlador;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author EGcri
@@ -22,4 +24,17 @@ public class CtrlConsulta {
     
     public static final String errorNoHayPuestos = "no hay puestos creados";
     
+    public static final String errorVacio = "No hay seleccion";
+    
+    public static boolean verificarSeleccion(int i){
+        if(i <= 0){
+            mostrarVentanaDeError(errorVacio);
+            return false;
+        }
+        else  return true;
+        
+    }
+     public static void mostrarVentanaDeError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

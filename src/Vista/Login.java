@@ -211,6 +211,7 @@ public class Login extends javax.swing.JPanel {
         if(UsuarioInvitado.length() != 0)
         {
             main.Postulante();
+            topPanel.setLabel2("Invitado");
         }
         else{
             mostrarVentanaDeError(CtrlUsuarios.errorUsuarioVacio);
