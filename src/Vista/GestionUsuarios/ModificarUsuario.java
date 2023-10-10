@@ -230,18 +230,18 @@ public class ModificarUsuario extends javax.swing.JPanel {
            )
         {
         
-        String contraseñaActual = Arrays.toString(ContraseñaActualjPasswordField.getPassword());
-        String contraseñaNueva = Arrays.toString(ContraseñaNuevajPasswordField.getPassword());
-        String confirmarContraseña = Arrays.toString(ConfirmarContraseñajPasswordField.getPassword()); 
-        String HashContraseñaActual = CtrlContraseñaaHash.hasher(contraseñaActual);
-        String HashContraseñaNueva = CtrlContraseñaaHash.hasher(contraseñaNueva);
-        String HashConfirmarContraseña = CtrlContraseñaaHash.hasher(confirmarContraseña); 
+        char[]  contraseñaActual = ContraseñaActualjPasswordField.getPassword();
+        char[]  contraseñaNueva = ContraseñaNuevajPasswordField.getPassword();
+        char[]  confirmarContraseña = ConfirmarContraseñajPasswordField.getPassword(); 
+        String HashContraseñaActual = CtrlContraseñaaHash.hasher(new String(contraseñaActual));
+        String HashContraseñaNueva = CtrlContraseñaaHash.hasher(new String(contraseñaNueva));
+        String HashConfirmarContraseña = CtrlContraseñaaHash.hasher(new String(confirmarContraseña)); 
         
         if(inter.match(user))
             {
             if(HashContraseñaNueva.equals(HashConfirmarContraseña))
             {
-                user.setContraseñaUsuario(contraseñaNueva);
+                user.setContraseñaUsuario(HashConfirmarContraseña);
                 user.setPermisosUsuario(leerbullets());
                 if(inter.update(user) == 1)
                     JOptionPane.showMessageDialog(this, "Usuario Actualizado", TOOL_TIP_TEXT_KEY, HEIGHT);
@@ -260,11 +260,11 @@ public class ModificarUsuario extends javax.swing.JPanel {
     private int leerbullets(){
         int resultado = 0;
         if(AdministradorjRadioButton.isEnabled())
-            resultado = 0;
-        else if(OperadorjRadioButton.isEnabled())
             resultado = 1;
+        else if(OperadorjRadioButton.isEnabled())
+            resultado = 2;
         else if(PostulantejRadioButton.isEnabled())
-            resultado = 2;        
+            resultado = 3;        
         return resultado;
     }
     private void marcarBullet(int permiso){

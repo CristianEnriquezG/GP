@@ -19,7 +19,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
 
     private static final String SQL_SELECT = "SELECT uidUsuario, nombreUsuario, contraseñaUsuario, permisosUsuario, activo FROM usuario";
     private static final String SQL_INSERT = "INSERT INTO usuario(nombreUsuario, contraseñaUsuario, permisosUsuario, activo) VALUES (?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE usuario SET nombreUsuario=?, contraseñaUsuario=?, permisosUsuario=?";
+    private static final String SQL_UPDATE = "UPDATE usuario SET nombreUsuario=?, contraseñaUsuario=?, permisosUsuario=? WHERE uidUsuario= ?";
     private static final String SQL_DELETE = "UPDATE usuario SET activo=? WHERE uidUsuario =?";
     private static final String SQL_SEARCH = "SELECT uidUsuario, nombreUsuario, contraseñaUsuario, permisosUsuario, activo FROM usuario WHERE nombreUsuario =?";
     private static final String SQL_MATCH = "SELECT * FROM usuario where nombreUsuario=?";
@@ -46,7 +46,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
                 Usuario = new Usuario(uidUsuario,nombreUsuario,contraseñaUsuario,permisosUsuario,activo);
                 Usuarios.add(Usuario);
             }
-        }catch(Exception e)
+        }catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -73,7 +73,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
             stmt.setInt(3,Usuario.getPermisosUsuario());
             stmt.setBoolean(4,Usuario.isActivo());
             rows = stmt.executeUpdate();
-        }catch ( Exception e){
+        }catch ( SQLException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         finally{
@@ -97,7 +97,9 @@ public class UsuarioDaoJDBC implements UsuarioDao{
             stmt.setString(1,Usuario.getNombreUsuario());
             stmt.setString(2,Usuario.getContraseñaUsuario());
             stmt.setInt(3,Usuario.getPermisosUsuario());
-        }catch(Exception e)
+            stmt.setInt(4, Usuario.getUidUsuario());
+            rows = stmt.executeUpdate();
+        }catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -157,7 +159,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
                 usuario = new Usuario(uidUsuario,nombreUsuario,contraseñaUsuario,permisosUsuario,activo);
             }
             
-        }catch(Exception e)
+        }catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -185,7 +187,7 @@ public class UsuarioDaoJDBC implements UsuarioDao{
                     result = true;
             }
 
-        }catch(Exception e)
+        }catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
