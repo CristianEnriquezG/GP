@@ -5,7 +5,7 @@
  */
 package Vista.Postulantes;
 
-import Controlador.CtrlEliminarDatos;
+import Controlador.CtrlPostulante;
 import Modelo.CvPostulante;
 import Modelo.CvPostulanteDaoJDBC;
 import Modelo.Postulante;
@@ -292,7 +292,7 @@ public class EliminarDatos extends javax.swing.JPanel {
         post = new PostulanteDaoJDBC().select(dniPost);
         if(post != null) {
             cvPost = new CvPostulanteDaoJDBC().select(post.getCodPostulante());
-            if(CtrlEliminarDatos.esEliminable(post)) {
+            if(CtrlPostulante.esPostulanteActivo(post)) {
                 jLabelCodigoTexto.setText(String.format("%05d",post.getCodPostulante()));
                 jLabelApellidoTexto.setText(post.getApellido());
                 jLabelNombreTexto.setText(post.getNombre());
@@ -303,7 +303,7 @@ public class EliminarDatos extends javax.swing.JPanel {
                 activarFormBuscarPostulante(false);
             }
             else {
-                JOptionPane.showMessageDialog(this,CtrlEliminarDatos.mensajeError);
+                JOptionPane.showMessageDialog(this,CtrlPostulante.mensajeError);
             }
         }
         else {

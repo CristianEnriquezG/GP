@@ -345,8 +345,8 @@ public class Main {
 	        frame.add(topPanel, BorderLayout.NORTH);
 	        frame.add(centerPanel, BorderLayout.CENTER);
 	        frame.add(bottomPanel, BorderLayout.SOUTH);
-
-	        frame.setVisible(true);
+                
+                frame.setVisible(true);
     }
      public static void main(String[] args) {
 	      Main principal = new Main();

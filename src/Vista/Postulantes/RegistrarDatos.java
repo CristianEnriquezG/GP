@@ -280,7 +280,7 @@ public class RegistrarDatos extends javax.swing.JPanel {
         post.setEmail(jTextFieldEmail.getText());
         post.setEstado(true);
         // Si los datos son válidos se insertan en la BD
-        if(CtrlRegistrarDatos.esValido(post)) {
+        if(CtrlPostulante.esPostulanteValido(post) && !CtrlPostulante.existePostulante(post.getDni())) {
             // Controla si ingresó CV
             if(archivoPDF != null) {
                 // Inserta postulante
@@ -303,7 +303,7 @@ public class RegistrarDatos extends javax.swing.JPanel {
             }
         }
         else {
-            JOptionPane.showMessageDialog(this, CtrlRegistrarDatos.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, CtrlPostulante.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 

@@ -5,7 +5,7 @@
  */
 package Vista.Postulantes;
 
-import Controlador.CtrlModificarDatos;
+import Controlador.CtrlPostulante;
 import Modelo.Postulante;
 import Modelo.PostulanteDaoJDBC;
 import javax.swing.JOptionPane;
@@ -231,7 +231,7 @@ public class ModificarDatos extends javax.swing.JPanel {
         post.setDomicilio(jTextFieldDomicilio.getText());
         post.setTelefono(jTextFieldTelefono.getText());
         post.setEmail(jTextFieldEmail.getText());
-        if(CtrlModificarDatos.esValido(post)) {
+        if(CtrlPostulante.esPostulanteValido(post)) {
             new PostulanteDaoJDBC().update(post);
             JOptionPane.showMessageDialog(this, "Se han modificado los datos del postulante");
             limpiarFormulario();
@@ -239,7 +239,7 @@ public class ModificarDatos extends javax.swing.JPanel {
             activarFormBuscarPostulante(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, CtrlModificarDatos.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, CtrlPostulante.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
@@ -259,7 +259,7 @@ public class ModificarDatos extends javax.swing.JPanel {
         }
         post = new PostulanteDaoJDBC().select(dniPost);
         if(post != null) {
-            if(CtrlModificarDatos.esModificable(post)) {
+            if(CtrlPostulante.esPostulanteActivo(post)) {
                 jTextFieldApellido.setText(post.getApellido());
                 jTextFieldNombre.setText(post.getNombre());
                 jTextFieldDomicilio.setText(post.getDomicilio());
@@ -269,7 +269,7 @@ public class ModificarDatos extends javax.swing.JPanel {
                 activarFormBuscarPostulante(false);
             }
             else {
-                JOptionPane.showMessageDialog(this,CtrlModificarDatos.mensajeError);
+                JOptionPane.showMessageDialog(this,CtrlPostulante.mensajeError);
             }
         }
         else {
