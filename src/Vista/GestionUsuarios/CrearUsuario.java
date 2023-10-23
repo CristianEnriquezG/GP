@@ -6,7 +6,7 @@ package Vista.GestionUsuarios;
 import Modelo.UsuarioDao;
 import Modelo.UsuarioDaoJDBC;
 import Modelo.Usuario;
-import Controlador.CtrlContraseñaaHash;
+//import Controlador.CtrlContraseñaaHash;
 import Controlador.CtrlUsuarios;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -157,7 +157,7 @@ public class CrearUsuario extends javax.swing.JPanel {
        if(NombreUsuariojTextField.getText().length() == 0)
            mostrarVentanaDeError(CtrlUsuarios.errorUsuarioVacio);
        if(Arrays.equals(password1, password2))
-        usuario.setContraseñaUsuario(CtrlContraseñaaHash.hasher(new String (password1)));
+        usuario.setContraseñaUsuario(CtrlUsuarios.hasher(new String (password1)));
        else
            mostrarVentanaDeError(CtrlUsuarios.errorContraseñaVacia);
        if(PermisoAdministradorjRadioButton.isEnabled())

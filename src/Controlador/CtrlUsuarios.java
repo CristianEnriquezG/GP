@@ -38,4 +38,30 @@ public class CtrlUsuarios {
             
         return resultado;
     }
+        public static String hasher(String contraseña){
+        byte[] hashenBytes;
+        String hash = "";
+        try {
+                        
+            MessageDigest conversor = MessageDigest.getInstance("SHA-256");
+            hashenBytes = conversor.digest(contraseña.getBytes(StandardCharsets.UTF_8));
+            hash = bytesaHex(hashenBytes);
+            return hash;
+            
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CtrlContraseñaaHash.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            return hash;
+        }
+    }
+     private static String bytesaHex(byte[] hash) {
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 }

@@ -9,6 +9,7 @@ import Modelo.Usuario;
 import Modelo.UsuarioDao;
 import Modelo.UsuarioDaoJDBC;
 import Controlador.CtrlContraseñaaHash;
+import Controlador.CtrlUsuarios;
 import javax.swing.*;
 
 
@@ -151,7 +152,7 @@ public class Login extends javax.swing.JPanel {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         String nombreUsuario = UsuarioJTextField.getText();
-        String contraseña = CtrlContraseñaaHash.hasher(new String(jPasswordField.getPassword()));
+        String contraseña = CtrlUsuarios.hasher(new String(jPasswordField.getPassword()));
         try{
             if(nombreUsuario.length() != 0)
             {
