@@ -4,11 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/Entrevista.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlUsuarios.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlNuevoExamen.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Etapa/NuevaEntrevista.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlVentana.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Consulta/VerPostulantesPuesto.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Main.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/EntrevistaDao.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/EntrevistaDaoJDBC.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlPostulante.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Login.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Etapa/NuevaPrueba.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Convocatoria/ConfigurarEntrevista.java</file>
@@ -17,6 +21,8 @@
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/Etapa/NuevoExamen.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/FormatoEntrevista.java</file>
             <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Modelo/FormatoEntrevistaDaoJDBC.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Controlador/CtrlContraseñaaHash.java</file>
+            <file>file:/C:/Users/EGcri/Documents/NetBeansProjects/GP/src/Vista/GestionUsuarios/CrearUsuario.java</file>
         </group>
     </open-files>
 </project-private>

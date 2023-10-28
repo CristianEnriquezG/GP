@@ -27,6 +27,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Controlador.CtrlVentana;
 /**
  *
  * @author CristianEnriquezG
@@ -58,6 +59,7 @@ public class Main {
 	        frame.setSize(1280, 720);	        	        	      	        
 	        frame.setLayout(new BorderLayout());
                 frame.setResizable(false);
+                CtrlVentana.controlResolucion();
 	        
 	        topPanel = new PanelSuperior();
 	        topPanel.setPreferredSize(new Dimension(1280, 80));
