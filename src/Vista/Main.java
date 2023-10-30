@@ -56,9 +56,10 @@ public class Main {
 	        JFrame frame = new JFrame("Gestion de Postulantes");
 	        
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.setSize(1280, 720);	        	        	      	        
+	        frame.setSize(1280, 720);
+                frame.setMinimumSize(new Dimension(1280, 720));
 	        frame.setLayout(new BorderLayout());
-                frame.setResizable(false);
+                frame.setResizable(true);
                 CtrlVentana.controlResolucion();
 	        
 	        topPanel = new PanelSuperior();
