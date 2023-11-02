@@ -160,11 +160,11 @@ public class CrearUsuario extends javax.swing.JPanel {
         usuario.setContraseñaUsuario(CtrlUsuarios.hasher(new String (password1)));
        else
            mostrarVentanaDeError(CtrlUsuarios.errorContraseñaVacia);
-       if(PermisoAdministradorjRadioButton.isEnabled())
+       if(PermisoAdministradorjRadioButton.isSelected())
            usuario.setPermisosUsuario(1);
-       else if(PermisoOperadorjRadioButton.isEnabled())
+       else if(PermisoOperadorjRadioButton.isSelected())
            usuario.setPermisosUsuario(2);
-       else if(PermisoPostulantejRadioButton.isEnabled())
+       else if(PermisoPostulantejRadioButton.isSelected())
            usuario.setPermisosUsuario(3);
        else
            mostrarVentanaDeError(CtrlUsuarios.errorSinSeleccion);
