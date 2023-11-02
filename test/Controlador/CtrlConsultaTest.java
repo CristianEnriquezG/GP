@@ -14,75 +14,41 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CtrlConsultaTest {
     
-    public CtrlConsultaTest() {
+
+    @Test
+    public void testVerificarSeleccionSinSeleccion() {    
+        assertEquals(false, CtrlConsulta.verificarSeleccion(-1));    
+    }
+
+    @Test
+    public void testVerificarSeleccionConSeleccion() {    
+        assertEquals(true,CtrlConsulta.verificarSeleccion(1));        
+}
+
+    @Test
+    public void testVerificarPuestosNoExistenPuestos() {               
+        assertEquals(false, CtrlConsulta.verificarPuestos(0));
     }
     
-
-    /**
-     * Test of verificarSeleccion method, of class CtrlConsulta.
-     */
     @Test
-    public void testVerificarSeleccion() {
-        System.out.println("verificarSeleccion");
-        int sinSeleccion = -1;
-        int conSeleccion = 1;
-        boolean expResult = false;
-        
-        boolean result = CtrlConsulta.verificarSeleccion(sinSeleccion);
-        assertEquals(expResult, result);
-        
-        expResult = true;
-        result = CtrlConsulta.verificarSeleccion(conSeleccion);
-        assertEquals(expResult,result);
-
-        
+    public void testVerificarPuestosExistenPuestos() {        
+        assertEquals(true, CtrlConsulta.verificarPuestos(1));        
     }
 
-    /**
-     * Test of verificarPuestos method, of class CtrlConsulta.
-     */
     @Test
-    public void testVerificarPuestos() {
-        System.out.println("verificarPuestos");
-        int i = 0;
-        boolean expResult = false;
-        boolean result = CtrlConsulta.verificarPuestos(i);
-        assertEquals(expResult, result);
-        i = 1;
-        
-        expResult = true;
-        result = CtrlConsulta.verificarPuestos(i);
-        assertEquals(expResult, result);
+    public void testVerificarPostulantesConPostulantes() {
+        assertEquals(true,CtrlConsulta.verificarPostulantes(1));
+    }
+    @Test
+    public void testVerificarPostulantesSinPostulantes() {        
+        assertEquals(false,CtrlConsulta.verificarPostulantes(0));              
     }
 
-    /**
-     * Test of verificarPostulantes method, of class CtrlConsulta.
-     */
-    @Test
-    public void testVerificarPostulantes() {
-        System.out.println("verificarPostulantes");
-        
-        int i = 0;
-        boolean expResult = false;
-        boolean result = CtrlConsulta.verificarPostulantes(i);
-        assertEquals(expResult, result);
-        i = 1;
-        
-        expResult = true;
-        result = CtrlConsulta.verificarPostulantes(i);
-        assertEquals(expResult, result);
-        
-    }
-
-    /**
-     * Test of mostrarVentanaDeError method, of class CtrlConsulta.
-     */
     @Test
     public void testMostrarVentanaDeError() {
         System.out.println("mostrarVentanaDeError");
-        String mensaje = "";
+        String mensaje = "Prueba";
         CtrlConsulta.mostrarVentanaDeError(mensaje);
         
     }
-    
 }

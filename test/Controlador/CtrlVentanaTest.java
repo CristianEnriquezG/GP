@@ -22,16 +22,16 @@ public class CtrlVentanaTest {
      * Test of controlResolucion method, of class CtrlVentana.
      */
     @Test
-    public void testControlResolucion() {
-        System.out.println("controlResolucion");
-        int anchoEsperado = 1280;
-        int altoEsperado = 720;
-        boolean resultado = CtrlVentana.controlResolucion(anchoEsperado,altoEsperado);
-        assertTrue(resultado, "Resolucion esperada es valida" );
-        
-        resultado = CtrlVentana.controlResolucion(800,600);
-        assertTrue(resultado,"Resolucion esperada es invalida");
+    public void testControlResolucionValida() {        
+        assertTrue(CtrlVentana.controlResolucion(1280,720));
 
+    }
+    @Test
+    public void testControlResolucionInvalida(){
+        assertFalse(CtrlVentana.controlResolucion(800,600));
+        assertFalse(CtrlVentana.controlResolucion(1281,721));
+        assertFalse(CtrlVentana.controlResolucion(1180, 720));
+        assertFalse(CtrlVentana.controlResolucion(1280, 600));
     }
     
 }

@@ -14,26 +14,26 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CtrlUsuariosTest {
     
-    public CtrlUsuariosTest() {
-    }
-    
-    /**
-     * Test of chequeoFinal method, of class CtrlUsuarios.
-     *   private int uidUsuario;
-    private String nombreUsuario;
-    private String contraseñaUsuario;
-    private int permisosUsuario;
-    private boolean activo;
-     */
-    
     @Test
-    public void testChequeoFinal() {
+    public void testChequeoFinalVacio() {
         System.out.println("chequeoFinal");
-        Usuario usuario = null;
+        Usuario usuario = new Usuario
+        (
+            0,
+            "",
+            "",
+            1,
+            false
+        );
         boolean expResult = false;
         boolean result = CtrlUsuarios.chequeoFinal(usuario);
-        assertEquals(expResult, result,"El resultado es el esperado");
-        
+        assertEquals(expResult, result);        
+    }
+@Test
+    public void testChequeoFinalCompleto() {
+        System.out.println("chequeoFinal");
+        Usuario usuario = new Usuario();
+        boolean expResult = true;        
         usuario = new Usuario
         (
                 1,
@@ -42,11 +42,10 @@ public class CtrlUsuariosTest {
                 1,
                 true
         );
-        expResult = true;
-        result = CtrlUsuarios.chequeoFinal(usuario);
-        assertEquals(expResult,result,"El resultado es el esperado");
-    }
 
+        boolean result = CtrlUsuarios.chequeoFinal(usuario);
+        assertEquals(expResult,result);
+    }
     /**
      * Test of hasher method, of class CtrlUsuarios.
      */
@@ -56,7 +55,7 @@ public class CtrlUsuariosTest {
         String contraseña = "admin";
         String expResult = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
         String result = CtrlUsuarios.hasher(contraseña);
-        assertEquals(expResult, result,"El resultado es el esperado");
+        assertEquals(expResult, result);
     }
-    
+
 }
