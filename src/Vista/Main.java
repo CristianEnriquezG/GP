@@ -60,7 +60,7 @@ public class Main {
                 frame.setMinimumSize(new Dimension(1280, 720));
 	        frame.setLayout(new BorderLayout());
                 frame.setResizable(true);
-                CtrlVentana.controlResolucion();
+                CtrlVentana.controlResolucion(1280,720);
 	        
 	        topPanel = new PanelSuperior();
 	        topPanel.setPreferredSize(new Dimension(1280, 80));
