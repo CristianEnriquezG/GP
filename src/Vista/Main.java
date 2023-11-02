@@ -60,8 +60,13 @@ public class Main {
                 frame.setMinimumSize(new Dimension(1280, 720));
 	        frame.setLayout(new BorderLayout());
                 frame.setResizable(true);
-                CtrlVentana.controlResolucion(1280,720);
-	        
+                if(! CtrlVentana.controlResolucion(1280,720))
+                {
+                    JFrame errorFrame = new JFrame("Error de resolución");
+                    JOptionPane.showMessageDialog(errorFrame, "La resolución mínima requerida es 1280x720.");
+                    errorFrame.dispose(); 
+                    System.exit(0); 
+                }
 	        topPanel = new PanelSuperior();
 	        topPanel.setPreferredSize(new Dimension(1280, 80));
 
@@ -229,7 +234,7 @@ public class Main {
 					bottomPanel.repaint();
 				}
 			});
-
+                        
 	        ver_Puesto.setFont(font);
 	        Consulta.add(ver_Puesto);
                 

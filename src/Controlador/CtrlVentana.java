@@ -16,17 +16,15 @@ import javax.swing.JOptionPane;
 
 public class CtrlVentana {
     
-    public static void controlResolucion(int width, int height){
+    public static boolean controlResolucion(int width, int height){
         
+        boolean result = false;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;        
-        if (screenWidth < width || screenHeight < height) 
-        {        
-        JFrame errorFrame = new JFrame("Error de resolución");
-        JOptionPane.showMessageDialog(errorFrame, "La resolución mínima requerida es 1280x720.");
-        errorFrame.dispose(); 
-        System.exit(0); 
-        }        
+        if (screenWidth < width || screenHeight < height)     
+            return result;       
+        else
+            return result = true;
     }
 }
