@@ -12,21 +12,21 @@ import javax.swing.JOptionPane;
  */
 public class CtrlConsulta {
     
-    public static final String errorApellidoNombreVacio = "El apellido y nombre no puede ser vacio";
+    public static final String errorApellidoNombreVacio = "Error: El apellido y nombre no puede ser vacio";
     
-    public static final String errorPostulanteInexistente = "El Postulante no existe";
+    public static final String errorPostulanteInexistente = "Error: El Postulante no existe";
     
-    public static final String errorPostulanteInactivo ="El Postulante esta inactivo";
+    public static final String errorPostulanteInactivo ="Error: El Postulante esta inactivo";
     
-    public static final String errorDNIVacio = "El DNI no puede ser vacio";
+    public static final String errorDNIVacio = "Error: El DNI no puede ser vacio";
     
-    public static final String errorDNINoExistente = "El DNI no existe";
+    public static final String errorDNINoExistente = "Error: El DNI no existe";
     
-    public static final String errorNoHayPuestos = "No hay puestos creados";
+    public static final String errorNoHayPuestos = "Error: No hay puestos creados";
     
-    public static final String errorVacio = "No hay seleccion";
+    public static final String errorVacio = "Error: No hay seleccion";
     
-    public static final String errorSinPostulantes = "No hay Postulantes para ese puesto";
+    public static final String errorSinPostulantes = "Error: No hay Postulantes para ese puesto";
     
     public static boolean verificarSeleccion(int i){
         if(i <= -1){
