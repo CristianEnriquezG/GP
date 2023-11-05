@@ -16,34 +16,46 @@ public class CtrlConsultaTest {
     
 
     @Test
-    public void testVerificarSeleccionSinSeleccion() {    
-        assertEquals(false, CtrlConsulta.verificarSeleccion(-1));    
+    public void testVerificarSeleccionSinSeleccion() {
+        int sinSeleccion = -1;
+        assertEquals(false, CtrlConsulta.verificarSeleccion(sinSeleccion));    
     }
 
     @Test
-    public void testVerificarSeleccionConSeleccion() {    
-        assertEquals(true,CtrlConsulta.verificarSeleccion(1));        
+    public void testVerificarSeleccionConSeleccion() {
+        int conSeleccion = 1;
+        assertEquals(true,CtrlConsulta.verificarSeleccion(conSeleccion));        
 }
 
     @Test
-    public void testVerificarPuestosNoExistenPuestos() {               
-        assertEquals(false, CtrlConsulta.verificarPuestos(0));
+    public void testVerificarPuestosNoExistenPuestos() {
+        int noHayPuestos = 0;
+        assertEquals(false, CtrlConsulta.verificarPuestos(noHayPuestos));
     }
     
     @Test
-    public void testVerificarPuestosExistenPuestos() {        
-        assertEquals(true, CtrlConsulta.verificarPuestos(1));        
+    public void testVerificarPuestosExistenPuestos() {
+        int puestoExistente  = 1;
+        assertEquals(true, CtrlConsulta.verificarPuestos(puestoExistente));        
     }
 
+    /**
+     * Test of verificarPostulantes method, of class CtrlConsulta.
+     */
     @Test
     public void testVerificarPostulantesConPostulantes() {
-        assertEquals(true,CtrlConsulta.verificarPostulantes(1));
+        int existePostulante = 1;
+        assertEquals(true,CtrlConsulta.verificarPostulantes(existePostulante));
     }
     @Test
-    public void testVerificarPostulantesSinPostulantes() {        
-        assertEquals(false,CtrlConsulta.verificarPostulantes(0));              
+    public void testVerificarPostulantesSinPostulantes() {
+        int noExistePostulante = 0;
+        assertEquals(false,CtrlConsulta.verificarPostulantes(noExistePostulante));
     }
-
+     /*
+     *
+     * Test of mostrarVentanaDeError method, of class CtrlConsulta.
+     */
     @Test
     public void testMostrarVentanaDeError() {
         System.out.println("mostrarVentanaDeError");

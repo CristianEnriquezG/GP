@@ -14,23 +14,23 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CtrlVentanaTest {
     
-    public CtrlVentanaTest() {
-    }
-
-
-    /**
-     * Test of controlResolucion method, of class CtrlVentana.
-     */
     @Test
-    public void testControlResolucionValida() {        
-        assertTrue(CtrlVentana.controlResolucion(1280,720));
+    public void testControlResolucionConValoresValidos() {
+        int altoValido = 720;
+        int anchoValido = 1280;
+        assertTrue(CtrlVentana.controlResolucion(anchoValido,altoValido));
 
     }
     @Test
-    public void testControlResolucionInvalida(){
-        assertFalse(CtrlVentana.controlResolucion(800,600));
-        assertFalse(CtrlVentana.controlResolucion(1281,721));
-        assertFalse(CtrlVentana.controlResolucion(1180, 720));
+    public void testControlResolucionConValoresInvalidos(){
+        int altoInvalidoMasGrande = 1281;
+        int anchoInvalidoMasGrande = 721;
+        assertFalse(CtrlVentana.controlResolucion(altoInvalidoMasGrande,anchoInvalidoMasGrande));
+        
+        int altoInvalidoPequeño = 1279;
+        int anchoInvalidoPequeño = 719;
+        assertFalse(CtrlVentana.controlResolucion(altoInvalidoPequeño, anchoInvalidoPequeño));
+       
         assertFalse(CtrlVentana.controlResolucion(1280, 600));
     }
     
