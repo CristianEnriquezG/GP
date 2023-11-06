@@ -6,7 +6,7 @@ package Vista.Etapa;
 import javax.swing.JOptionPane;
 import Modelo.PostulanteDaoJDBC;
 import Modelo.Postulante;
-import Controlador.CtrlNuevaEntrevista;
+import Controlador.CtrlPostulante;
 import Modelo.Postulacion;
 import Modelo.PostulacionDaoJDBC;
 import Modelo.Puesto;
@@ -178,7 +178,7 @@ public class NuevaEntrevista extends javax.swing.JPanel {
         }
         post = new PostulanteDaoJDBC().select(dniPost);
         if(post != null) {
-            if(CtrlNuevaEntrevista.esActivo(post)) {
+            if(CtrlPostulante.esPostulanteActivo(post)) {
                 // Obtiene todas las postulaciones y descarta las que no tienen entrevista pendiente o que estén canceladas
                 ArrayList<Postulacion> listaPostulacion = (ArrayList<Postulacion>) new PostulacionDaoJDBC().select(post.getCodPostulante());
                 listaPostulacionEntrevista = new ArrayList<>();
@@ -203,7 +203,7 @@ public class NuevaEntrevista extends javax.swing.JPanel {
                 }
             }
             else {
-                JOptionPane.showMessageDialog(this,CtrlNuevaEntrevista.mensajeError);
+                JOptionPane.showMessageDialog(this,CtrlPostulante.mensajeError);
             }
         }
         else {

@@ -5,7 +5,8 @@
  */
 package Vista.Etapa;
 
-import Controlador.CtrlNuevoExamen;
+import Controlador.CtrlEtapa;
+import Controlador.CtrlPostulante;
 import Modelo.Examen;
 import Modelo.ExamenDaoJDBC;
 import Modelo.Postulacion;
@@ -14,6 +15,9 @@ import Modelo.Postulante;
 import Modelo.PostulanteDaoJDBC;
 import Modelo.Puesto;
 import Modelo.PuestoDaoJDBC;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -48,11 +52,7 @@ public class NuevoExamen extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabelIdPostulante = new javax.swing.JLabel();
-        jLabelFecha = new javax.swing.JLabel();
         jLabelObservaciones = new javax.swing.JLabel();
-        jTextFieldFecha = new javax.swing.JTextField();
-        jLabelHora = new javax.swing.JLabel();
-        jTextFieldHora = new javax.swing.JTextField();
         jLabelApto = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -65,8 +65,12 @@ public class NuevoExamen extends javax.swing.JPanel {
         jComboBoxPuesto = new javax.swing.JComboBox<>();
         jButtonCancelar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
-        jLabelFormatoFecha = new javax.swing.JLabel();
+        jComboBoxHH = new javax.swing.JComboBox<>();
+        jComboBoxMM = new javax.swing.JComboBox<>();
+        jLabelHora = new javax.swing.JLabel();
         jLabelFormatoHora = new javax.swing.JLabel();
+        jDateChooserFechaEnt = new com.toedter.calendar.JDateChooser();
+        jLabelFecha = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -86,31 +90,11 @@ public class NuevoExamen extends javax.swing.JPanel {
         jLabelIdPostulante.setMinimumSize(new java.awt.Dimension(350, 17));
         jLabelIdPostulante.setPreferredSize(new java.awt.Dimension(350, 17));
 
-        jLabelFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFecha.setText("Fecha de entrega");
-        jLabelFecha.setMaximumSize(new java.awt.Dimension(105, 16));
-        jLabelFecha.setMinimumSize(new java.awt.Dimension(105, 16));
-        jLabelFecha.setPreferredSize(new java.awt.Dimension(105, 16));
-
         jLabelObservaciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelObservaciones.setText("Observaciones");
         jLabelObservaciones.setMaximumSize(new java.awt.Dimension(552, 16));
         jLabelObservaciones.setMinimumSize(new java.awt.Dimension(552, 16));
         jLabelObservaciones.setPreferredSize(new java.awt.Dimension(552, 16));
-
-        jTextFieldFecha.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha.setPreferredSize(new java.awt.Dimension(100, 22));
-
-        jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelHora.setText("Hora de entrega");
-        jLabelHora.setMaximumSize(new java.awt.Dimension(105, 16));
-        jLabelHora.setMinimumSize(new java.awt.Dimension(105, 16));
-        jLabelHora.setPreferredSize(new java.awt.Dimension(105, 16));
-
-        jTextFieldHora.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldHora.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldHora.setPreferredSize(new java.awt.Dimension(100, 22));
 
         jLabelApto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelApto.setText("¿Es apto?");
@@ -198,19 +182,33 @@ public class NuevoExamen extends javax.swing.JPanel {
             }
         });
 
-        jLabelFormatoFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFormatoFecha.setText("dd/mm/aaaa");
-        jLabelFormatoFecha.setEnabled(false);
-        jLabelFormatoFecha.setMaximumSize(new java.awt.Dimension(80, 16));
-        jLabelFormatoFecha.setMinimumSize(new java.awt.Dimension(80, 16));
-        jLabelFormatoFecha.setPreferredSize(new java.awt.Dimension(80, 16));
+        jComboBoxHH.setMaximumRowCount(6);
+        jComboBoxHH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
-        jLabelFormatoHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFormatoHora.setText("hh:mm");
+        jComboBoxMM.setMaximumRowCount(6);
+        jComboBoxMM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
+
+        jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelHora.setText("Hora de entrega");
+        jLabelHora.setMaximumSize(new java.awt.Dimension(40, 16));
+        jLabelHora.setMinimumSize(new java.awt.Dimension(40, 16));
+        jLabelHora.setPreferredSize(new java.awt.Dimension(40, 16));
+
+        jLabelFormatoHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelFormatoHora.setText(":");
         jLabelFormatoHora.setEnabled(false);
+        jLabelFormatoHora.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jLabelFormatoHora.setMaximumSize(new java.awt.Dimension(60, 16));
         jLabelFormatoHora.setMinimumSize(new java.awt.Dimension(60, 16));
         jLabelFormatoHora.setPreferredSize(new java.awt.Dimension(60, 16));
+
+        jDateChooserFechaEnt.setDateFormatString("d MMMM y");
+
+        jLabelFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelFecha.setText("Fecha de entrega");
+        jLabelFecha.setMaximumSize(new java.awt.Dimension(50, 16));
+        jLabelFecha.setMinimumSize(new java.awt.Dimension(50, 16));
+        jLabelFecha.setPreferredSize(new java.awt.Dimension(50, 16));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -223,38 +221,12 @@ public class NuevoExamen extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(396, 396, 396)
-                        .addComponent(jLabelApto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(396, 396, 396)
-                        .addComponent(jLabelObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(396, 396, 396)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(509, 509, 509)
                         .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(396, 396, 396)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelIdPostulante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelFormatoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(238, 238, 238)
                         .addComponent(jLabelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,8 +237,34 @@ public class NuevoExamen extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(jLabelPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(396, 396, 396)
+                        .addComponent(jLabelIdPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(396, 396, 396)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelApto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
+                                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(254, 254, 254))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabelFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jDateChooserFechaEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(331, 331, 331))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,30 +283,23 @@ public class NuevoExamen extends javax.swing.JPanel {
                             .addComponent(jLabelPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(51, 51, 51)
                 .addComponent(jLabelIdPostulante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelFormatoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooserFechaEnt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabelApto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,7 +321,7 @@ public class NuevoExamen extends javax.swing.JPanel {
         }
         Postulante post = new PostulanteDaoJDBC().select(dniPost);
         if(post != null) {
-            if(CtrlNuevoExamen.esActivo(post)) {
+            if(CtrlPostulante.esPostulanteActivo(post)) {
                 // Obtiene todas las postulaciones y descarta las que no tienen examen pendiente o que estén canceladas
                 ArrayList<Postulacion> listaPostulacion = (ArrayList<Postulacion>) new PostulacionDaoJDBC().select(post.getCodPostulante());
                 listaPostulacionExamen = new ArrayList<>();
@@ -356,7 +347,7 @@ public class NuevoExamen extends javax.swing.JPanel {
                 }
             }
             else {
-                JOptionPane.showMessageDialog(this,CtrlNuevoExamen.mensajeError);
+                JOptionPane.showMessageDialog(this,CtrlPostulante.mensajeError);
             }
         }
         else {
@@ -391,10 +382,16 @@ public class NuevoExamen extends javax.swing.JPanel {
         exa.setObservaciones(jTextAreaObservaciones.getText());
         exa.setCodPostulante(pstl.getCodPostulante());
         exa.setCodPuesto(pstl.getCodPuesto());
-        String fec = jTextFieldFecha.getText();
-        String hor = jTextFieldHora.getText();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            exa.setFechaEntrega(Date.valueOf(sdf.format(jDateChooserFechaEnt.getDate())));
+        } catch(NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "ERROR: Debe especificar una fecha", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        exa.setHoraEntrega(Time.valueOf(jComboBoxHH.getSelectedItem() + ":" + jComboBoxMM.getSelectedItem() + ":00"));
         
-        if(CtrlNuevoExamen.esValido(exa,fec,hor)) {
+        if(CtrlEtapa.esExamenValido(exa)) {
             new ExamenDaoJDBC().insert(exa);
             pstl.setEtapaActual("Finalizado");
             new PostulacionDaoJDBC().update(pstl);
@@ -406,7 +403,7 @@ public class NuevoExamen extends javax.swing.JPanel {
             activarFormBuscarPostulante(true);
         }
         else {
-            JOptionPane.showMessageDialog(this, CtrlNuevoExamen.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, CtrlEtapa.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
@@ -427,9 +424,10 @@ public class NuevoExamen extends javax.swing.JPanel {
     
     public final void activarFormRegistrarExamen(boolean band) {
         jLabelFecha.setEnabled(band);
-        jTextFieldFecha.setEnabled(band);
+        jDateChooserFechaEnt.setEnabled(band);
         jLabelHora.setEnabled(band);
-        jTextFieldHora.setEnabled(band);
+        jComboBoxHH.setEnabled(band);
+        jComboBoxMM.setEnabled(band);
         jLabelApto.setEnabled(band);
         jRadioButton1.setEnabled(band);
         jRadioButton2.setEnabled(band);
@@ -441,8 +439,9 @@ public class NuevoExamen extends javax.swing.JPanel {
     
     public void limpiarFormulario() {
         jTextFieldDNI.setText("");
-        jTextFieldFecha.setText("");
-        jTextFieldHora.setText("");
+        jDateChooserFechaEnt.setDate(null);
+        jComboBoxHH.setSelectedIndex(0);
+        jComboBoxMM.setSelectedIndex(0);
         jRadioButton1.setSelected(true);
         jTextAreaObservaciones.setText("");
     }
@@ -452,12 +451,14 @@ public class NuevoExamen extends javax.swing.JPanel {
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JComboBox<String> jComboBoxHH;
+    private javax.swing.JComboBox<String> jComboBoxMM;
     private javax.swing.JComboBox<String> jComboBoxPuesto;
+    private com.toedter.calendar.JDateChooser jDateChooserFechaEnt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelApto;
     private javax.swing.JLabel jLabelDni;
     private javax.swing.JLabel jLabelFecha;
-    private javax.swing.JLabel jLabelFormatoFecha;
     private javax.swing.JLabel jLabelFormatoHora;
     private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelIdPostulante;
@@ -468,7 +469,5 @@ public class NuevoExamen extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextAreaObservaciones;
     private javax.swing.JTextField jTextFieldDNI;
-    private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables
 }

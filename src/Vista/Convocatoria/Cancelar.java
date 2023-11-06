@@ -5,9 +5,10 @@
  */
 package Vista.Convocatoria;
 
-import Controlador.CtrlCancelarConvocatoria;
 import Modelo.Puesto;
 import Modelo.PuestoDaoJDBC;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -231,8 +232,9 @@ public class Cancelar extends javax.swing.JPanel {
         // Llena el formulario con los datos del puesto seleccionado para modificar
         jLabelNombreTexto.setText(puest.getNombre());
         jTextAreaDescripcionTexto.setText(puest.getDescripcion());
-        jLabelFechaInicioTexto.setText(CtrlCancelarConvocatoria.modificarFormatoFecha(puest.getFechaInicio().toString()));
-        jLabelFechaCierreTexto.setText(CtrlCancelarConvocatoria.modificarFormatoFecha(puest.getFechaCierre().toString()));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        jLabelFechaInicioTexto.setText(sdf.format(puest.getFechaInicio()));
+        jLabelFechaCierreTexto.setText(sdf.format(puest.getFechaCierre()));
         // Desactiva el formulario para seleccionar puesto y activa el formulario principal
         activarFormSeleccionarPuesto(false);
         activarFormCancelarPuesto(true);

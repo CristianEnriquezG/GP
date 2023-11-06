@@ -4,8 +4,12 @@
  */
 package Vista.Convocatoria;
 
-import Controlador.CtrlCrearConvocatoria;
+import Controlador.CtrlConvocatoria;
 import Modelo.FormatoEntrevista;
+import Modelo.Puesto;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -54,11 +58,12 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
         jCheckBox12Lider = new javax.swing.JCheckBox();
         jCheckBox13Manej = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldFecha = new javax.swing.JTextField();
-        jTextFieldHora = new javax.swing.JTextField();
         jLabelHora = new javax.swing.JLabel();
         jLabelFormatoHora = new javax.swing.JLabel();
         jButtonCancelar = new javax.swing.JButton();
+        jDateChooserFechaEnt = new com.toedter.calendar.JDateChooser();
+        jComboBoxHH = new javax.swing.JComboBox<>();
+        jComboBoxMM = new javax.swing.JComboBox<>();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -158,22 +163,14 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
         jLabel2.setMinimumSize(new java.awt.Dimension(250, 17));
         jLabel2.setPreferredSize(new java.awt.Dimension(250, 17));
 
-        jTextFieldFecha.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldFecha.setPreferredSize(new java.awt.Dimension(100, 22));
-
-        jTextFieldHora.setMaximumSize(new java.awt.Dimension(100, 22));
-        jTextFieldHora.setMinimumSize(new java.awt.Dimension(100, 22));
-        jTextFieldHora.setPreferredSize(new java.awt.Dimension(100, 22));
-
         jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelHora.setText("Hora");
         jLabelHora.setMaximumSize(new java.awt.Dimension(40, 16));
         jLabelHora.setMinimumSize(new java.awt.Dimension(40, 16));
         jLabelHora.setPreferredSize(new java.awt.Dimension(40, 16));
 
-        jLabelFormatoHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFormatoHora.setText("hh:mm");
+        jLabelFormatoHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelFormatoHora.setText(":");
         jLabelFormatoHora.setEnabled(false);
         jLabelFormatoHora.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jLabelFormatoHora.setMaximumSize(new java.awt.Dimension(60, 16));
@@ -190,32 +187,46 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
             }
         });
 
+        jDateChooserFechaEnt.setDateFormatString("d MMMM y");
+
+        jComboBoxHH.setMaximumRowCount(6);
+        jComboBoxHH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+
+        jComboBoxMM.setMaximumRowCount(6);
+        jComboBoxMM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(528, 528, 528)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(528, 528, 528)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(466, 466, 466)
-                        .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(404, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(502, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDateChooserFechaEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(395, 395, 395))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -239,12 +250,7 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
                                     .addComponent(jCheckBox10Conoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jCheckBox12Lider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jCheckBox13Manej, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(385, 385, 385))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(474, 474, 474))))
+                        .addGap(385, 385, 385))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,14 +290,14 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox13Manej, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelFormatoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxHH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooserFechaEnt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,9 +308,14 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         FormatoEntrevista formatoEnt = new FormatoEntrevista();
-        
-        String fec = jTextFieldFecha.getText();
-        String hor = jTextFieldHora.getText();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            formatoEnt.setFecha(Date.valueOf(sdf.format(jDateChooserFechaEnt.getDate())));
+        } catch(NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "ERROR: Debe especificar una fecha", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        formatoEnt.setHora(Time.valueOf(jComboBoxHH.getSelectedItem() + ":" + jComboBoxMM.getSelectedItem() + ":00"));
         formatoEnt.setPresentacion(jCheckBox1Prese.isSelected());
         formatoEnt.setActitud(jCheckBox2Actit.isSelected());
         formatoEnt.setConversacion(jCheckBox3Conve.isSelected());
@@ -319,13 +330,13 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
         formatoEnt.setLiderazgo(jCheckBox12Lider.isSelected());
         formatoEnt.setManejoHerramientas(jCheckBox13Manej.isSelected());
         
-        if(CtrlCrearConvocatoria.esValido(formatoEnt, fec, hor)) {
+        if(CtrlConvocatoria.esFechaValidaEntrevista(formatoEnt.getFecha(),((Puesto)objeto.get(0)).getFechaCierre())) {
             // almacena objeto válido en array list
             objeto.add(formatoEnt);
             pantCrear.avanzarPantalla();
         }
         else {
-            JOptionPane.showMessageDialog(this, CtrlCrearConvocatoria.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, CtrlConvocatoria.mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
         }  
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
@@ -349,12 +360,13 @@ public class ConfigurarEntrevista extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBox7Trans;
     private javax.swing.JCheckBox jCheckBox8Aspec;
     private javax.swing.JCheckBox jCheckBox9Exper;
+    private javax.swing.JComboBox<String> jComboBoxHH;
+    private javax.swing.JComboBox<String> jComboBoxMM;
+    private com.toedter.calendar.JDateChooser jDateChooserFechaEnt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelFormatoHora;
     private javax.swing.JLabel jLabelHora;
-    private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables
 }
