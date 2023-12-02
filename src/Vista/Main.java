@@ -88,7 +88,7 @@ public class Main {
 			Registrar_datos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					bottomPanel.removeAll();
-					bottomPanel.add(new RegistrarDatos());
+					bottomPanel.add(new RegistrarDatos(Main.this,Main.topPanel));
 					bottomPanel.revalidate();
 					bottomPanel.repaint();
 				}
@@ -262,7 +262,7 @@ public class Main {
                 {
                     public void actionPerformed(ActionEvent e){
                         bottomPanel.removeAll();
-                        bottomPanel.add(new CrearUsuario());
+                        bottomPanel.add(new CrearUsuario(Main.topPanel));
                         bottomPanel.revalidate();
                         bottomPanel.repaint();
                     }
@@ -362,7 +362,13 @@ public class Main {
 	    }
      public void setBottomPanel(){
         bottomPanel.removeAll();
-        bottomPanel.revalidate();
+        bottomPanel.add(new CrearUsuario(Main.topPanel));
+        bottomPanel.revalidate();        
+        bottomPanel.repaint();
+     }
+     public void setBottomPanelVacio(){
+        bottomPanel.removeAll();
+        bottomPanel.revalidate();        
         bottomPanel.repaint();
      }
     public void Administrador(){
@@ -384,7 +390,7 @@ public class Main {
         Postulante.setVisible(true);
         Eliminar_Datos.setVisible(false);
         bottomPanel.removeAll();
-        bottomPanel.add(new RegistrarDatos());
+        bottomPanel.add(new RegistrarDatos(Main.this,Main.topPanel));
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }

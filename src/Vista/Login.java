@@ -165,23 +165,23 @@ public class Login extends javax.swing.JPanel {
                             case 1:
                                 {
                                 main.Administrador();
-                                main.setBottomPanel();
+                                main.setBottomPanelVacio();
                                 topPanel.setLabel2("Administrador");
                                 }                                
                                 break;
                             case 2:
                                 {
                                 main.Operador();
-                                main.setBottomPanel();
+                                main.setBottomPanelVacio();
                                 topPanel.setLabel2("Operador");
                                 }                                
                                 break;
                             case 3:
                                 {
                                 main.Postulante();
-                                main.setBottomPanel();
+                                main.setBottomPanelVacio();
                                 topPanel.setLabel2("Postulante");
-                                }                                
+                                }
                                 break;
                         }
                     }
@@ -213,6 +213,7 @@ public class Login extends javax.swing.JPanel {
         {
             main.Postulante();
             topPanel.setLabel2("Invitado");
+            topPanel.usuario = UsuarioInvitado;
         }
         else{
             mostrarVentanaDeError(CtrlUsuarios.errorUsuarioVacio);

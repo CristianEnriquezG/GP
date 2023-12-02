@@ -6,6 +6,8 @@
 package Vista.Postulantes;
 import Modelo.*;
 import Controlador.*;
+import Vista.Main;
+import Vista.PanelSuperior;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,17 +16,22 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import Vista.GestionUsuarios.CrearUsuario;
 /**
  *
  * @author MC1
  */
 public class RegistrarDatos extends javax.swing.JPanel {
     private File archivoPDF = null;
+    private PanelSuperior topPanel;
+    private Main main;
 
     /**
      * Creates new form RegistrarDatos
      */
-    public RegistrarDatos() {
+    public RegistrarDatos(Main main, PanelSuperior topPanel) {
+        this.main = main;
+        this.topPanel = topPanel;
         initComponents();
         seleccionArchivo.addChoosableFileFilter(new FileNameExtensionFilter("Documentos PDF","pdf"));
         seleccionArchivo.setAcceptAllFileFilterUsed(false);
@@ -283,7 +290,21 @@ public class RegistrarDatos extends javax.swing.JPanel {
         if(CtrlPostulante.esPostulanteValido(post) && !CtrlPostulante.existePostulante(post.getDni())) {
             // Controla si ingresó CV
             if(archivoPDF != null) {
-                // Inserta postulante
+                // Inserta postulante                
+                if(topPanel.getLabel12() == "Invitado"){
+                    CvPostulante cvPost = new CvPostulante();
+                try {
+                    cvPost.setCv(new FileInputStream(archivoPDF));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(RegistrarDatos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cvPost.setCodPostulante(new PostulanteDaoJDBC().insert(post));
+                topPanel.setPost(post);
+                topPanel.setCvPost(cvPost);
+                main.setBottomPanel();
+                }                    
+                else
+                {
                 int cod_post = new PostulanteDaoJDBC().insert(post);
                 // Inserta CV
                 CvPostulante cvPost = new CvPostulante();
@@ -293,10 +314,13 @@ public class RegistrarDatos extends javax.swing.JPanel {
                     Logger.getLogger(RegistrarDatos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 cvPost.setCodPostulante(cod_post);
+                
                 new CvPostulanteDaoJDBC().insert(cvPost);
-                // Confirmación del alta
+                // Confirmación del alta                              
                 JOptionPane.showMessageDialog(this, "Postulante agregado");
                 limpiarFormulario();
+                }
+                
             }
             else {
                 JOptionPane.showMessageDialog(this, "ERROR: NO se adjuntó Currículum Vitae", "Error", JOptionPane.ERROR_MESSAGE);

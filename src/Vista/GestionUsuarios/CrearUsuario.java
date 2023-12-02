@@ -8,6 +8,9 @@ import Modelo.UsuarioDaoJDBC;
 import Modelo.Usuario;
 //import Controlador.CtrlContraseñaaHash;
 import Controlador.CtrlUsuarios;
+import Modelo.CvPostulanteDaoJDBC;
+import Vista.PanelSuperior;
+import java.awt.Container;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -16,12 +19,28 @@ import javax.swing.JOptionPane;
  * @author EGcri
  */
 public class CrearUsuario extends javax.swing.JPanel {
-
+    private PanelSuperior topPanel;
     /**
      * Creates new form crearUsuario
      */
-    public CrearUsuario() {
-        initComponents();
+    public CrearUsuario(PanelSuperior topPanel) {
+        this.topPanel = topPanel;
+        if ("Invitado".equals(topPanel.getLabel12()))
+        {
+            initComponents();
+            NombreUsuariojTextField.setText(topPanel.usuario);
+            NombreUsuariojTextField.setEditable(false);
+            PermisoAdministradorjRadioButton.setSelected(false);
+            PermisoOperadorjRadioButton.setSelected(false);
+            PermisoAdministradorjRadioButton.setVisible(false);
+            PermisoOperadorjRadioButton.setVisible(false);
+            PermisoPostulantejRadioButton.setSelected(true);            
+        
+        }
+        else
+        {
+            initComponents();
+        }
     }
 
     /**
@@ -170,18 +189,39 @@ public class CrearUsuario extends javax.swing.JPanel {
            mostrarVentanaDeError(CtrlUsuarios.errorSinSeleccion);
        
        UsuarioDao UsuarioDao = new UsuarioDaoJDBC();
-       if(CtrlUsuarios.chequeoFinal(usuario))
-       {
+       if(topPanel.getLabel12() == "Invitado"){
+       new CvPostulanteDaoJDBC().insert(topPanel.getCvPost());
+                // Confirmación del alta                              
+                JOptionPane.showMessageDialog(this, "Postulante agregado"); 
+                if(CtrlUsuarios.chequeoFinal(usuario))
+            {           
+            if(UsuarioDao.insert(usuario) != 0){
+                JOptionPane.showMessageDialog(this,"Usuario Creado");
+                Container contenedorPadre = getParent();
+                contenedorPadre.remove(this);
+                contenedorPadre.revalidate();
+                contenedorPadre.repaint();
+                }                               
+            }
+             else
+                    {
+            JOptionPane.showMessageDialog(this, CtrlUsuarios.errorContraseñaVacia, "Error", JOptionPane.ERROR_MESSAGE);
+                    }   
+       }
+       else{
+        if(CtrlUsuarios.chequeoFinal(usuario))
+       {           
             if(UsuarioDao.insert(usuario) != 0){
                 JOptionPane.showMessageDialog(this,"Usuario Creado");
                 limpiarFormulario();
-            }
-                
-               
+            }                               
        }
        else{
            JOptionPane.showMessageDialog(this, CtrlUsuarios.errorContraseñaVacia, "Error", JOptionPane.ERROR_MESSAGE);
+       }   
        }
+       
+       
        
         
     }//GEN-LAST:event_GuardarjButtonActionPerformed
