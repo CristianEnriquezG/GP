@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import Vista.Consulta.BuscarPostulante;
 import Vista.Consulta.Calendario;
+import Vista.Consulta.Calendario;
 import Vista.Consulta.VerPostulantesPuesto;
 import Vista.Convocatoria.Crear;
 import Vista.Convocatoria.Modificar;
@@ -28,6 +29,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Controlador.CtrlVentana;
+import Modelo.Puesto;
+import Modelo.PuestoDaoJDBC;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author CristianEnriquezG
@@ -44,7 +55,7 @@ public class Main {
         private JMenu Convocatoria;
         private JMenu gestionUsuarios;
         private JMenuItem Eliminar_Datos;
-        private  JButton Cerrar_Sesion;
+        private JButton Cerrar_Sesion;
         
     public Main(){
         try {
@@ -315,8 +326,6 @@ public class Main {
                             Cerrar_Sesion.setVisible(false);
                         }
                     });
-	        
-                
                 
 	        Cerrar_Sesion.setPreferredSize(new Dimension(200, 40));
 	        Cerrar_Sesion.setOpaque(false);
@@ -355,16 +364,19 @@ public class Main {
 	        frame.add(bottomPanel, BorderLayout.SOUTH);
                 
                 frame.setVisible(true);
+                ejecutarHiloCerrarConvocatoria(bottomPanel);
     }
-     public static void main(String[] args) {
-	      Main principal = new Main();
-              
-	    }
-     public void setBottomPanel(){
+    
+    public static void main(String[] args) {
+        Main principal = new Main();
+    }
+    
+    public void setBottomPanel(){
         bottomPanel.removeAll();
         bottomPanel.revalidate();
         bottomPanel.repaint();
-     }
+    }
+    
     public void Administrador(){
         Postulante.setVisible(true);
         Etapa.setVisible(true);
@@ -373,13 +385,14 @@ public class Main {
         Convocatoria.setVisible(true);
         Eliminar_Datos.setVisible(true);
         Cerrar_Sesion.setVisible(true);
-        
-    } 
+    }
+    
     public void Operador(){
         Etapa.setVisible(true);
         Convocatoria.setVisible(true);
         Eliminar_Datos.setVisible(true);
     }
+    
     public void Postulante(){
         Postulante.setVisible(true);
         Eliminar_Datos.setVisible(false);
@@ -388,5 +401,34 @@ public class Main {
         bottomPanel.revalidate();
         bottomPanel.repaint();
     }
-
+    
+    /* Este hilo cierra las convocatorias cuya fecha de cierre sea <= a la fecha actual;
+     * ejecuta esta tarea apenas iniciado el programa y luego a las 0:00 hs de cada día
+     * (obviamente, siempre y cuando el programa se mantenga en ejecución) */
+    public final void ejecutarHiloCerrarConvocatoria(JPanel jpan) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = null;
+        try {
+            d = sdf.parse(LocalDate.now().toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        }
+        java.util.Timer t = new java.util.Timer();
+        TimerTask ttCerrarConvocatoria = new TimerTask() {
+            @Override
+            public void run() {
+                PuestoDaoJDBC pstDao = new PuestoDaoJDBC();
+                ArrayList<Puesto> arrPst = pstDao.selectPstCierreConv();
+                Puesto p = null;
+                for(int i = 0; i < arrPst.size(); i++) {
+                    p = arrPst.get(i);
+                    p.setEstadoConvocatoria("cerrada");
+                    pstDao.update(p);
+                    JOptionPane.showMessageDialog(jpan,"Se ha cerrado la convocatoria\n   Puesto: " + p.getNombre() + "\n   Código: " + String.format("%05d",p.getCodPuesto()));
+                }
+            };
+        };
+        t.scheduleAtFixedRate(ttCerrarConvocatoria,d,86400000L);
+    }
 }

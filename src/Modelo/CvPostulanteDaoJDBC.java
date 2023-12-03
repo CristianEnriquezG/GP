@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,7 @@ public class CvPostulanteDaoJDBC implements CvPostulanteDao {
     
     private static final String SQL_SELECT = "";
     private static final String SQL_INSERT = "INSERT INTO cv_postulante(cv,cod_postulante) VALUES(?,?);";
-    private static final String SQL_UPDATE = "";
+    private static final String SQL_UPDATE = "UPDATE cv_postulante SET cv = ? WHERE cod_postulante = ?";
     private static final String SQL_DELETE = "";
     
     @Override
@@ -83,17 +84,32 @@ public class CvPostulanteDaoJDBC implements CvPostulanteDao {
     }
 
     @Override
-    public int update(CvPostulante CvPostulante){
-        int rows = 0;
-
-        return rows;
-
-    }
-
-    @Override
     public int delete(CvPostulante CvPostulante){
         int rows = 0;
 
+        return rows;
+    }
+    
+    @Override
+    public int update(CvPostulante CvPostulante){
+        int rows = 0;
+        String sql = SQL_UPDATE;
+        Connection c = null;
+        PreparedStatement ps = null;
+        try {
+            c = Conector_DB.getConnection();
+            ps = c.prepareStatement(sql);
+            ps.setBinaryStream(1,CvPostulante.getCv());
+            ps.setInt(2,CvPostulante.getCodPostulante());
+            ps.executeUpdate();
+        }
+        catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        finally {
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+        }
         return rows;
     }
 }

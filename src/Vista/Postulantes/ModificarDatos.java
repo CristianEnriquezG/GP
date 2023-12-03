@@ -6,19 +6,31 @@
 package Vista.Postulantes;
 
 import Controlador.CtrlPostulante;
+import Modelo.CvPostulante;
+import Modelo.CvPostulanteDaoJDBC;
 import Modelo.Postulante;
 import Modelo.PostulanteDaoJDBC;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author EGcri
  */
 public class ModificarDatos extends javax.swing.JPanel {
-    Postulante post;
+    private Postulante post;
+    private File archivoPDF = null;
 
     public ModificarDatos() {
         initComponents();
+        jFileChooserPDF.addChoosableFileFilter(new FileNameExtensionFilter("Documentos PDF","pdf"));
+        jFileChooserPDF.setAcceptAllFileFilterUsed(false);
         activarFormModificarPostulante(false);
     }
 
@@ -26,6 +38,7 @@ public class ModificarDatos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooserPDF = new javax.swing.JFileChooser();
         jLabelApellido = new javax.swing.JLabel();
         jTextFieldDNI = new javax.swing.JTextField();
         jLabelNombre = new javax.swing.JLabel();
@@ -43,6 +56,9 @@ public class ModificarDatos extends javax.swing.JPanel {
         jButtonBuscar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonSeleccionarPDF = new javax.swing.JButton();
+        jLabelRutaPdf = new javax.swing.JLabel();
+        jLabelCv = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1280, 550));
         setMinimumSize(new java.awt.Dimension(1280, 550));
@@ -146,26 +162,30 @@ public class ModificarDatos extends javax.swing.JPanel {
             }
         });
 
+        jButtonSeleccionarPDF.setText("Seleccionar Archivo PDF...");
+        jButtonSeleccionarPDF.setActionCommand("Seleccionar Archivo PDF...");
+        jButtonSeleccionarPDF.setMaximumSize(new java.awt.Dimension(200, 22));
+        jButtonSeleccionarPDF.setMinimumSize(new java.awt.Dimension(200, 22));
+        jButtonSeleccionarPDF.setPreferredSize(new java.awt.Dimension(200, 22));
+        jButtonSeleccionarPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSeleccionarPDFActionPerformed(evt);
+            }
+        });
+
+        jLabelRutaPdf.setMaximumSize(new java.awt.Dimension(200, 16));
+        jLabelRutaPdf.setMinimumSize(new java.awt.Dimension(200, 16));
+        jLabelRutaPdf.setPreferredSize(new java.awt.Dimension(200, 16));
+
+        jLabelCv.setText("Currículum Vitae");
+        jLabelCv.setMaximumSize(new java.awt.Dimension(100, 16));
+        jLabelCv.setMinimumSize(new java.awt.Dimension(100, 16));
+        jLabelCv.setPreferredSize(new java.awt.Dimension(100, 16));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(491, 491, 491)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(471, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,6 +204,30 @@ public class ModificarDatos extends javax.swing.JPanel {
                         .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(454, 454, 454))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(491, 491, 491)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelCv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSeleccionarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +261,12 @@ public class ModificarDatos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSeleccionarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelRutaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,6 +282,19 @@ public class ModificarDatos extends javax.swing.JPanel {
         post.setEmail(jTextFieldEmail.getText());
         if(CtrlPostulante.esPostulanteValido(post)) {
             new PostulanteDaoJDBC().update(post);
+            
+            // Si he especificado nuevo currículum, lo actualizo
+            if(!jLabelRutaPdf.getText().equals("")) {
+                CvPostulante cvPost = new CvPostulante();
+                try {
+                    cvPost.setCv(new FileInputStream(archivoPDF));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(ModificarDatos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cvPost.setCodPostulante(post.getCodPostulante());
+                new CvPostulanteDaoJDBC().update(cvPost);
+            }
+            
             JOptionPane.showMessageDialog(this, "Se han modificado los datos del postulante");
             limpiarFormulario();
             activarFormModificarPostulante(false);
@@ -291,7 +353,18 @@ public class ModificarDatos extends javax.swing.JPanel {
         jTextFieldEmail.setEnabled(band);
         jButtonGuardar.setEnabled(band);
         jButtonCancelar.setEnabled(band);
+        jLabelCv.setEnabled(band);
+        jButtonSeleccionarPDF.setEnabled(band);
+        jLabelRutaPdf.setEnabled(band);
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonSeleccionarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarPDFActionPerformed
+        int valorRet = jFileChooserPDF.showDialog(this, "Seleccionar");
+        if(valorRet == JFileChooser.APPROVE_OPTION) {
+            archivoPDF = jFileChooserPDF.getSelectedFile();
+            jLabelRutaPdf.setText(archivoPDF.getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButtonSeleccionarPDFActionPerformed
 
     public void activarFormBuscarPostulante(boolean band) {
         jLabelDni.setEnabled(band);
@@ -306,19 +379,24 @@ public class ModificarDatos extends javax.swing.JPanel {
         jTextFieldDomicilio.setText("");
         jTextFieldTelefono.setText("");
         jTextFieldEmail.setText("");
+        jLabelRutaPdf.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JButton jButtonSeleccionarPDF;
+    private javax.swing.JFileChooser jFileChooserPDF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelCv;
     private javax.swing.JLabel jLabelDni;
     private javax.swing.JLabel jLabelDomicilio;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelRutaPdf;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldDNI;

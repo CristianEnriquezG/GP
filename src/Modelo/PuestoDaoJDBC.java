@@ -84,22 +84,64 @@ public class PuestoDaoJDBC implements PuestoDao {
     // Este método se utiliza para obtener el puesto de acuerdo a mes y año, para usar en Calendario
     public ArrayList<Puesto> select(int mes, int año) {
         ArrayList<Puesto> ListaPst = new ArrayList<>();
-        String sql = "SELECT nombre,fecha_cierre FROM puesto WHERE YEAR(fecha_cierre) = ? AND MONTH(fecha_cierre) = ? AND estado_convocatoria = 'abierta';";
+        String q1 = "SELECT nombre,fecha_inicio FROM puesto WHERE YEAR(fecha_inicio) = ? AND MONTH(fecha_inicio) = ? AND estado_convocatoria != 'cancelada'";
+        String q2 = "SELECT nombre,fecha_cierre FROM puesto WHERE YEAR(fecha_cierre) = ? AND MONTH(fecha_cierre) = ? AND estado_convocatoria != 'cancelada'";
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            c = Conector_DB.getConnection();
+            ps = c.prepareStatement(q1);
+            ps.setInt(1, año);
+            ps.setInt(2, mes);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Puesto p = new Puesto();
+                p.setNombre(rs.getString(1));
+                p.setFechaInicio(rs.getDate(2));
+                ListaPst.add(p);
+            }
+            ps = c.prepareStatement(q2);
+            ps.setInt(1, año);
+            ps.setInt(2, mes);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Puesto p = new Puesto();
+                p.setNombre(rs.getString(1));
+                p.setFechaCierre(rs.getDate(2));
+                ListaPst.add(p);
+            }
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            Conector_DB.close(rs);
+            Conector_DB.close(ps);
+            Conector_DB.close(c);
+        }
+        return ListaPst;
+    }
+    
+    // Este método devuelve todos aquellos puestos cuya convocatoria está abierta y cierra el día actual o antes
+    public ArrayList<Puesto> selectPstCierreConv() {
+        ArrayList<Puesto> ListaPst = new ArrayList<>();
+        String sql = "SELECT * FROM puesto WHERE fecha_cierre <= CURDATE() AND estado_convocatoria = 'abierta';";
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             c = Conector_DB.getConnection();
             ps = c.prepareStatement(sql);
-            ps.setInt(1, año);
-            ps.setInt(2, mes);
             rs = ps.executeQuery();
             while(rs.next()) {
                 Puesto p = new Puesto();
-                
-                p.setNombre(rs.getString(1));
-                p.setFechaCierre(rs.getDate(2));
-                
+                p.setCodPuesto(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setDescripcion(rs.getString(3));
+                p.setFechaInicio(rs.getDate(4));
+                p.setFechaCierre(rs.getDate(5));
+                p.setEstadoConvocatoria(rs.getString(6));
                 ListaPst.add(p);
             }
         }
