@@ -4,11 +4,33 @@
  */
 package Vista;
 
+import Modelo.CvPostulante;
+import Modelo.Postulante;
+
 /**
  *
  * @author EGcri
  */
 public class PanelSuperior extends javax.swing.JPanel {
+    Postulante Post;
+    CvPostulante cvPost;
+
+    public CvPostulante getCvPost() {
+        return cvPost;
+    }
+
+    public void setCvPost(CvPostulante cvPost) {
+        this.cvPost = cvPost;
+    }
+    public String usuario;
+
+    public Postulante getPost() {
+        return Post;
+    }
+
+    public void setPost(Postulante Post) {
+        this.Post = Post;
+    }
     /**
      * Creates new form PanelSuperior
      */
@@ -57,7 +79,9 @@ public class PanelSuperior extends javax.swing.JPanel {
     public void setLabel2(String usuario){
         jLabel2.setText(usuario);
     }
-    
+    public String getLabel12(){
+        return jLabel2.getText();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
